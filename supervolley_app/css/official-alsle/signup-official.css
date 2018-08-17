@@ -1,0 +1,54 @@
+.box {
+    width: 100%;
+}
+.box-title {
+    height: 30px;
+    line-height: 30px;
+    text-indent: 15px;
+    color: #333333;
+    font-size: 14px;
+}
+.box-people {
+    background: #FFFFFF;
+    padding: 8px 1px 20px 1px;
+}
+.box-people > div {
+    display: inline-block;
+    vertical-align: top;
+    width: 67px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    font-size: 12px;
+    margin: 12px 0 0 18px;
+    border-radius: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.box-normal {
+    color: #333333;
+    background: #E6E6E6;
+}
+.box-disabled {
+    color: #BFBFBF;
+    background: #E6E6E6;
+}
+.box-selected {
+    color: #FFFFFF;
+    background: #D22330;
+}
+.next {
+    background: #FFFFFF;
+    padding: 10px 0 30px 30px;
+}
+.next > span {
+    display: block;
+    width: 300px;
+    font-size: 15px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 40px;
+    background: #D22330;
+    border-radius: 6px;
+}

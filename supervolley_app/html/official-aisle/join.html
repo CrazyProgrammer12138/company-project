@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>球员转会</title>
+		<link rel="stylesheet" href="../../css/mui/mui.min.css">
+		<link rel="stylesheet" href="../../css/mui/common.css">
+        <link rel="stylesheet" href="../../css/mui/mui.picker.css">
+        <link rel="stylesheet" href="../../css/mui/mui.poppicker.css">
+		<link rel="stylesheet" href="../../css/official-alsle/join.css"/>
+		<script src="../../js/view-port.js"></script>
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/jquery.min.js"></script>
+		<script src="../../js/mui.picker.js"></script>
+    	<script src="../../js/mui.poppicker.js"></script>
+    	<script src="../../js/pako.js"></script>
+    	<script src="../../js/ajax.js"></script>
+		<script src="../../js/commom.js"></script>
+	</head>
+	<body>
+		<div class="list" >
+			<center class="no-data" style="display: none;">
+				<img src="../../img/zanwushuju.png"/>
+				<center class="ceter_text">暂时没有数据哦~</center>
+			</center>
+    		<div class="team" v-for = "(val, index) in getTransferPlayerList" >
+    			<div><img :src="val.PlayerHeaderImg | ImgUrlOfficial" onerror="this.src='../../img/headDefaltImg.png'"/></div>
+	    		<div>{{ val.PlayerName }}</div>
+	    		<button @click="init(val.PlayerID)">转会</button>
+	    	</div>
+    	</div>
+	</body>
+</html>
+<script type="text/javascript">
+	/* 接收参数 */
+	var TeamID = UrlParm.TeamID;
+	var selectArr = [];
+	var vm = new Vue({
+		el: ".list",
+		data: {
+			getTransferPlayerList: []
+		},
+		methods: {
+			/* 转会接口 */
+			init: function(a){
+				add(a);
+			}
+		}
+	});
+	
+	/* 转会列表接口 */
+	(function(){
+		var json = {};
+		json.TeamID = TeamID;
+		$.post(httpOfficial + "CollegeStudent/getTransferPlayerList", json, function(res) {
+				console.log(res)
+				res = JSON.parse(res);
+				vm.getTransferPlayerList = res.data;
+				if(res.data.length == 0 ){
+					$(".no-data").show();
+					return ;
+				}
+			})
+	})();
+    
+    /* 转会 */
+   (function(){
+   		var json = {};
+		json.TeamID = TeamID;
+   		Ajax(httpOfficial + "CollegeStudent/getHighLevelTeamList", json, function(msg) {
+			msg = JSON.parse(msg);
+			selectArr = msg.data;
+			var len = msg.data.length;
+			for(var i = 0; i < len; i++){
+				selectArr[i].text = selectArr[i].TeamName;
+			}
+		});
+   })();
+   
+	//普通示例
+    var arrays = [];
+    var userPicker = new mui.PopPicker();
+    function add(a) {
+        userPicker.setData(selectArr);
+        userPicker.show(function(items){
+			var btnArray = ['取消', '确认'];
+			mui.confirm('你确定转会吗？', '', btnArray, function(e) {
+				if (e.index == 1) {
+					Ajax(httpOfficial + "CollegeStudent/playerTransfer", {
+						TeamID: items[0].TeamID,
+						PlayerID: a
+					}, function(msg) {
+						msg = JSON.parse(msg);
+						if(msg.msgCode == 0){
+							mui.toast(msg.msg);
+							var PlayerList = [];
+							var listlen = vm.getTransferPlayerList.length;
+							for(var i = 0; i < listlen; i++){
+								if(vm.getTransferPlayerList[i].PlayerID != a) {
+									// 挑出来不同于a的形成一个数组
+									PlayerList.push(vm.getTransferPlayerList[i]);
+								}
+							}
+							// 新数组赋值给原数组
+							vm.getTransferPlayerList = PlayerList;
+						} else {
+							mui.toast(msg.msg);
+						}
+					})
+				}
+			});
+        });
+    }
+</script>

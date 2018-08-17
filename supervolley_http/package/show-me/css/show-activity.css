@@ -1,0 +1,121 @@
+html,body{
+	background: #fff;
+}
+ .head {
+    background: #000000;
+    font-size: 0;
+    position: fixed;
+    top: 0;
+    z-index: 3;
+    width: 100%;
+}
+.head-logo {
+    width: 34px;
+    height: 34px;
+    margin: 7px 10px 7px 14px;
+}
+.head-text {
+    color: white;
+    font-size: 16px;
+}
+.inline-mid {
+    display: inline-block;
+    vertical-align: middle;
+}
+.head-button {
+    width: 45px;
+    height: 25px;
+    line-height: 26px;
+    color: #FFFFFF;
+    font-size: 12px;
+    text-align: center;
+    background: #D22330;
+    border-radius: 4px;
+    float: right;
+    margin: 12px 14px 0 0;
+}
+.activity-body{
+	width: 100%;
+	position: relative;
+	margin-top: 48px;
+}
+.activity-header{
+    height: 112px;
+    width: 112px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    margin: 17px;
+}
+.activity-mask{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.7);
+	position: absolute;
+	z-index: 1;
+}
+.activity-img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+.activity-name{
+	color: #dc2828;
+	position: relative;
+	z-index: 2;	
+}
+.activity-people{
+	position: relative;
+	z-index: 2;	
+	color: #fff;
+	font-size: 13px;
+}
+.activity-text{
+	position: relative;
+	z-index: 2;
+	color: #fff;
+	font-size: 12px;
+	margin: 15px 15px 0 15px;
+    padding-bottom: 15px;
+}
+.activity-join>div{
+	width: 120px;
+	height: 160px;
+	display: inline-block;
+	position: relative;
+}
+.activity-join>div>img{
+    width: 100%;
+    height: 100%;
+}
+.item{
+    position: relative;
+    top: -14px;
+    margin-left: 5px;
+}
+.item>img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;	
+}
+.item>div{
+    font-size: 10px;
+    color: #666;
+    bottom: 0px;
+    position: relative;
+    width: 80px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1;
+}
+.num{
+    height: auto !important;
+    position: absolute;
+    top: 8px;
+    left: 5px;
+    z-index: 9;
+    width: 36px !important;
+}

@@ -1,0 +1,122 @@
+/*最外面宽 50%*/
+body{
+    font-size: 12px;
+}
+.tennis-right{
+    width:400px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.IFF-OFF{
+    text-align: right;
+}
+.IFF-OFF span{
+    font-weight: bolder;
+    font-size: 15px;
+}
+/*图表部分*/
+.event{
+    margin-top: 20px;
+}
+.et-title{
+    font-size: 14px;
+}
+.et-title-two{
+    float: right;
+    margin-right: 80px;
+}
+.et-main{
+    border: 2px solid #000000;
+    overflow: hidden;
+    border-bottom: 1px solid #000;
+}
+/*字在左上角模板*/
+.et-col{
+    height: 45px;
+    float: left;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+.small-text{
+    font-size: 7px;
+    margin: -3px 0 0 2px;
+}
+.et-text{
+    margin: 3px 0 0 0;
+}
+/*带有复选框模板*/
+.et-line{
+    overflow: hidden;
+}
+.et-one-line{
+    margin: -4px 0 0 2px;
+}
+.et-two-line{
+    margin: -2px 0 0 2px;
+}
+.et-one-line input[type=checkbox], .et-two-line input[type=checkbox]{
+    margin: 0;
+    vertical-align: text-bottom;
+}
+/*表格模板*/
+.et-match-div{
+    width: 75px;
+    height: 48px;
+    float: left;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #000000;
+    margin-left: -2px;
+}
+.et-match-div-o{
+    margin-top: 4px;
+}
+.et-match-div-t{
+    margin-top: 8px;
+}
+.et-match{
+    width: 70px;
+    margin-top: 1px;
+}
+.et-match td{
+    height: 21px;
+}
+.et-col-lost{
+    width: 251px;
+    height: 22px;
+    line-height: 11px;
+    border-right: 2px solid #000000;
+    float: left;
+    border-left: none;
+}
+.et-col-lost-o{
+    width: 147px;
+    float: right;
+    border-bottom: 2px solid #000000;
+}
+.et-tie-text{
+    border-right: 2px solid #000000;
+}
+.et-tie-div{
+    width: 75px;
+    float: left;
+    text-align: center;
+}
+.et-tie{
+    width: 70px;
+    border-top: none;
+    border-bottom: none;
+}
+.et-tie td{
+    height: 16px;
+}
+/*margin-top*/
+.m-t-five{
+    margin-top: 20px;
+}
+/*boder-right-noen*/
+.e-t-b-r-n{
+    border-right: none;
+}

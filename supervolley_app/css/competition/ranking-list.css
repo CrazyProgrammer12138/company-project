@@ -1,0 +1,261 @@
+html, body {
+    background: #271E1E;
+}
+#main {
+    width: 360px;
+    color: #FFFFFF;
+    padding: 30px 0 0 0;
+}
+.inline-mid {
+    display: inline-block;
+    vertical-align: middle;
+}
+.select {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 30px;
+    background: #3D3535;
+    text-align: center;
+
+}
+.select > span {
+    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+}
+.select > img {
+    height: 12px;
+    margin: 0 0 0 5px;
+}
+
+.group {
+    width: 100%;
+    font-size: 0;
+}
+.group-name {
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    background: #271E1E;
+    text-indent: 5px;
+}
+.group-freeze {
+    width: 156px;
+    font-size: 0;
+}
+.group-freeze-order {
+    width: 36px;
+}
+.group-order-title {
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+    background: #3D3535;
+    text-indent: 5px;
+}
+.group-order-infos {
+    font-size: 12px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-bottom: 1px solid #999999;
+}
+.group-freeze-teams {
+    width: 120px;
+}
+.group-teams-title {
+    height: 30px;
+    line-height: 30px;
+    background: #3D3535;
+    font-size: 13px;
+    padding: 0 0 0 58px;
+    border-right: 1px solid #999999;
+}
+.group-teams-infos {
+    font-size: 12px;
+    height: 40px;
+    border-right: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+}
+.group-teams-infos > img {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background: #fff;
+}
+.group-teams-infos > span {
+    height: 40px;
+    line-height: 40px;
+    margin: 0 0 0 10px;
+}
+.group-scroll {
+    -webkit-overflow-scrolling: touch;
+    width: 204px;
+    overflow-x: scroll;
+}
+.group-ul {
+    white-space: nowrap;
+}
+.group-li {
+    width: 51px;
+}
+.group-li-title {
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+    background: #3D3535;
+    text-align: center;
+}
+.group-li-infos {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 12px;
+    border-bottom: 1px solid #999999;
+}
+
+.fight {
+    margin: 10px 0 0 0;}
+.fight-line {
+    background: #322929;
+    font-size: 0;
+    border-bottom: 1px solid #999999;
+}
+.fight > div:last-child {
+    border: none;
+}
+.fight-time {
+    padding: 0 0 0 15px;
+    font-size: 12px;
+    color: #CCCCCC;
+    width: 118px;
+    height: 40px;
+    line-height: 40px;
+}
+.fight-name-a, .fight-name-b {
+    width: 102px;
+}
+.fight-name-a {
+    text-align: right;
+}
+
+.fight-name-a > span, .fight-name-b > span {
+    font-size: 13px;
+    height: 40px;
+    line-height: 40px;
+    width: 74px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.fight-name-a > img, .fight-name-b > img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.fight-name-a > img,  .fight-name-b > span{
+    margin: 0 0 0 8px;
+}
+.fight-score {
+    font-size: 13px;
+    width: 38px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+.all {
+    margin: 10px 0 0 0;
+}
+.all-head {
+    line-height: 30px;
+    height: 30px;
+    background: #3D3535;
+    font-size: 0;
+    font-size: 13px;
+}
+.all-head-order {
+    width: 50px;
+    text-align: center;
+}
+.all-head-tname {
+    padding: 0 0 0 55px;
+}
+.all-line {
+    height: 40px;
+    font-size: 0;
+    border-bottom: 1px solid #999999;
+}
+.all-order {
+    width: 50px;
+    text-align: center;
+    font-size: 13px;
+}
+.all-tname {
+    padding: 0 0 0 25px;
+}
+.all-tname > img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    /*margin: 0 0 0 25px;*/
+}
+.all-tname > span {
+    font-size: 13px;
+    line-height: 40px;
+    margin: 0 0 0 12px;
+}
+.nodata {
+
+}
+.nodata > img {
+    display: block;
+    height: 75px;
+    margin: 190px auto 13px auto;
+}
+.nodata > span {
+    display: block;
+    text-align: center;
+}
+
+
+.dialog {
+    position: fixed;
+    overflow: hidden;
+    z-index: 2;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    font-size: 0;
+}
+.dialog-assist, .dialog-content {
+    display: inline-block;
+    vertical-align: bottom;
+}
+.dialog-assist {
+    height: 100%;
+}
+.dialog-content {
+    width: 100%;
+    transition-property: margin-bottom;
+    transition-duration: 0.3s;
+}
+.dialog-stage, .dialog-cancel {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #999999;
+    background: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
+    color: #333333;
+}
+.dialog-cancel {
+    height: 45px;
+    border-bottom: none;
+    border-top: 5px solid #999999;
+}
+
+.three-ago {
+    background: #D22330;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>信息确认</title>
+		<link rel="stylesheet" href="../../css/mui/mui.min.css">
+		<link rel="stylesheet" href="../../css/mui/common.css">
+		<link rel="stylesheet" href="../../css/official-alsle/manage-affirm.css">
+		<script src="../../js/view-port.js"></script>
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/jquery.min.js"></script>
+		<script src="../../js/pako.js"></script>
+		<script src="../../js/ajax.js"></script>
+		<script src="../../js/commom.js"></script>
+		<style>
+
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<div class="identity">
+				<div class="identity-title">身份信息</div>
+				<div class="identity-message">
+					<div class="head-portrait">
+						<img :src="player.PlayerHeaderImg | ImgUrlOfficial" onerror="this.src='../../img/bigDefaule.png'">
+						<div>{{player.PlayerName}}</div>
+					</div>
+					<ul class="identity-message-content">
+						<li>
+							<div class="identity-left" v-if="player.PlayerName == 1">性别 ：男</div>
+							<div class="identity-left" v-else>性别 ：女</div>
+							<div class="identity-right">民族 ：{{player.Nation}}</div>
+						</li>
+						<li>
+							<div class="identity-left">身高 ：{{player.Height}}cm</div>
+							<div class="identity-right">体重 ：{{player.Weight}}kg</div>
+						</li>
+						<li>
+							<div>生日 ：{{Birthday}}</div>
+						</li>
+						<li>
+							<div class="identity-left">扣球高度 ：{{player.SpikNum}}cm</div>
+							<div class="identity-right">拦网高度 ：{{player.BlockNum}}cm</div>
+						</li>
+						<li>
+							<div class="identity-left">国际大赛 ：{{player.InternaCompeNum}}次</div>
+							<div class="identity-right">国内大赛 ：{{player.DomesticCompeNum}}次</div>
+						</li>
+						<li>
+							<div>{{player.TeamName}}</div>
+						</li>
+						<li>
+							<div>手机号码 ：{{player.MobilePhone}}</div>
+						</li>
+						<li>
+							<div>身份证号 ：{{player.IDCard}}</div>
+						</li>
+						<li>
+							<div>地址 ：{{player.Address}}</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="identity" v-for="(item, keys) in ImgMsg">
+				<div class="identity-title" v-if="item.FileItem == 2">学生证信息</div>
+                <div class="identity-title" v-if="item.FileItem == 3">学籍单信息</div>
+                <div class="identity-title" v-if="item.FileItem == 4">保险单信息</div>
+                <div class="identity-title" v-if="item.FileItem == 5">体检单信息</div>
+				<div class="identity-img">
+					<img :src=" item.FileAddress | ImgUrlOfficial" onerror="this.src='../../img/bigDefaule.png'">
+				</div>
+			</div>
+
+			<div class="hint">您是否确认此身份信息，如确认请点击提交</div>
+			<div class="message-true" @click="rights()">确认信息</div>
+		</div>
+		<script type="text/javascript">
+			var PlayerID = UrlParm.PlayerID;
+            var CompetitionID = UrlParm.CompetitionID;
+            //测试参数
+//            PlayerID = 77;
+//            CompetitionID = 1;
+			var vm = new Vue({
+				data:{
+					player: [],
+                    Birthday: 0,
+                    ImgMsg: []
+				},
+                methods: {
+                    rights: function(){
+                        msgRight();
+                    }
+                }
+			}).$mount("#main");
+			//获取身份信息
+			(function(){
+			    Ajax(httpOfficial + "CollegeStudent/getPlayerInfo", {
+					PlayerID: PlayerID
+				}, function(e){
+					vm.player = JSON.parse(e).data[0];
+					vm.Birthday = JSON.parse(e).data[0].Birthday.split(" ")[0];
+				})
+			})();
+
+			//获取图片信息
+			(function(){
+                Ajax(httpOfficial + "CollegeStudent/getImgAddressList", {
+                    FileItems: "2,3,4,5",
+                    FileID: PlayerID
+                }, function(e){
+                    vm.ImgMsg = JSON.parse(e).data;
+                });
+			})();
+
+			//信息确认
+            function msgRight(){
+                Ajax(httpOfficial + "CollegeStudent/playerConfirm", {
+                    PlayerID: PlayerID,
+                    CompetitionID: CompetitionID,
+                }, function(e){
+                    var msgStr = JSON.parse(e);
+                    if (msgStr.msgCode == 0){
+                        mui.alert(msgStr.msg);
+                    }
+                })
+            };
+		</script>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的</title>
+		<link rel="stylesheet" href="../../css/mui/mui.min.css">
+		<link rel="stylesheet" href="../../css/mui/common.css">
+		<link rel="stylesheet" href="../../css/official-alsle/my.css"/>
+		<script src="../../js/view-port.js"></script>
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/jquery.min.js"></script>
+		<script src="../../js/commom.js"></script>
+	</head>
+	<body>
+		<div id="main" class="mui-content">
+			<ul class="mui-table-view">
+			    <li class="mui-table-view-cell" @tap="playerManage()">
+			        <a class="mui-navigate-right">球员管理</a>
+			    </li>
+			    <li class="mui-table-view-cell" @tap="officerManage('0', '领队管理')">
+			        <a class="mui-navigate-right">领队管理</a>
+			    </li>
+			    <li class="mui-table-view-cell" @tap="officerManage('1', '主教练管理')">
+			        <a class="mui-navigate-right">主教练管理</a>
+			    </li>
+			    <li class="mui-table-view-cell" @tap="officerManage('2', '教练管理')">
+			        <a class="mui-navigate-right">教练管理</a>
+			    </li>
+			    <li class="mui-table-view-cell" @tap="officerManage('3', '理疗师管理')">
+			        <a class="mui-navigate-right">理疗师管理</a>
+			    </li>
+			    <li class="mui-table-view-cell" @tap="officerManage('4', '队医管理')">
+			        <a class="mui-navigate-right">队医管理</a>
+			    </li>
+			    <li class="mui-table-view-cell" @tap="teamManage()">
+			        <a class="mui-navigate-right">球队管理</a>
+			    </li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#main",
+				data: {
+					 
+				},
+				methods: {
+					playerManage: function(){
+//						window.location.href="player-manage.html";
+						H5ToNative(["html/official-aisle/player-manage.html"]);
+					},
+					officerManage: function(roleId, title){
+//						window.location.href="officer-info.html?roleId="+roleId+"&title="+title;
+						H5ToNative(["html/official-aisle/officer-info.html","&roleId="+roleId,title]);
+					},
+					teamManage: function(){
+						H5ToNative(["goTeamManage"]);
+					}
+				}
+			});
+			
+		</script>
+	</body>
+</html>

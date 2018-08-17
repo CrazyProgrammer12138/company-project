@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>排行榜</title>
+    <link rel="stylesheet" href="../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../css/mui/common.css">
+    <link rel="stylesheet" href="../../css/competition/ranking-list.css">
+    <script src="../../js/view-port.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/commom.js"></script>
+    <script src="../../js/pako.js"></script>
+    <script src="../../js/ajax.js"></script>
+</head>
+<body> 
+<div id="main" v-cloak>
+    <div class="select" @tap="showDialog" v-if="phaseTitle">
+        <span class="inline-mid">{{ phaseTitle }}</span>
+        <img class="inline-mid" src="../../img/rightArrows.png">
+    </div>
+
+    <!-- 第一阶段分组显示的队列 -->
+    <div v-if="isScore == 1" class="group" v-for="(itemA, a) in dataList">
+        <div class="group-name">{{ itemA.groupname }}</div>
+        <div class="inline-mid group-freeze">
+            <div class="inline-mid group-freeze-order">
+                <div class="group-order-title">排名</div>
+                <div class="group-order-infos" v-for="(itemB, b) in itemA.dList"
+                     :class="{'three-ago': b < 3}"
+                >
+                    {{b + 1}}
+                </div>
+            </div>
+            <div class="inline-mid group-freeze-teams">
+                <div class="group-teams-title">球队</div>
+                <div class="group-teams-infos" v-for="(itemC, c) in itemA.dList"
+                     :class="{'three-ago': c < 3}"
+                >
+                    <img class="inline-mid" :src="itemC.teamLogo | ImgUrl"
+                         onerror="this.src='../../img/headDefaltImg.png'"
+                    >
+                    <span class="inline-mid">{{ itemC.teamShortName }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="inline-mid group-scroll">
+            <div class="group-ul">
+                <div class="inline-mid group-li" v-for="(itemB, b) in colunmName">
+                    <div class="group-li-title">{{ itemB }}</div>
+                    <div class="group-li-infos" v-for="(itemC, c) in itemA.dList"
+                         :class="{'three-ago': c < 3}"
+                    >
+                        {{ itemC[colunmField[b]] || 0 }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第二阶段对战列表的显示 -->
+    <div v-if="isScore == 0" class="fight">
+        <div class="fight-line" v-for="(item, i) in dataList">
+            <div class="inline-mid fight-time">{{ dateFormat(item.starttime) }}</div>
+            <div class="inline-mid fight-name-a">
+                <span class="inline-mid">{{ item.teamAname }}</span>
+                <img class="inline-mid" :src="item.teamAlogo | ImgUrl"
+                     onerror="this.src='../../img/headDefaltImg.png'"
+                >
+            </div>
+            <div class="inline-mid fight-score">
+                {{ scoreForamt(item.teamascore, item.teambscore) }}
+            </div>
+            <div class="inline-mid fight-name-b">
+                <img class="inline-mid" :src="item.teamBlogo | ImgUrl"
+                     onerror="this.src='../../img/headDefaltImg.png'"
+                >
+                <span class="inline-mid">{{ item.teamBname }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 总排名阶段显示 -->
+    <div v-if="isScore == 2" class="all">
+        <div class="all-head">
+            <div class="inline-mid all-head-order">排名</div>
+            <div class="inline-mid all-head-tname">球队</div>
+        </div>
+        <div class="all-line" v-for="(item, i) in dataList[0].dList"
+             :class="{'three-ago': i < 3}"
+        >
+            <div class="inline-mid all-order">{{ i + 1 }}</div>
+            <div class="inline-mid all-tname">
+                <img class="inline-mid" :src="item.teamLogo | ImgUrl"
+                     onerror="this.src='../../img/headDefaltImg.png'"
+                >
+                <span class="inline-mid">{{ item.teamShortName }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 暂无数据显示 -->
+    <div class="nodata" v-if="noData">
+        <img src="../../img/no-data.png">
+        <span>赛事暂未排名</span>
+    </div>
+
+    <!-- 选择阶段的弹窗 -->
+    <div class="dialog" v-show="dialogShow" @tap="dialogShow=false">
+        <div class="dialog-assist"></div>
+        <div class="dialog-content">
+            <div v-for="item in phasedList" class="dialog-stage"
+                 @tap.stop="select(item.phaseid, item.phasename, item.isScore)"
+            >
+                {{ item.phasename }}
+            </div>
+            <div class="dialog-cancel">取消</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    /**
+     * html/competition/ranking-list.html?raceId=3
+     * 接收全局参数
+     */
+    var raceId = UrlParm.raceId;
+
+    /**
+     * 实例化 VUE， 托管页面显示逻辑
+     */
+    var vm = new Vue({
+        data: {
+            noData: false,          // 是否没有数据
+            dataList: [],           // 某一阶段的数据
+            dialogShow: false,      // 控制弹框是否出现
+            phaseTitle: null,       // 第几阶段顶部标题
+            phaseId: 1,             // 第几阶段选中的id
+            isScore: 1,             // 0数据表格，1比分表格，2决赛
+            phasedList: [],         // 总共有多少阶段的数据
+            colunmName: ["总场", "总胜", "总负", "积分", "C值", "Z值"],
+            colunmField: ["attentNum", "winNum", "loseNum", "allScore", "cvalue", "zvalue"]
+        },
+        methods: {
+            /**
+             * 时间格式化
+             * @param value xxxx-xx-xx xx:xx:xx 格式的时间字符串
+             */
+            dateFormat: function(value) {
+                if(!value) return 'xx-xx xx:xx';
+                return value.substr(5, 11);
+            },
+            /**
+             * 格式化比分，如果两个的得分都为0，显示 VS
+             * @param aScore A 队的得分
+             * @param bScore B 队的得分
+             */
+            scoreForamt: function(aScore, bScore) {
+                if (!aScore && !bScore) return "VS";
+                return aScore + " : " + bScore;
+            },
+            /**
+             * 唤起底部阶段选择弹窗
+             */
+            showDialog: function () {
+                this.dialogShow = true;
+            },
+            /**
+             * 处理用户选择了某一阶段
+             * @param phaseId    阶段主键
+             * @param phaseName  阶段名称
+             * @param isScore    显示那一种样式
+             */
+            select: function (phaseId, phaseName, isScore) {
+                this.dialogShow = false;
+                if(phaseId == this.phaseId) return;
+                this.phaseId = phaseId;
+                this.phaseTitle = phaseName;
+                if (this.phaseTitle == "总排名") {
+                    this.isScore = 2;
+                } else {
+                    this.isScore = isScore;
+                }
+                this.queryPhasedTeamRankData();
+            },
+            /**
+             * 请求服务器，获取底部弹窗的数据
+             */
+            queryPhasedList: function () {
+                Ajax(httpCompetion + "queryPhasedList.do", {
+                    raceid: raceId
+                }, function (ret) {
+                    console.log(ret);
+                    ret = JSON.parse(ret);
+                    if (!ret.data || ret.data.length == 0) {
+                        this.noData = true;
+                    } else {
+                        this.phasedList = ret.data;
+                        this.phaseTitle = ret.data[0].phasename;
+                        this.phaseId = ret.data[0].phaseid;
+                        this.isScore = ret.data[0].isScore;
+                        this.queryPhasedTeamRankData();
+                    }
+                }.bind(this));
+            },
+            /**
+             * 请求服务器，获取某一阶段的数据
+             */
+            queryPhasedTeamRankData: function () {
+                // console.log(raceId+"-"+this.phaseId+"-"+this.isScore == 2 ? 1 : this.isScore)
+                Ajax(httpCompetion + "queryPhasedTeamRankData.do", {
+                    raceid: raceId,
+                    phaseid: this.phaseId,
+                    isScore: this.isScore == 2 ? 1 : this.isScore
+                }, function (ret) {
+                    // console.log(ret);
+                    ret = JSON.parse(ret);
+                    if (!ret.data || ret.data.length == 0) {
+                        this.noData = true;
+                        this.dataList = [];
+                    } else {
+                        this.noData = false;
+                        this.dataList = ret.data;
+                    }
+                }.bind(this));
+            }
+        },
+        mounted: function () {
+            this.queryPhasedList();
+        }
+    }).$mount("#main");
+
+    /**
+     * 被原生调用的及接口方法
+     * @type {string[]}
+     */
+    var httpArr = [
+        'http://h.supervolleyball.com/package/competition/html/ranking-list-two.html',
+        'http://h.supervolleyball.com/package/competition/html/ranking-list-one.html',
+        'http://h.supervolleyball.com/package/competition/html/results-all.html'
+    ]
+    function share() {
+        var param = '?raceid='+ raceId +'&phaseid='+ vm.phaseId +'&isScore=';
+        param += vm.isScore > 1 ? 1 : vm.isScore;
+        var param = {
+            content: vm.phaseTitle + (vm.isScore == 2 ? "" : "总排名"),
+            url: httpArr[vm.isScore] + param
+        };
+        return param.content + "," + param.url;
+    }
+
+</script>
+</body>
+</html>

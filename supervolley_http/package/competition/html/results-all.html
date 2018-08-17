@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>超级排球</title>
+		<link rel="stylesheet" href="../../../css/mui/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/mui/common.css" />
+		<link rel="stylesheet" href="../css/download.css"/>
+		<script src="../../../js/view.port.js"></script>
+		<script src="../../../js/mui.min.js" ></script>
+		<script src="../../../js/jquery.min.js" ></script>
+		<script src="../../../js/vue.js" ></script>
+		<script src="../../../js/commom.js"></script>
+		<script src="../../../js/pako.js"></script>
+    	<script src="../../../js/ajax.js"></script>
+	</head>
+	<body>
+		<div class="bodyBg"></div>
+		<div id="box">
+			<center class="title">
+				<center>中天钢铁</center>
+				<center>北京大学锦标赛总决赛</center>
+			</center>
+			<div class="body">
+				<div class="row">
+					<div class="line1">排名</div>
+					<div class="line2"></div>
+					<div class="line3">队伍</div>
+				</div>
+				<div>
+					<div class="row" v-for="(item,index) in dataList[0].dList" v-if="index<3">
+						<div class="line1"><img src="../../../img/top3Before.png" /><center class="top3">{{ index+1 }}</center><img src="../../../img/top3After.png" /></div>
+						<div class="line2"><img class="logo" :src="item.teamLogo | ImgUrl" onerror="this.src='../../../img/headDefaltImg.png'" /></div>
+						<div class="line3"><img src="../../../img/top3Before.png" /><center class="top3">{{ item.teamShortName }}</center><img src="../../../img/top3After.png" /></div>
+					</div>
+					<div class="row" v-for="(item,index) in dataList[0].dList" v-if="index>=3">
+						<div class="line1">{{ index+1 }}</div>
+						<div class="line2"><img class="logo" :src="item.teamLogo | ImgUrl" onerror="this.src='../../../img/headDefaltImg.png'" /></div>
+						<div class="line3">{{ item.teamShortName }}</div>
+					</div>
+				</div>
+			</div>
+			<div class="bottom" @tap="jump()">
+				想查看更多，请下载成绩单！
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	  // html/results-all.html?raceid=3&phaseid=8&isScore=1
+    // 接收全局参数
+    var raceid = UrlParm.raceid;
+    var phaseid = UrlParm.phaseid;
+    var isScore = UrlParm.isScore;
+
+    // 实例化 VUE
+    var vm = new Vue({
+    	el: '#box',
+        data: {
+            dataList: ["dList"],           // 某一阶段的数据
+        },
+        methods: {
+        	 // 获取某一阶段的具体数据
+            queryPhasedTeamRankData: function () {
+                Ajax(httpCompetion + "queryPhasedTeamRankData.do", {
+                    raceid: raceid,
+                    phaseid: phaseid,
+                    isScore: isScore
+                }, function (ret) {
+//                  console.log(ret);
+                    ret = JSON.parse(ret);
+                    this.dataList = ret.data;
+                }.bind(this));
+            },
+            jump: function () {
+				mui.toast("请稍等......");
+		        if (window.PhoneSystem.name == "Android") {
+		            setTimeout(function(){
+		                window.location.href = androidLoad;
+		            }, 2000);
+		            window.location.href = androidOpen;
+		        } else {
+		            setTimeout(function(){
+		                window.location.href = iosLoad;
+		            }, 2000);
+		            window.location.href = iosOpen;
+		        }
+			},
+        },
+        mounted: function(){
+        	this.queryPhasedTeamRankData();
+        }
+    });
+</script>

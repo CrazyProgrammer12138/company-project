@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>SuperVolley</title>
+    <link rel="stylesheet" type="text/css" href="../css/news-details-share.css"/>
+    <script src="../../../js/view.port.js"></script>
+    <script src="../../../js/vue.js"></script>
+	<script src="../../../js/commom.js"></script>
+    <script src="../../../js/jquery.min.js"></script>
+</head>
+<body>
+	<!--<video controls="controls" loop="loop" poster="" width="100%" height="100%">
+		<source src="http://video.sina.com.cn/share/video/251053438.swf" type="audio/mp4">
+		<source src="http://video.sina.com.cn/share/video/251053438.swf" type="video/webm">
+		<source src="http://video.sina.com.cn/share/video/251053438.swf" type="video/ogg">
+		您的浏览器不支持 video 标签。
+	</video>-->
+    <div id="main" class="del-height">
+    	<!--信息头-->
+		<div class="header">
+			<div class="head-title">女排亚俱杯东道主2-3久光制药</div>
+			<div class="time-info">
+				<span>中国排协</span>
+				<span>03-08 11:46</span>
+			</div>
+		</div>
+		<!--内容-->
+		<div class="content">
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三方还觉得顺丰快递很舒服就很舒服几乎都是看风景的的康师傅的说法京东方科技风反间谍法都开始风华绝代顺丰快递司法解释的开发剪得还是开发合社分段函数浮夸房交会的首付款交话费肯定是福克斯福建师范房间开始</p>
+			<p style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;
+				<img class="atlasClass" data-id="6" data-size="4" src="http://cva.res.supervolleyball.com/1//png/35054900-f87e-404c-86e2-53589c26c91d.png"/>
+			</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;幅度是客服电话首付款绝对是放得开解放后的时刻会飞的会计师仿佛看见第三方科技大会上付电话费的看法活动附近代发货的发动机发货单</p>
+			<p style="text-align: center;">
+				<img class="atlasClass" data-id="13" data-size="4" src="http://cva.res.supervolleyball.com/1//png/0738a3a2-8cc5-4493-a61e-ad7d318ed22c.png"/>
+			<br/>
+			</p>
+			<p>吃饱饭书法家的减肥不舒服不当回事卷发棒点击回复电饭锅打电话较高的市房管局地方打个返回到结果都会发给粉红色的回房间的是非得失</p>
+			<p style="text-align: center;">
+				<img src="http://cva.res.supervolleyball.com/1/uEditor/jpg/b28d0793-dbca-4b6e-bbac-14fe13d36c45.jpg" title="a2cc7cd98d1001e986e39386b20e7bec55e79758.jpg"/>
+			</p>
+			<p>房间看电视付款后焚枯食淡很快就发货的康师傅好地方绝代风华付款后发动机号封口费发多少接口返回客服电话技术否浩丰科技的说法客家话翻山倒海发卡行翻江倒海副科级封号结束代付款大煞风景房交会的经适房康师傅和</p>
+			<p style="text-align: center;">
+				<img class="atlasClass" data-id="49" data-size="4" src="http://cva.res.supervolleyball.com/1//png/35054900-f87e-404c-86e2-53589c26c91d.png"/>
+			</p>
+			<p>福建省的看法九分裤好看的绝代风华复健科淡饭黄齑防火防盗开发阶段会飞的金凤凰巅峰对决返回房间的首付款建华大街开户费惊世毒妃款到发货打开方式复合大师客服回复看电视复活甲闪电发货独守空房</p>
+			<p style="text-align: center;">
+				<img src="http://cva.res.supervolleyball.com/1/uEditor/jpg/d044a609-505c-48a3-8a1b-e4de184bafe5.jpg" title="壁纸.jpg"/>
+			</p>
+		</div>
+    </div>
+    <script type="text/javascript">
+    	/*增加图集*/
+    	$(".atlasClass").parent("p").addClass("img-group");
+    	var imgs = [];
+    	
+		//获取图片在文件中是第几个
+    	$("#main img").addClass("img-list");
+    	$(".atlasClass").removeClass("img-list");
+        for (var i = 0; i < $(".img-list").length; i++){
+        	imgs.push($(".img-list").eq(i).attr("src"));
+        }
+        $(".img-list").on("click", function(){
+        	console.log(["imgIndex", imgs.join(","), imgs.indexOf(this.src).toString()]);
+            H5ToNative(["imgIndex", imgs.join(","), imgs.indexOf(this.src).toString()]);
+        });
+        $(".atlasClass").on("click", function(){
+        	console.log($(this).attr("data-id"));
+            H5ToNative(["goAtlas",$(this).attr("data-id")]);
+        });
+    </script>
+</body>
+</html>

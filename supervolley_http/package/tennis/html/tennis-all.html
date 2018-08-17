@@ -1,0 +1,2956 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>网球</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+				font-size: 12px;
+			}
+			body{
+				text-align: center; 
+			}
+			.cx-wrapper{
+			    display: inline-block;
+			    vertical-align: middle;
+			}
+			.cx-left {
+				width: 400px;
+				padding: 20px 20px;
+			}
+			/*时间*/
+			.cx-time {
+				position: absolute;
+			    width: 800px;
+			    margin-top: 20px;
+			    text-align: left;
+			    margin-left: 10px;
+			}
+			.cx-time > div {
+				display: inline-block;
+				width: 18%;
+				margin-top: 4px;
+			}
+			.cx-started > div {
+				display: inline-block;
+				width: 44%;
+				height: 20px;
+				border-bottom: 1px solid #000000;
+				text-align: center;
+			}
+			.cx-Finished {
+				margin-left:1px ;
+			}
+			.cx-Finished > div {
+				display: inline-block;
+				width: 50%;
+				height: 20px;
+				border-bottom: 1px solid #000000;
+				text-align: center;
+			}
+			/*时间end*/
+			/*表格左侧*/
+			.cx-table-left {
+				display: inline-block;
+				margin-top: 74px;
+				text-align: center;
+				width: 291px;
+				vertical-align: top;
+				
+			}
+			.cx-td {
+			    width: 12px;
+			    text-align: center;
+			}
+			th {
+				font-weight: 500;
+			}
+			td {
+				position: relative;
+			}
+			.cx-points {
+				width: 84%;
+				text-align: center;
+			}
+			.cx-server {
+				width: 16%;
+			}
+			.cx-table-right {
+				display: inline-block;
+				width: 100px;
+				text-align: center;
+			    margin: -1px 0 0 -5px;
+				
+			}
+			.cx-table-left td{
+				height: 16px;
+				
+			}
+			.cx-table-right > table {
+				width: 50px;
+				float: left;
+				border: 2px solid #000000;
+			}
+			.cx-border-right {
+				border-right: 2px solid #000000;
+			}
+			.cx-among > div {
+				line-height: 35px;
+			}
+			/*左侧表格end*/
+			/*右侧表格*/
+			.cx-right-games1 {
+				height: 72px;
+			}
+			.cx-right-games2 {
+				height: 34px;
+			}
+			
+			
+			/*底部人员*/
+			.player-boottom {
+				width: 300px;
+				margin:-48px 0 40px 20px;
+				position: absolute;
+			}
+			.cx-player-left {
+			 	float: left;
+			 	width: 50%;
+			    margin-top: -10px;
+			}
+			.cx-player-right {
+			 	float: left;
+			    margin: -29px 0 0 -6px;
+			    vertical-align: bottom;
+			}
+			.cx-started1 {
+				margin-bottom: 5px;
+			}
+			.cx-started1 > div {
+				display: inline-block;
+				width: 60%;
+				height: 20px;
+				border-bottom: 1px solid #000000;
+				margin-bottom: -5px;
+			}
+			.cx-score {
+				width: 78px;
+			}
+			.cx-div-score {
+				width: 70px;
+				text-align: right;
+				height: 16px;
+			}
+			.cx-score-td {
+				width: 20px;
+				height: 21px; 
+			}
+			.cx-player-right td{
+				width: 20px;
+				height: 20px;
+				display: table-cell;
+			}
+			/*圆点*/
+			.cx-circle {
+				width: 5px;
+				height: 5px;
+				border-radius: 50%;
+				position: absolute;
+			    bottom: 4px;
+			    left: 4px;
+			}
+			/*最外面宽 50%*/
+			body{
+			    font-size: 12px;
+			}
+			.tennis-right{
+			    width:400px;
+			    display: inline-block;
+			    vertical-align: middle;
+			}
+			/*第一部分*/
+			.events{
+			    overflow: hidden;
+			}
+			/*底部线条*/
+			.events-one-line,.events-two-line,.events-three-line,.events-four-line{
+			    height: 20px;
+			    border-bottom: 2px solid #333333;
+			    line-height: 25px;
+			    text-align: center;
+			    font-size: 12px;
+			}
+			.events .right-o-mr{
+			    margin-left: 170px;
+			}
+			.events .right-t-mr{
+			    margin-left: 100px;
+			}
+			.dates{
+			    width: 29%;
+			    float: left;
+			}
+			.mar-cum{
+			    margin: 0 24px 0 23px;
+			}
+			.chair{
+			    display: inline-block;
+			    width: 34%;
+			    margin-top: 20px;
+			}
+			.cer-right{
+			    margin-left: 6%;
+			}
+			/*.events .text-r-line{
+			    margin-left: 40px;
+			}*/
+			/*第二部分带有表格 start*/
+			.content-two{
+			    margin-top: 56px;
+			    position: relative;
+			}
+			.player{
+			    height: 50px;
+			}
+			.p-text{
+			    float: left;
+			    margin-top: 22px;
+			}
+			.player-line{
+			    width: 81%;
+			    height: 35px;
+			    border-bottom: 2px solid #333333;
+			    margin-left: 67px;
+			    line-height: 45px;
+			    padding-left: 20px;
+			    font-size: 12px;
+			}
+			/*表格样式*/
+			.right-c{
+			    width: 20%;
+			    overflow: hidden;
+			    border-top: 2px solid #333333;
+			    border-right: 2px solid #333333;
+			    padding: 0;
+			    margin: 0;
+			    position: absolute;
+			    top: -15px;
+			    right: -11px;
+			}
+			/*表格上字体*/
+			.won-elects{
+			    position: absolute;
+			    top: -59px;
+			    right: -8px;
+			}
+			.won-elects div{
+			    float: left;
+			    text-align: center;
+			}
+			/*表格列表*/
+			.right-c li{
+			    width: 47%;
+			    height: 50px;
+			    line-height: 50px;
+			    list-style: none;
+			    float: left;
+			    text-align: center;
+			    border-left: 2px solid #333333;
+			}
+			/*第三部分 start*/
+			/*第三部分第三行*/
+			.started{
+			    overflow: hidden;
+			    padding-top: 4px;
+			}
+			.started-one{
+			    float: left;
+			}
+			.started-one-span,.started-two-span, .started-three-span{
+			    width: 98px;
+			    display: inline-block;
+			    overflow: hidden;
+			    vertical-align: -4px;
+			    white-space: nowrap;
+			    text-overflow: ellipsis;
+			}
+			.started-two, .started-three{
+			    float: left;
+			}
+			.bot-line{
+			    width: 86%;
+			    height: 1px;
+			    border-bottom: 2px solid #333333;
+			    margin-left: 14%;
+			    margin-top: -16px;
+			}
+			.started-two,.started-one,.started-three{
+				width: 132px;
+			}
+			.started-two>div,.started-one>div,.started-three>div{
+				width: 52%;
+			    vertical-align: middle;
+			    display: inline-block;
+			}
+			/*第三部分第三行 end*/
+			* {
+				padding: 0;
+				margin: 0;
+				font-size: 12px;
+			}
+			.bottom-two{
+				margin-top: 100px;
+			}
+			.csx-left {
+				width: 400px;
+				padding: 20px 20px;
+			}
+			.csx-wrapper{
+				display: inline-block;
+			    vertical-align: top;
+			}
+			/*时间*/
+			.csx-time {
+			    position: absolute;
+			    width: 800px;
+			    margin-top: 20px;
+			    text-align: left;
+			    margin-left: 10px;
+			}
+			.csx-time > div {
+				display: inline-block;
+				width: 17%;
+				margin-top: 4px;
+			}
+			.csx-started > div {
+				display: inline-block;
+				width: 42%;
+				height: 20px;
+				border-bottom: 1px solid #000000;
+				text-align: center;
+			}
+			.csx-Finished {
+				margin-left:1px ;
+			}
+			.csx-Finished > div {
+				display: inline-block;
+				width: 50%;
+				height: 20px;
+				border-bottom: 1px solid #000000;
+				text-align: center;
+			}
+			/*时间end*/
+			/*表格左侧*/
+			.csx-table-left {
+				display: inline-block;
+				margin-top: 74px;
+				text-align: center;
+				width: 291px;
+				/*border: 1px solid pink;*/
+				vertical-align: top;
+				
+			}
+			.csx-td {
+			    width: 12px;
+			    text-align: center;
+			}
+			.csx-border-right {
+				border: 1px solid #000000;
+			}
+			th {
+				font-weight: 500;
+			}
+			td{
+				position: relative;
+			}
+			.csx-points {
+				width: 84%;
+				text-align: center;
+			}
+			.csx-server {
+				width: 16%;
+			}
+			.csx-table-right {
+				display: inline-block;
+				width: 100px;
+				text-align: center;
+				margin:4px 0 0 -7px;
+				
+			}
+			.csx-table-left td{
+				height: 16px;
+				
+			}
+			.csx-table-right > table {
+				width: 48px;
+				float: left;
+			    border: 2px solid #000000;
+			}
+			.csx-border-right {
+				width: 5%;
+				height: 30px;
+				text-align: center;
+				border-right: 2px solid #000000;
+				
+			}
+			.csx-among > div {
+				line-height: 35px;
+			}
+			.twoTitle{
+				height: 32px
+			}
+			.csx-table-right>table:last-child{
+			    margin-left: -3px;
+			}
+			/*左侧表格end*/
+			/*右侧表格*/
+			.csx-right-games1 {
+				height: 52px;
+			}
+			.csx-right-games2 {
+				height: 34px;
+			}
+			.bottomTwo > td {
+			    border-bottom: 3px solid #000;
+			}
+			
+			/*底部人员*/
+			.bottom-two .player-boottom {
+				width: 300px;
+				margin:-170px 0 40px 20px;
+				position: absolute;
+			}
+			.bottom-two .csx-player-left {
+			 	float: left;
+			 	width: 50%;
+			    margin-top: -10px;
+			}
+			.bottom-two .csx-player-right {
+			 	float: left;
+			    margin: -29px 0 0 -7px;
+			}
+			.bottom-two .csx-started1 {
+				margin-bottom: 5px;
+			}
+			.bottom-two .csx-started1 > div {
+				display: inline-block;
+				width: 60%;
+				height: 20px;
+				line-height: 20px;
+				border-bottom: 1px solid #000000;
+				margin-bottom: -5px;
+			}
+			.bottom-two .csx-score {
+				width: 26px;
+			}
+			.bottom-two .csx-div-score {
+				width: 70px;
+				text-align: left;
+				height: 16px;
+			}
+			.bottom-two .csx-score-td {
+				width: 20px;
+				height: 21px;
+				line-height: 21px; 
+			    text-align: center;
+			}
+			.bottom-two .csx-player-right td{
+				width: 20px;
+				height: 20px;
+				display: table-cell;
+			}
+			/*圆点*/
+			.csx-circle {
+				width: 5px;
+				height: 5px;
+				border-radius: 50%;
+				position: absolute;
+			    bottom: 4px;
+			    left: 4px;
+			}
+		</style>
+	</head>
+	<body>
+	<div id="main">
+		<!--第一部分-->
+		<div class="cx-wrapper">
+			<!--表格-->
+			<div class="cx-left">
+				<!--时间-->
+				<div class="cx-time">
+					<div class="cx-started">Time Started <div></div></div>
+					<div class="cx-Finished">Finished <div></div></div>
+				</div>
+				<!--表格左侧-->
+				<div class="cx-table-left">
+					<table border="1" cellspacing="0">
+						<tr>
+							<th>BC</th>
+							<th class="cx-server" colspan="2">SERVER</th>
+							<th class="cx-points"  colspan="16">POINTS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;No.3</th>
+						</tr>
+						<!--第一行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">1</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td class="cx-td-height"><div class="cx-td">A</div><div class="cx-circle"><img src="../img/1.png"/></div></td>
+					        <td><div class="cx-td">D</div><div class="cx-circle"><img src="../img/1.png"/></div></td>
+					        <td><div class="cx-td">A</div><div class="cx-circle"><img src="../img/1.png"/></div></td>
+					        <td><div class="cx-td">D</div></td>
+					        <td><div class="cx-td">/</div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div><div class="cx-circle"><img src="../img/1.png"/></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td class="cx-td-height"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <!--第二行三行合并-->
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<td rowspan="4"class="cx-among"><div>2</div><div>3</div></td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					         <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					     <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <!--第四行五行合并-->
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<td rowspan="4"class="cx-among"><div>4</div><div>5</div></td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					         <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					     <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    
+					    <!--第六行七行合并-->
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<td rowspan="4"class="cx-among"><div>6</div><div>7</div></td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					         <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					     <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    
+					    <!--第八行九行合并-->
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<td rowspan="4"class="cx-among"><div>8</div><div>9</div></td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					         <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					     <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    
+					    <!--第十行十一行合并-->
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<td rowspan="4"class="cx-among"><div>10</div><div>11</div></td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					         <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					     <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    
+					    <!--第十二行十三行合并-->
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<td rowspan="4"class="cx-among"><div>4</div><div>5</div></td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					         <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					     <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    
+					    <!--第十四行十五行合并-->
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<td rowspan="4"class="cx-among"><div>14</div><div>15</div></td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					         <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					     <tr>
+					    	<!--BC 两行合并-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <!--第十六行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">16</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<td rowspan="2"><div class="cx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td class="cx-border-right"><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					        <td><div class="cx-td"></div></td>
+					    </tr>
+					</table>
+				</div>
+				<!--表格右侧-->
+				<div class="cx-table-right">
+					<table border="1" cellspacing="0">
+						<tr>
+							<th colspan="2">GAMES</th>
+						</tr>
+					    <tr>
+					    	<td class="cx-right-games1"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games1"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    	<td class="cx-right-games2"><div class="cx-td"></div></td>
+					    </tr>
+					</table>
+				</div>
+			</div>
+			<!--底部人员-->
+			<div class="player-boottom">
+				<div class="cx-player-left">
+					<div class="cx-started1">Player(S)
+						<div></div>
+					</div>
+					<div class="cx-started1">Player(S)
+						<div></div>
+					</div>
+				</div>
+				<div class="cx-player-right">
+					<div class="cx-div-score">Score</div>
+					<table border="1" cellspacing="0" class="cx-score">
+						<tr>
+							<td>
+								<div class="cx-score-td"></div>
+							</td>
+							<td>
+								<div class="cx-score-td"></div>
+							</td>
+							<td>
+								<div class="cx-score-td"></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="cx-score-td"></div>
+							</td>
+							<td>
+								<div class="cx-score-td"></div>
+							</td>
+							<td>
+								<div class="cx-score-td"></div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div style="width: 238px;text-align:  right;">
+				<span style="display:inline-block ;width: 25px;"></span>
+				<span style="display:inline-block;width: 25px;">( 2 )</span>
+				<span style="display:inline-block;width: 25px;"></span>
+			</div>
+		</div>
+		<!--第二部分-->
+		<div class="tennis-right">
+			<div class="events">
+				<div class="events-one-line"></div>
+				<span class="right-o-mr">EVENT</span>
+				<span class="right-t-mr">COURT NO.</span>
+			</div>
+			<div class="events">
+				<div class="dates">
+					<div class="events-two-line"></div>
+					<center>DATE</center>
+				</div>
+				<div class="dates mar-cum">
+					<div class="events-two-line">啦啦啦</div>
+					<center>ROUND</center>
+				</div>
+				<div class="dates">
+					<div class="events-two-line">呜呜呜</div>
+					<center>BALL CHANGE</center>
+				</div>
+			</div>
+			<div class="events">
+				<div class="chair">
+					<div class="events-three-line"></div>
+					<center>CHAIR UMPIRE</center>
+				</div>
+				<div class="chair cer-right">
+					<div class="events-three-line"></div>
+					<center>REFEREE</center>
+				</div>
+			</div>
+			<div class="events">
+				<div class="events-four-line"></div>
+				<span class="text-r-line">CHIEF OF UMPIRES</span>
+			</div>
+			<div class="content-two">
+				<div class="left-c">
+					<div class="player">
+						<div class="p-text">PLAYER(S)</div>
+						<div class="player-line">PLAYER(S)</div>
+					</div>
+					<div class="player">
+						<div class="player-line">PLAYER(S)</div>
+					</div>
+					<div class="player">
+						<div class="p-text">PLAYER(S)</div>
+						<div class="player-line">PLAYER(S)</div>
+					</div>
+					<div class="player">
+						<div class="player-line">PLAYER(S)</div>
+					</div>
+				</div>
+				<div class="won-elects">
+					<div>WON<br>FLIP</div>
+					<div>ELECTS<br>TO</div>
+				</div>
+				<ul class="right-c">
+					<li>√</li>
+					<li>S</li>
+					<li>√</li>
+					<li>S</li>
+					<li>√</li>
+					<li>S</li>
+					<li>√</li>
+					<li>S</li>
+				</ul>
+			</div>
+			<div class="content-three">
+				<div class="left-c">
+					<div class="player">
+						<div class="p-text mar-zero">WINNER(S)</div>
+						<div class="player-line">WINNER</div>
+					</div>
+					<div class="player">
+						<div class="p-text mar-zero">SCORE</div>
+						<div class="player-line">SCORE</div>
+					</div>
+				</div>
+				<div class="started">
+					<div class="started-one">
+						<div>TIME STARTED</div>
+						<span class="started-one-span"></span>
+					</div>
+					<div class="started-two">
+						<div>TIME<br>FINISHED</div>
+						<span class="started-two-span"></span>
+					</div>
+					<div class="started-three">
+						<div>DURATION<br>OF MATCH</div>
+						<span class="started-three-span"></span>
+					</div>
+				</div>
+				<div class="bot-line"></div>
+				<div class="events">
+					<div class="events-four-line"  style="height: 50px;"></div>
+					<center>Signature_ Chair Umpire</center>
+				</div>
+			</div>
+		</div>
+		
+		<br />
+		<!--第三部分-->
+		<div class="csx-wrapper bottom-two">
+			<!--表格-->
+			<div class="csx-left">
+				<!--时间-->
+				<div class="csx-time">
+					<div class="csx-started">Time Started <div></div></div>
+					<div class="csx-Finished">Finished <div></div></div>
+				</div>
+				<!--表格左侧-->
+				<div class="csx-table-left">
+					<table border="1" cellspacing="0">
+						<tr>
+							<th>BC</th>
+							<th class="csx-server" colspan="2">SERVER</th>
+							<th class="csx-points"  colspan="16">POINTS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;No.1</th>
+						</tr>
+						<!--第一行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">1</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td">1</div><div class="cx-circle"><img src="../img/1.png"/></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A<div class="cx-circle"><img src="../img/1.png"/></div></div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/<div class="cx-circle"><img src="../img/1.png"/></div></div></td>
+					        <td><div class="csx-td"><div class="cx-circle"><img src="../img/1.png"/></div></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div><div class="cx-circle"><img src="../img/1.png"/></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第二行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">2</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第三行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">3</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第四行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">4</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第五行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">5</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第六行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">6</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第七行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">7</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第八行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">8</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第九行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">9</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第十行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">10</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第十一行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">11</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第十二行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">12</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					</table>
+				</div>
+				<!--表格右侧-->
+				<div class="csx-table-right">
+					<table border="1" cellspacing="0">
+						<tr>
+							<th colspan="2" class="twoTitle">TIE<br />BREAK</th>
+						</tr>
+					    <tr>
+					    	<td class="csx-right-games1"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games1"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr class="bottomTwo">
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr class="bottomTwo">
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					</table>
+					<table border="1" cellspacing="0">
+						<tr>
+							<th colspan="2" class="twoTitle">GAMES</th>
+						</tr>
+					    <tr>
+					    	<td class="csx-right-games1"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games1"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr class="bottomTwo">
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					</table>
+				</div>
+			</div>
+			<!--底部人员-->
+			<div class="player-boottom">
+				<div class="csx-player-left">
+					<div class="csx-started1">Player(S)
+						<div>A</div>
+					</div>
+					<div class="csx-started1">Player(S)
+						<div>B</div>
+					</div>
+				</div>
+				<div class="csx-player-right">
+					<div class="csx-div-score">Score</div>
+					<table border="1" cellspacing="0" class="csx-score">
+						<tr>
+							<td>
+								<div class="csx-score-td">0</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="csx-score-td">0</div>
+							</td>
+						</tr>
+					</table>
+				</div><br />
+				<div style="width: 164px;text-align:  right;margin: 33px 0 0 0px;">
+					<span style="width: 30px;">( 1 )</span>
+				</div>
+			</div>
+		</div>
+		<!--第四部分-->
+		<div class="csx-wrapper bottom-two">
+			<!--表格-->
+			<div class="csx-left">
+				<!--时间-->
+				<div class="csx-time">
+					<div class="csx-started">Time Started <div></div></div>
+					<div class="csx-Finished">Finished <div></div></div>
+				</div>
+				<!--表格左侧-->
+				<div class="csx-table-left">
+					<table border="1" cellspacing="0">
+						<tr>
+							<th>BC</th>
+							<th class="csx-server" colspan="2">SERVER</th>
+							<th class="csx-points"  colspan="16">POINTS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;No.2</th>
+						</tr>
+						<!--第一行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">1</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A<div class="cx-circle"><img src="../img/1.png"/></div></div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/<div class="cx-circle"><img src="../img/1.png"/></div></div></td>
+					        <td><div class="csx-td"><div class="cx-circle"><img src="../img/1.png"/></div></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td">A<div class="cx-circle"><img src="../img/1.png"/></div></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第二行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">2</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第三行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">3</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第四行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">4</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第五行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">5</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第六行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">6</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第七行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">7</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第八行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">8</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第九行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">9</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第十行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">10</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第十一行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">11</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td">A</div></td>
+					        <td><div class="csx-td">D</div></td>
+					        <td><div class="csx-td">/</div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <!--第十二行-->
+					    <tr>
+					    	<!--BC-->
+					    	<td rowspan="2">12</td>
+					    	<!--SERVER-->
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<td rowspan="2"><div class="csx-td"></div></td>
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<!--BC-->
+					    	<!--SERVER-->
+					    	<!--POINTS-->
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td class="csx-border-right"><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					        <td><div class="csx-td"></div></td>
+					    </tr>
+					</table>
+				</div>
+				<!--表格右侧-->
+				<div class="csx-table-right">
+					<table border="1" cellspacing="0">
+						<tr>
+							<th colspan="2" class="twoTitle">TIE<br />BREAK</th>
+						</tr>
+					    <tr>
+					    	<td class="csx-right-games1"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games1"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr class="bottomTwo">
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr class="bottomTwo">
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					</table>
+					<table border="1" cellspacing="0">
+						<tr>
+							<th colspan="2" class="twoTitle">GAMES</th>
+						</tr>
+					    <tr>
+					    	<td class="csx-right-games1"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games1"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr class="bottomTwo">
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					    <tr>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    	<td class="csx-right-games2"><div class="csx-td"></div></td>
+					    </tr>
+					</table>
+				</div>
+			</div>
+			<!--底部人员-->
+			<div class="player-boottom">
+				<div class="csx-player-left">
+					<div class="csx-started1">Player(S)
+						<div></div>
+					</div>
+					<div class="csx-started1">Player(S)
+						<div></div>
+					</div>
+				</div>
+				<div class="csx-player-right">
+					<div class="csx-div-score">Score</div>
+					<table border="1" cellspacing="0" class="csx-score">
+						<tr>
+							<td>
+								<div class="csx-score-td">A</div>
+							</td>
+							<td>
+								<div class="csx-score-td">B</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="csx-score-td">/</div>
+							</td>
+							<td>
+								<div class="csx-score-td"></div>
+							</td>
+						</tr>
+					</table>
+				</div><br />
+				<div style="width: 190px;text-align:  right;margin: 33px 0 0 0px;">
+					<span style="width: 30px;">( 1 )</span>
+					<span style="width: 30px;">( 2 )</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../../../js/jquery.min.js"></script>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$.post("http://m.wandawenwen.com/index.php/portal/Resource/free_video",{
+		uid: 27,
+		num: 10,
+		page: 1
+	},function(msg){
+		console.log(msg);
+		console.log(msg.data[0].avatar);
+	});
+</script>

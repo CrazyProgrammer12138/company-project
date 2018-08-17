@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>报名</title>
+	<link rel="stylesheet" href="../../css/mui/mui.min.css">
+	<link rel="stylesheet" href="../../css/mui/common.css">
+	<link rel="stylesheet" href="../../css/official-alsle/apply.css">
+	<script src="../../js/view-port.js"></script>
+	<script src="../../js/vue.js"></script>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/mui.pullToRefresh.js"></script>
+	<script src="../../js/mui.pullToRefresh.material.js"></script>
+	<script src="../../js/pako.js"></script>
+	<script src="../../js/ajax.js"></script>
+	<script src="../../js/commom.js"></script>
+</head>
+
+<body>
+	<div id="main" class="mui-content">
+		<center class="no-data">
+			<img src="../../img/zanwushuju.png"/>
+			<center class="ceter_text">暂时没有数据哦~</center>
+		</center>
+		<div id="slider" class="mui-slider mui-fullscreen">
+			<div class="mui-slider-group">
+				<div id="item1mobile" class="mui-slider-item mui-active">
+					<div id="scroll1" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul class="mui-table-view add-margin">
+								<li class="mui-table-view-cell del-padding" v-for="item in getCompetitionSeasonList"  @tap="listGoDetails(item.CompetitionSeasonID)">
+									<div class="list-img-top">
+										<center>{{ item.SeasonShortName }}</center>
+										<center>
+											<button type="button" class="red-btn" v-if="item.IsStart==0 && item.IsSignUp==0">报名</button>
+											<button type="button" class="pale-red-btn" v-if="item.IsSignUp>0">已报名</button>
+											<button type="button" class="orange-btn" v-else-if="item.IsStart==1">进行中</button>
+											<button type="button" class="grey-btn" v-else-if="item.IsStart==2">已结束</button>
+										</center>
+									</div>
+									<img class="list-img" :src="item.SeasonImage | ImgUrlOfficial" onerror="this.src='../../img/bigDefaule.png'">
+									<div class="date">
+										<img class="list-logo-date" src="../../img/date.png">
+										<span>{{ item.BeginDateTime | dateFilter }}</span>
+									</div>
+									<div class="address">
+										<img class="list-logo-address" src="../../img/address.png">
+										<span>{{ item.MatchPlace }}</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		var teamID = UrlParm.TeamID;
+
+		var vm = new Vue({
+			el: "#main",
+			data: {
+				getCompetitionSeasonList: [],
+			},
+			methods: {
+				listGoDetails: function(id){
+//					window.location.href="application-registration.html?CompetitionSeasonID="+id;
+					H5ToNative(["html/official-aisle/application-registration.html","&CompetitionSeasonID="+id])
+				}
+			}
+		});
+		/*列表接口*/
+		var json = {
+			"TeamID": teamID,
+			"Page": 1,
+			"Size": 10,
+		}
+		getCompetitionSeasonList();
+		function getCompetitionSeasonList(self){
+			Ajax(httpOfficial+"CollegeStudent/getCompetitionSeasonList",json,function(e){
+				console.log(e);
+				e = JSON.parse(e);
+				if(e.data.length == 0 && json.Page == 1){
+					$(".no-data").show();
+					$(".mui-pull-bottom-tips").hide();
+					return ;
+				}
+				if(!!self && e.data.length < json.Size) {
+		            self.endPullUpToRefresh(true);
+				} else if(!!self) {
+				    self.endPullUpToRefresh(false);
+				}
+				vm.getCompetitionSeasonList = vm.getCompetitionSeasonList.concat(e.data);
+				json.Page++;
+			});
+		}
+		mui.init();
+		(function($) {
+			//阻尼系数
+			var deceleration = mui.os.ios?0.003:0.0009;
+			$('.mui-scroll-wrapper').scroll({
+				bounce: false,
+				indicators: true, //是否显示滚动条
+				deceleration:deceleration
+			});
+			$.ready(function() {
+				//循环初始化所有下拉刷新，上拉加载。
+				$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+					$(pullRefreshEl).pullToRefresh({
+						up: {
+							callback: function() {
+								setTimeout(function() {
+									getCompetitionSeasonList(this);
+								}.bind(this), 1000);
+							}
+						}
+					});
+				});
+			});
+		})(mui);
+	</script>
+</body>
+
+</html>

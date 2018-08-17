@@ -1,0 +1,180 @@
+/**
+ * 创建人：  薛魁
+ * 创建时间：2018-03-013 13:26
+ * 功能说明：圈子详情分享
+ */
+body{
+    background: #fff;
+    width: 360px;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0;
+    font-family: arial;
+}
+/*头部打开或者下载APP -- start*/
+.open-app{
+    width: 94%;
+    padding: 6px 12px;
+    background-color: #999999;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+}
+.open-left{
+    float: left;
+    height: 35px;
+    margin-top: 2px;
+}
+.open-left img{
+    width: 34px;
+    height: 34px;
+    margin-right: 9px;
+}
+.open-left span{
+    font-size: 18px;
+    color: #ffffff;
+    vertical-align: 9px;
+}
+.open-app button{
+    width: 45px;
+    height: 25px;
+    color: #ffffff;
+    font-size: 12px;
+    background-color: #d22330;
+    border-radius: 4px;
+    float: right;
+    border: none;
+    margin-top: 6px;
+}
+
+/* 帖子发布 -- starr */
+.publish-post{
+    margin:50px 15px 15px 15px;
+    overflow-x: hidden;
+}
+.publish-header{
+    height: 40px;
+}
+.publish-header img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    float: left;
+}
+.publish-header .post{
+    margin-left: 46px;
+    padding-top: 4px;
+}
+.publish-header .post-username{
+    color: #d22330;
+    font-size: 14px;
+}
+.publish-header .post p{
+    color: #a4aabe;
+    font-size: 11px;
+    margin: 0;
+}
+.publish-post-title{
+    font-size: 18px;
+    margin: 12px 0;
+    color: #333333;
+}
+.publish-post-content{
+    font-size: 14px;
+    color: #333333;
+    margin-bottom: 12px;
+}
+.publish-post-img{
+    width: 100%;
+}
+
+/* 精彩评论  */
+.brilliant{
+    font-size: 14px;
+    padding: 10px 15px;
+    background-color: #e6e6e6;
+}
+
+/* 帖子及评论  */
+.discuss{
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.discuss-header{
+    overflow: hidden;
+}
+.discuss-header-left{
+    float: left;
+}
+.discuss-header-left img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    float: left;
+    margin-top: 4px;
+}
+.discuss-user-message{
+    margin-left: 38px;
+}
+.discuss-user-message div{
+    font-size: 14px;
+    color: #d22330;
+}
+.discuss-user-message p{
+    font-size: 11px;
+    color: #999999;
+    margin: 3px 0 0 0;
+    padding: 0;
+}
+.discuss-header-right{
+    float: right;
+}
+.discuss-header-right img{
+    width: 11px;
+    height: 11px;
+}
+.discuss-header-right span{
+    font-size: 11px;
+    color: #999999;
+}
+.discuss-txt,
+.discuss-txt-img{
+    margin: 12px 0;
+    word-wrap:break-word;
+}
+.discuss-txt-img{
+    font-size: 14px;
+    color: #d22330;
+}
+/* 查看更多评论 */
+.view-more{
+    width: 90%;
+    height: 40px;
+    background-color: #d22330;
+    color: #ffffff;
+    font-size: 15px;
+    text-align: center;
+    margin: 25px 15px;
+    border-radius: 6px;
+    border: none;
+}
+.jump{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+    top: 0;
+	z-index: 999999;
+    background: rgba(0,0,0,.2);
+    text-align: center;
+    display: none;
+}
+.jump>span{
+	position: relative;
+	top: 50%;
+	font-size: 12px;
+	color: #fff;
+	background: rgba(0,0,0,.8);
+	border-radius: 4px;
+	padding: 8px 12px;
+	line-height: 1;
+}

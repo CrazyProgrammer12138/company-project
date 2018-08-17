@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SuperVolley</title>
+    <link rel="stylesheet" href="../../../css/mui/mui.min.css" />
+    <link rel="stylesheet" href="../../../css/mui/common.css">
+    <link rel="stylesheet" href="../../../css/video/video.css">
+    <link rel="stylesheet" href="../css/compition-live.css" />
+    <script src="../../../js/view.port.js"></script>
+    <script src="../../../js/vue.js"></script>
+    <script src="../../../js/mui.min.js"></script>
+    <script src="../../../js/commom.js"></script>
+    <script src="../../../js/jquery.min.js"></script>
+    <script src="../../../js/video.js"></script>
+    <script src="../../../js/commom.js"></script>
+</head>
+<body>
+    <video id="my-player"
+           class="video-js vjs-big-play-centered"
+           controls
+           preload="auto"
+           poster="../../../img/video.jpg"
+           data-setup='{}'
+           width="360"
+           height="203"
+    >
+        <source src="" type="application/vnd.apple.mpegurl" />
+    </video>
+
+    <div id="box">
+        <!--top 打开提示-->
+        <div class="top" @click="jump()">
+            <img class="logo" src="../../../img/SuperVolleyLogo.png" />
+            <div class="name">SuperVolley</div>
+			<div class="head-button">打开</div>
+        </div>
+
+        <!--打开超级排球按钮-->
+        <div class="open"  @click="jump()">
+            <div>打开SuperVolley,提升3倍流畅度</div>
+        </div>
+
+        <!--底部-->
+        <center class="bottom-one">Copyright©2015-2017 HUAYUSHIDAI版权所有</center>
+        <center class="bottom-two">华羽时代体育文化发展公司 版权所有</center>
+    </div>
+</body>
+<script type="text/javascript">
+
+    /* 获取地址栏传值 */
+    var videoUrl = UrlParm.videoUrl;
+
+    /* 切换直播地址 */
+    $("#my-player > source").attr("src", videoUrl);
+    var player = videojs('my-player', {}, function onPlayerReady() {
+        var isPlayer = 1;
+        $(".vjs-modal-dialog-content").html("<br />直播 已过期 或 未开始");
+        this.on("error", function () {
+            $(".vjs-modal-dialog-content").html("<br />视频已过期 或 未开始");
+        });
+        $("video").on("touchstart", function (ev) {
+            if (isPlayer == 0) {
+                this.play();
+                isPlayer = 1;
+            } else {
+                this.pause();
+                isPlayer = 0;
+            }
+        }.bind(this));
+    });
+
+    // 跳转下载或打开 APP
+    $("#box").on("tap", ".top, .open", function(ev) {
+        mui.toast("正在跳转…");
+        if (PhoneSystem.name == "Android") {
+            setTimeout(function(){
+                window.location.href = androidLoad;
+            }, 2000);
+            window.location.href = androidOpen;
+        } else {
+            setTimeout(function(){
+                window.location.href = iosLoad;
+            }, 2000);
+            window.location.href = iosOpen;
+        }
+    });
+</script>
+</html>

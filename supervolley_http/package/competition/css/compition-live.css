@@ -1,0 +1,260 @@
+body{
+	background-color: #f2f2f2;
+}
+.top{
+	height: 50px;
+	line-height: 50px;
+	vertical-align: top;
+	background: #000;
+    opacity: 0.8;
+	position: fixed;
+	top: 0;
+	z-index: 9999;
+	width: 100%;
+}
+.logo{
+	width: 31px;
+	height: 31px;
+	margin: 10px 16px;
+}
+.top>div{
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 2px;
+}
+.head-button {
+    width: 45px;
+    height: 25px;
+    line-height: 26px;
+    color: #FFFFFF;
+    font-size: 12px;
+    text-align: center;
+    background: #D22330;
+    border-radius: 4px;
+    margin: 12px 14px 0 0;
+    position: absolute;
+    top: 11px;
+    right: 0;
+}
+.name{
+	font-size: 14px;
+    color: #fff;
+    margin-left: -7px;
+}
+.button{
+	color: #E33C46;
+    border: 2px solid #E33C46;
+    padding: 5px;
+    line-height: 1;
+    border-radius: 14px;
+    font-size: 12px;
+    margin: 0 15px;
+    position: relative;
+    top: 12px;
+    padding: 5px 9px;
+}
+#my-player{
+	position: fixed;
+	top: 50px;
+}
+.open>div{
+	font-size: 13px;
+	color: #fff;
+	background: #E33C46;
+	padding: 11px;
+	border-radius: 20px;
+	text-align: center;
+    letter-spacing: 1px;
+}
+#video{
+    margin-top: 50px;
+    position: relative;
+}
+#video>center{
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    color: #fff;
+    font-size: 22px;
+    letter-spacing: 6px;
+}
+.video-js {
+    width: 360px;
+    height: 180px;
+}
+.open{
+	padding: 15px 12px;
+	background: #fff;
+	border-bottom: 1px solid #E5E5E5;
+}
+/*实时比分，即时通讯*/
+.IM{
+	height: 110px;
+    padding: 0 25px;
+    border-bottom: 1px solid #e5e5e5;
+    background: #fff;
+    z-index: 9999;
+    padding-top: 10px;
+    border-bottom: 1px solid #E5E5E5;
+}
+.IMTitle{
+    font-size: 12px;
+    color: #111111;
+}
+.IM>div{
+	display: inline-block;
+	vertical-align: top;
+}
+.leftLogo,.rightLogo{
+	width:55px;
+}
+.SCORE{
+    /*margin-top: 102px;*/
+}
+.competitionName{
+    font-size: 10px;
+	white-space: nowrap;
+    overflow: hidden;
+    color: #111111;
+    margin-top: 2px;
+}
+.logoImg{
+    border: 1px solid #7f7f7f;
+    border-radius: 50%;
+    height: 47px;
+    width: 47px;
+    padding: 7px;
+    margin: 0 auto;
+}
+.logoImg>img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.centerData{
+	width: 186px;;
+}
+.centerData>div:first-child,.centerData>div:last-child{
+	display: inline-block;
+	width: 49px;
+	font-size: 10px;
+	vertical-align: middle;
+    margin-top: 7px;
+    color: #ffc106;
+}
+.centerData>div:nth-child(2){
+	width: 75px;
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 24px;
+    margin-top: 7px;
+    color: #fc0a1b;
+}
+/*本场比分*/
+.scoreTitle{
+    font-size: 14px;
+    height: 43px;
+    line-height: 43px;
+    margin: 0 13px;
+}
+.scoreTitle>img{
+    width: 20px !important;
+    position: relative;
+    top: 9px;
+}
+.competitionLogo{
+    width: 18px;
+    height: 18px;
+}
+.scoreTable th{
+    font-weight: 500 !important;
+    font-size: 12px;
+    color: #626262;
+    height: 32px;
+    vertical-align: top;
+}
+.scoreTable td{
+    font-size: 12px;
+    color: #333333;
+    vertical-align: top;
+    height: 21px;
+}
+.mui-table {
+    width: 90%;
+    margin: 0 auto 10px auto;
+}
+/*两队数据统计*/
+.SCORE{
+	background: #fff;
+    padding: 0 0 2px 0;
+}
+.dataTitle{
+    font-size: 14px;
+    height: 43px;
+    line-height: 43px;
+    margin: 0 13px;
+}
+.dataTitle>img{
+    width: 20px;
+    position: relative;
+    top: 5px;
+    height: 20px;
+}
+.dataItem{
+    width: 49%;
+    display: inline-block;
+}
+.dataItemTitle{
+    font-size: 12px;
+    color: #333;
+    margin: 3px 12px 9px 12px;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 6px;
+    font-weight: bold;
+}
+.dataTable th{
+	font-weight: 500 !important;
+	color: #6f6f6f;
+	font-size: 11px;
+}
+.dataTable td{
+	color: #333;
+	font-size: 12px;
+}
+.line{
+	height: 5px;
+	background: #F2F2F2;
+}
+.bottom-one	{
+	font-size: 9px;
+	color: #666;
+	margin-top: 22px;
+}
+.bottom-two{
+	font-size: 9px;
+	color: #000;
+	margin: 5px 0 22px 0;
+}
+
+/* 修改播放按钮为圆形 */
+.video-js .vjs-big-play-button {
+    width: 1.5em;
+    border-radius: 50%;
+}
+.vjs-big-play-centered .vjs-big-play-button {
+    margin-left: -0.75em;
+}
+#refresh{
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	bottom: 40px;
+	right: 15px;
+}
+.refresh{
+	animation: flush 1s infinite;
+}
+#refresh>img{
+	width: 100%;
+	height: 100%;
+}

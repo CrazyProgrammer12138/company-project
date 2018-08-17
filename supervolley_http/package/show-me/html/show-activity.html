@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>SuperVolley</title>
+		<link rel="stylesheet" href="../../../css/mui/mui.min.css">
+		<link rel="stylesheet" href="../../../css/mui/common.css">
+		<link rel="stylesheet" href="https://cdn.bootcss.com/video.js/7.0.0-rc.1/video-js.min.css">
+		<link rel="stylesheet" href="../css/show-activity.css">
+		<script src="../../../js/view.port.js"></script>
+		<script src="../../../js/vue.js"></script>
+		<script src="../../../js/mui.min.js"></script>
+		<script src="../../../js/jquery.min.js"></script>
+		<script src="../../../js/pako.js"></script>
+		<script src="../../../js/ajax.js"></script>
+		<script src="../../../js/commom.js"></script>
+		<script src="https://cdn.bootcss.com/video.js/7.0.0-rc.1/video.min.js"></script>
+	</head>
+
+	<body>
+		<div id="main">
+			<div class="head">
+				<img class="inline-mid head-logo" src="../../../img/SuperVolleyLogo.png">
+				<div class="inline-mid head-text">SuperVolley</div>
+				<div class="head-button go-app">打开</div>
+			</div>
+			<div class="activity-body">
+				<img class="activity-img" :src="activitie.picUrl | ImgUrl" onerror="this.src='../../../img/headDefaltImg.png'" />
+				<div class="activity-mask">
+				</div>
+				<center>
+					<img class="activity-header" :src="activitie.picUrl | ImgUrl" onerror="this.src='../../../img/headDefaltImg.png'" />
+				</center>
+				<center class="activity-name">
+					{{ activitie.activityName }}
+				</center>
+				<center class="activity-people">
+					— {{ activitie.participates }}人使用 —
+				</center>
+				<div class="activity-text">
+					{{ activitie.activeInfo }}
+				</div>
+			</div>
+			<div class="activity-join">
+				<div v-for="(item,index) in collection" class="go-app">
+					<img :src="item.picUrl | ImgUrl" onerror="this.src='../../../img/headDefaltImg.png'" >
+					<img v-if="index==0" class="num" src="../../../img/num1.png" />
+					<img v-else-if="index==1" class="num" src="../../../img/num2.png" />
+					<img v-else-if="index==2" class="num" src="../../../img/num3.png" />
+					<div class="item">
+						<img :src="item.headPic | ImgUrl" onerror="this.src='../../../img/headDefaltImg.png'" />
+						<div>{{ item.name }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			//html/show-activity.html?acId=1
+			var acId = UrlParm.acId;
+			// 实例化 VUE
+			var vm = new Vue({
+				el: '#main',
+				data: {
+					activitie: {},
+					collection: []
+				},
+				methods: {
+
+				}
+			});
+			
+			Ajax(httpShowBar + 'live/similarShare.do',{
+				acId: acId
+			},function(msg){
+				console.log(msg);
+				msg = JSON.parse(msg);
+				vm.activitie = msg.data.activities;
+				vm.collection = msg.data.collections;
+			});
+			 // 跳转到或下载 App
+		    $("#main").on("tap", ".go-app", function (ev) {
+		        mui.toast("请稍等......");
+		        if (window.PhoneSystem.name == "Android") {
+		            setTimeout(function(){
+		                window.location.href = androidLoad;
+		            }, 2000);
+		            window.location.href = androidOpen;
+		        } else {
+		            setTimeout(function(){
+		                window.location.href = iosLoad;
+		            }, 2000);
+		            window.location.href = iosOpen;
+		        }
+		    });
+		</script>
+	</body>
+
+</html>

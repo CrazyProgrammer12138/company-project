@@ -1,0 +1,276 @@
+/**
+ * 创建人：  薛魁
+ * 创建时间：2018-03-022 11:45
+ * 功能说明：身份信息确认
+ */
+html, body{
+    background-color: #ffffff;
+}
+.identity-team{
+    padding: 15px 15px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 1px solid #E5E5E5;
+}
+.identity-title{
+    width: 100%;
+    font-size: 15px;
+    text-align: center;
+    color: #000000;
+    position: relative;
+    margin: 27px 0 23px 0;
+}
+.identity-line,.identity-line-right{
+    width: 30px;
+    height: 1px;
+    background: #e5e5e5;
+    position: absolute;
+    top: 10px;
+    left: 105px;
+}
+.identity-line-right{
+    left: 226px;
+}
+
+/* 头像 */
+.head-portrait{
+    overflow: hidden;
+    margin-left: 30px;
+}
+.head-portrait img{
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 17px;
+}
+.head-portrait div{
+    font-size: 15px;
+    color: #000000;
+    text-align: center;
+    height: 34px;
+    line-height: 34px;
+    float: left;
+    font-weight: bold;
+}
+/* 身份信息 */
+.identity-message-content{
+    overflow: hidden;
+    padding: 10px 30px 0 30px;
+    margin: 0;
+    font-size: 13px;
+}
+.identity-message-content li{
+    list-style: none;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.identity-message-content li .identity-left{
+    float: left;
+}
+.identity-message-content li .identity-right{
+    float: left;
+    margin-left: 20px;
+}
+.identity-message-content li .widthOne{
+    width: 110px;
+}
+/* 证件照 */
+.identity-img{
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+.identity-img li{
+    list-style: none;
+    padding: 15px 0 15px 30px;
+    border-bottom: 1px solid #E5E5E5;
+    overflow: hidden;
+}
+.identity-img li img{
+    width: 60px;
+    height: 50px;
+    float: left;
+    border: 1px solid #E5E5E5;
+}
+.identity-img li span{
+    font-size: 13px;
+    color: #000000;
+    line-height: 50px;
+    float: left;
+    margin-left: 20px;
+}
+/* 提示信息 */
+.hint{
+    font-size: 11px;
+    color: #d22330;
+    padding: 15px 0 0 30px;
+}
+/* 确认信息按钮 */
+.message-true{
+    width: 84%;
+    margin: 35px 30px;
+    background-color: #d22330;
+    color: #ffffff;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 6px;
+    padding: 10px 0;
+}
+.message-true:active{
+    opacity: .7;
+}
+
+/* 点击放大图 */
+.mui-preview-image.mui-fullscreen {
+    position: fixed;
+    z-index: 20;
+    background-color: #000;
+}
+.mui-preview-header,
+.mui-preview-footer {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    z-index: 10;
+}
+.mui-preview-header {
+    height: 44px;
+    top: 0;
+}
+.mui-preview-footer {
+    height: 50px;
+    bottom: 0px;
+}
+.mui-preview-header .mui-preview-indicator {
+    display: block;
+    line-height: 25px;
+    color: #fff;
+    text-align: center;
+    margin: 15px auto 4px;
+    width: 70px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    font-size: 16px;
+}
+.mui-preview-image {
+    display: none;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.mui-preview-image.mui-preview-in {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+.mui-preview-image.mui-preview-out {
+    background: none;
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+}
+.mui-preview-image.mui-preview-out .mui-preview-header,
+.mui-preview-image.mui-preview-out .mui-preview-footer {
+    display: none;
+}
+.mui-zoom-scroller {
+    position: absolute;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    -webkit-backface-visibility: hidden;
+}
+.mui-zoom {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.mui-slider .mui-slider-group .mui-slider-item img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+    width: 100%;
+}
+.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+    display: inline-table;
+}
+.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+    display: table-cell;
+    vertical-align: middle;
+}
+.mui-preview-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.mui-preview-loading.mui-active {
+    display: block;
+}
+.mui-preview-loading .mui-spinner-white {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+    height: 50px;
+    width: 50px;
+}
+.mui-preview-image img.mui-transitioning {
+    -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+。identity-img li img {
+    max-width: 100%;
+    height: auto;
+}

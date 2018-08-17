@@ -1,0 +1,223 @@
+/**
+ * 创建人：  薛魁
+ * 创建时间：2018-05-04 15:34
+ * 功能说明：球队详情
+ */
+body, .mui-content{
+    background: #fff;
+	overflow: hidden;
+}
+.headed{
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    background: url(../../img/com-bg.png) no-repeat;
+    background-size: 100% 100%;
+}
+.mui-slider-indicator.mui-segmented-control{
+    background-color: #fff;
+}
+.portray{
+    padding-top: 18px;
+    padding-bottom: 5px;
+}
+.portray img{
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+}
+.nameChina{
+    width: 174px;
+    margin: 0 auto;
+    font-size: 15px;
+    padding-bottom: 5px;
+}
+.mui-control-item{
+    color: #d22330;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+    color: #d22330;
+}
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{
+    border-top: 1px solid #e5e5e5;
+}
+.mui-scroll-wrapper{
+    overflow: scroll;
+}
+#item2mobile{
+    /*padding-bottom: 50px;	*/
+}
+/* 介绍 */
+.message{
+    height: 35px;
+    line-height: 35px;
+    color: #333;
+    font-size: 14px;
+    padding-left: 13px;
+    background-color: #f2f2f2;
+}
+.mes_ul{
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+.mes_ul li{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 13px;
+    color: #333;
+    font-size: 11px;
+    border-bottom:1px solid #e5e5e5;
+    list-style: none;
+}
+.mes_ul li:last-child{
+    border-bottom: none;
+}
+.more li{
+    border-bottom: none;
+}
+.more li:first-child{
+    padding-top: 7px;
+}
+.mes_ul .individual{
+    height: auto;
+    line-height: 1.5;
+    margin-top: 8px;
+}
+/* 数据 */
+.times{
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    background-color: #f6f6f6;
+    font-size: 15px;
+    color: #333;
+    padding-left: 15px;
+}
+.game{
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+.game li{
+    border-bottom: 1px solid #e5e5e5;
+    padding: 3px 15px;
+    background-color: #fff;
+    list-style: none;
+}
+.in_left{
+    color: #999999;
+    font-size: 12px;
+    margin-top: 4px;
+}
+.in_left .turn{
+    margin: 0 5px;
+}
+.rotate span{
+    width: 80px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    overflow: hidden;
+    float: left;
+}
+.in_right{
+    color: #333;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 5px;
+    overflow: hidden;
+}
+.in_right .game_text_A, .in_right .game_text_B{
+    width: 125px;
+    color: #222222;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
+}
+.in_right .game_text_A{
+    text-align: right;
+}
+.in_right .game_text_B{
+    text-align: left;
+}
+.mui-scroll .introduce .game li .in_right .game_img{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    float: left;
+}
+.mui-scroll .introduce .game li .in_right .game_img_A{
+    margin: 2px 0 0 2px;
+}
+.mui-scroll .introduce .game li .in_right .game_img_B{
+    margin: 2px 2px 0 0;
+}
+.game_cont{
+    text-align: center;
+    vertical-align: 3px;
+    margin: 0 5px;
+    float: left;
+}
+/* 成员  */
+.member{
+    border-top: 1px solid #e5e5e5;
+    margin-top: -2px;
+}
+.line{
+    height: 35px;
+    line-height: 35px;
+    background-color: #f6f6f6;
+    font-size: 15px;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.post{
+    overflow: hidden;
+    padding: 8px 40px 20px 40px;
+    margin: 0;
+}
+.post li{
+    width: 75px;
+    height: 100px;
+    border: 1px solid #d9d9d9;
+    background-color: #f2f2f2;
+    border-radius: 3px;
+    text-align: center;
+    margin-top: 12px;
+    list-style: none;
+    float: left;
+}
+.post li:nth-child(2),
+.post li:nth-child(5),
+.post li:nth-child(8),
+.post li:nth-child(11),
+.post li:nth-child(14),
+.post li:nth-child(17),
+.post li:nth-child(20){
+    margin: 12px 26px 0px;
+}
+.job .post .people .peopleImg{
+    width: 33px;
+    height: 33px;
+    margin-top: 17px;
+    border-radius: 50%;
+}
+.name{
+    font-size: 10px;
+    color: #333;
+}
+.jobs{
+    font-size: 10px;
+    color: #818181;
+}
+.margin_top{
+    margin-top: 12px;
+}
+#lineImg,#lineImg1{
+    width: 75px;
+    vertical-align: middle;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>SuperVolley</title>
+		<link rel="stylesheet" href="../../../css/mui/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/mui/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/download.css"/>
+		<script src="../../../js/mui.min.js" ></script>
+		<script src="../../../js/jquery.min.js" ></script>
+		<script src="../../../js/view.port.js" ></script>
+		<script src="../../../js/vue.js" ></script>
+		<script src="../../../js/commom.js"></script>
+	</head>
+	<body>
+		<div class="mui-content">
+			<center>
+				<img src="../../../img/cx-download.png"/>
+			</center>
+			<center>
+				<img src="../../../img/SuperVolleyLogo.png"/>
+			</center>
+			<div class="name">SuperVolley</div>
+			<div class="address" @click="jump()" >去&nbsp;<span>应用商店</span>&nbsp;下载</div>
+		</div>
+	</body>
+</html>
+<script>
+	
+	var vm = new Vue({
+        el: '.mui-content',
+        methods:{
+            jump: function(){
+                if (window.PhoneSystem.name == "Android"){
+                    mui.toast("正在跳转…");
+                    setTimeout(function(){
+                        window.location.href = androidLoad;
+                    }, 2000);
+                    window.location.href = androidOpen;
+                } else {
+                    mui.toast("正在跳转…");
+                    setTimeout(function(){
+                        window.location.href = iosLoad;
+                    }, 2000);
+                    window.location.href = iosOpen;
+                }
+            }
+        },
+
+    })
+	if(window.PhoneSystem.name=="Android"){
+		
+	}else{
+		$(".address>span").html('App Store');
+	}
+	
+</script>

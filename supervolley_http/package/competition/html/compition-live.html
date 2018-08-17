@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SuperVolley</title>
+	<link rel="stylesheet" href="../../../css/mui/mui.min.css" />
+	<link rel="stylesheet" href="../../../css/mui/common.css" />
+	<link rel="stylesheet" href="../css/video.css" />
+	<link rel="stylesheet" href="../css/compition-live.css"/>
+	<script src="../../../js/view.port.js"></script>
+	<script src="../../../js/video.js"></script>
+	<script src="../../../js/mui.min.js" ></script>
+	<script src="../../../js/jquery.min.js" ></script>
+	<script src="../../../js/vue.js" ></script>
+	<script src="../../../js/commom.js"></script>
+</head>
+<body>
+
+    <div id="box">
+	    <div class="video" id="video">
+	    	<img src="../../../img/video.jpg"  style="width: 360px;"/>
+	    </div>
+    	<!--top 打开提示-->
+		<div class="top" @click="jump()">
+			<img class="logo" src="../../../img/SuperVolleyLogo.png" /> 
+			<div class="name">SuperVolley</div> 
+			<div class="head-button">打开</div>
+		</div>
+		
+	    <!--打开超级排球按钮-->
+	    <div class="open"  @click="jump()">
+			<div>打开SuperVolley,提升3倍流畅度</div>
+	    </div>
+	    
+	    <!--实时比分-->
+		<div class="IM">
+			<center class="IMTitle">第{{ sectionname }}局</center>
+			<div class="leftLogo">
+				<div class="logoImg">
+					<img :src="teamALogo | ImgUrl3" onerror="this.src='../../../img/SuperVolleyLogo.png'"  />
+				</div>
+				<center class="competitionName">{{ nowData.teamaName }}</center>
+			</div>
+			<div class="centerData">
+				<div class="centerData-left">
+					<center>暂停&nbsp;&nbsp;{{ nowData.pauseA | judge }}</center>
+					<center>换人&nbsp;&nbsp;{{ nowData.turnA | judge }}</center>
+				</div>
+				<div class="centerData-center">
+					<center>{{ nowData.teamascore | judge }}:{{ nowData.teambscore | judge  }}</center>
+				</div>
+				<div class="centerData-right">
+					<center>暂停&nbsp;&nbsp;{{ nowData.pauseB | judge }}</center>
+					<center>换人&nbsp;&nbsp;{{ nowData.turnB | judge }}</center>
+				</div>
+			</div>
+			<div class="rightLogo">
+				<div class="logoImg">
+					<img :src="teamBLogo | ImgUrl3" onerror="this.src='../../../img/SuperVolleyLogo.png'"  />
+				</div>
+				<center class="competitionName">{{ nowData.teambName }}</center>
+			</div>
+		</div>
+		
+		<!--线-->
+		<div class="line"></div>
+		
+		<!--本场比分-->
+		<div class="SCORE">
+			<div class="scoreTitle">本场比分</div>
+			<table class="mui-table mui-text-center scoreTable">
+				<tr>
+					<th></th>
+					<th>1st</th>
+					<th>2nd</th>
+					<th>3rd</th>
+					<th>4th</th>
+					<th>5th</th>
+					<th>总计</th>
+				</tr>
+				<tr>
+					<td>
+	                    <img :src="teamALogo | ImgUrl3" class="competitionLogo"  onerror="this.src='../../../img/SuperVolleyLogo.png'" />
+	                </td>
+					<td v-for="item in sectionData">{{ item.teamascore | judge }}</td>
+					<td>{{ teamATotalScore }}</td>
+				</tr>
+				<tr>
+					<td>
+	                    <img :src="teamBLogo | ImgUrl3"class="competitionLogo" onerror="this.src='../../../img/SuperVolleyLogo.png'"  />
+	                </td>
+					<td v-for="item in sectionData">{{ item.teambscore | judge }}</td>
+					<td>{{ teamBTotalScore }}</td>
+				</tr>
+			</table>
+		</div>
+		
+		<!--底部-->
+		<center class="bottom-one">Copyright©2015-2017 HUAYUSHIDAI版权所有</center>
+		<center class="bottom-two">华羽时代体育文化发展公司 版权所有</center>
+		
+		<!--<div id="refresh" class="refresh" @tap="refresh()" >
+			<img src="../../../img/flush.png" />
+		</div>-->
+	</div>
+</body>
+<script type="text/javascript">
+	
+	//测试地址  html/compition-live.html?roundid=170
+	
+    /* 获取地址栏传值 */
+	var roundid = UrlParm.roundid;
+    var videoUrl = UrlParm.videoUrl;
+
+    var vm = new Vue({
+    	el: '#box',
+    	data: {
+    		teamALogo: '',
+    		teamBLogo: '',
+    		teamATotalScore: 0,
+    		teamBTotalScore: 0,
+    		sectionData: [
+    		    { teamascore: '-',teambscore: '-' },
+                { teamascore: '-',teambscore: '-' },
+                { teamascore: '-',teambscore: '-' },
+                { teamascore: '-',teambscore: '-' },
+                { teamascore: '-',teambscore: '-' }
+            ],
+    		nowData: {
+    		    sectionname: 1,
+                teamascore: '-',
+                teambscore: '-',
+            },
+    		week: ['一', '二', '三', '四', '五'],
+    		len: 0,
+    		videoUrl: ''
+    	},
+        computed: {
+            sectionname: function () {
+                return this.week[this.nowData.sectionname - 1];
+            }
+        },
+        methods: {
+    		jump: function () {
+				mui.toast("请稍等......");
+		        if (window.PhoneSystem.name == "Android") {
+		            setTimeout(function(){
+		                window.location.href = androidLoad;
+		            }, 2000);
+		            window.location.href = androidOpen;
+		        } else {
+		            setTimeout(function(){
+		                window.location.href = iosLoad;
+		            }, 2000);
+		            window.location.href = iosOpen;
+		        }
+			},
+//			refresh: function(){
+//				shareRoundPage();
+//			}
+    	},
+    	filters: {
+    		judge: function(data){
+    			if(data==null || !data){
+    				return '-';
+    			}
+    			return data;
+    		}
+    	}
+    });
+    shareRoundPage();
+    function shareRoundPage(){
+    	vm.teamATotalScore = 0;
+    	vm.teamBTotalScore = 0;
+	    $.post(httpCompetion + "shareRoundPage.do", {
+	        roundid: roundid
+	    }, function (msg) {
+	    	// console.log(msg);
+	      	msg = JSON.parse(msg);
+	      	
+	    	vm.teamALogo = msg.data.section[0].teamaLogo;
+	    	vm.teamBLogo = msg.data.section[0].teambLogo;
+	    	vm.len = msg.data.section.length;
+	    	vm.sectionData = msg.data.section;
+	    	vm.nowData = msg.data.section[msg.data.section.length - 1];
+			for (vm.len; vm.len < 5; vm.len++) {
+				vm.sectionData[vm.len] = { teamAScore: '-', teamBScore: '-' };
+			}
+			for (var i = 0; i < vm.len; i++) {
+				if(msg.data.section[i].teamascore > msg.data.section[i].teambscore){
+					vm.teamATotalScore++;
+				}else if (msg.data.section[i].teamascore < msg.data.section[i].teambscore){
+					vm.teamBTotalScore++;
+				}
+			}
+			/*
+			 	1直播 2为未直播 3为回放4没有直播源 5没有视频直播源结束 6转播 7为转播结束
+			 * */
+			var videoUrl,type;
+			if(msg.data.status.status == 1){
+	      		videoUrl = msg.data.status.hLSPlayURL;
+	      		type = "application/x-mpegURL";
+	      	}else if(msg.data.status.status == 3){
+	      		videoUrl = msg.data.status.viewedurl;
+	      		type = "video/mp4";
+	      	}else if(msg.data.status.status == 2){
+	      		$("#video").append("<center>未直播</center>");
+	      		return ;
+	      	}else{
+	      		$("#video").append("<center>没有直播源或已结束</center>");
+	      		return ;
+	      	}
+	      	var str = '<video id="vieo-player" loop class="video-js vjs-big-play-centered"';
+	        str += ' webkit-playsinline playsinline controls';
+	        str += ' width="360" height="380" data-setup="{}"';
+	        str += ' poster="../../../img/video.jpg">';
+	        str += '<source src="'+ videoUrl +'" type="'+ type +'"></video>';
+	        $("#video").html(str);
+	    });
+    }
+
+</script>
+</html>

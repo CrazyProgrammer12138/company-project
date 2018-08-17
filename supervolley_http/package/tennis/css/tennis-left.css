@@ -1,0 +1,174 @@
+/**
+ * 创建人：  丛秀
+ * 创建时间：2018-05-30 15:04
+ * 功能说明：网球 - 表格
+ */
+/**
+ * 创建人：  丛秀
+ * 创建时间：2018-05-30 15:04
+ * 功能说明：网球 - 表格
+ */
+* {
+	padding: 0;
+	margin: 0;
+	font-size: 12px;
+}
+body{
+	text-align: center; 
+}
+.cx-wrapper{
+    display: inline-block;
+    vertical-align: middle;
+}
+.cx-left {
+	width: 400px;
+	padding: 20px 20px;
+}
+/*时间*/
+.cx-time {
+	position: absolute;
+    width: 800px;
+    margin-top: 20px;
+    text-align: left;
+    margin-left: 10px;
+}
+.cx-time > div {
+	display: inline-block;
+	width: 18%;
+	margin-top: 4px;
+}
+.cx-started > div {
+	display: inline-block;
+	width: 44%;
+	height: 20px;
+	border-bottom: 1px solid #000000;
+	text-align: center;
+}
+.cx-Finished {
+	margin-left:1px ;
+}
+.cx-Finished > div {
+	display: inline-block;
+	width: 50%;
+	height: 20px;
+	border-bottom: 1px solid #000000;
+	text-align: center;
+}
+/*时间end*/
+/*表格左侧*/
+.cx-table-left {
+	display: inline-block;
+	margin-top: 74px;
+	text-align: center;
+	width: 291px;
+	vertical-align: top;
+	
+}
+.cx-td {
+    width: 12px;
+    text-align: center;
+}
+.cx-border-right {
+	border: 1px solid #000000;
+}
+th {
+	font-weight: 500;
+}
+td {
+	position: relative;
+}
+.cx-points {
+	width: 84%;
+	text-align: center;
+}
+.cx-server {
+	width: 16%;
+}
+.cx-table-right {
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+    margin: -1px 0 0 -5px;
+	
+}
+.cx-table-left td{
+	height: 16px;
+	
+}
+.cx-table-right > table {
+	width: 50px;
+	float: left;
+	border: 2px solid #000000;
+}
+.cx-border-right {
+	width: 5%;
+	height: 30px;
+	text-align: center;
+	border-right: 2px solid #000000;
+	
+}
+.cx-among > div {
+	line-height: 35px;
+}
+/*左侧表格end*/
+/*右侧表格*/
+.cx-right-games1 {
+	height: 72px;
+}
+.cx-right-games2 {
+	height: 34px;
+}
+
+
+/*底部人员*/
+.player-boottom {
+	width: 300px;
+	margin:-48px 0 40px 20px;
+	position: absolute;
+}
+.cx-player-left {
+ 	float: left;
+ 	width: 50%;
+    margin-top: -10px;
+}
+.cx-player-right {
+ 	float: left;
+    margin: -29px 0 0 -6px;
+    vertical-align: bottom;
+}
+.cx-started1 {
+	margin-bottom: 5px;
+}
+.cx-started1 > div {
+	display: inline-block;
+	width: 60%;
+	height: 20px;
+	border-bottom: 1px solid #000000;
+	margin-bottom: -5px;
+}
+.cx-score {
+	width: 78px;
+}
+.cx-div-score {
+	width: 70px;
+	text-align: right;
+	height: 16px;
+}
+.cx-score-td {
+	width: 20px;
+	height: 21px; 
+}
+.cx-player-right td{
+	width: 20px;
+	height: 20px;
+	display: table-cell;
+}
+/*圆点*/
+.cx-circle {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	position: absolute;
+    bottom: 4px;
+    left: 4px;
+}

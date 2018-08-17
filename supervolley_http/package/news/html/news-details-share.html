@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>SuperVolley</title>
+    <link rel="stylesheet" type="text/css" href="../css/news-details-share.css"/>
+    <script src="../../../js/view.port.js"></script>
+    <script src="../../../js/vue.js"></script>
+	<script src="../../../js/commom.js"></script>
+    <script src="../../../js/jquery.min.js"></script>
+</head>
+<body>
+	
+	<!--打开APP-->
+	<div class="fixed-app jumpApp">
+		<img src="../../../img/SuperVolleyLogo.png"/>
+		<span>SuperVolley</span>
+		<div class="cx-open">打开</div>
+	</div>
+	<div class="jump">
+		<span>正在跳转…</span>
+	</div>
+	<div class="add-video">
+		<!--<video controls="controls" loop="loop" poster="" width="100%" height="100%">
+			<source src="http://video.sina.com.cn/share/video/251053438.swf" type="audio/mp4">
+			<source src="http://video.sina.com.cn/share/video/251053438.swf" type="video/webm">
+			<source src="http://video.sina.com.cn/share/video/251053438.swf" type="video/ogg">
+			您的浏览器不支持 video 标签。
+		</video>-->
+		<iframe id="iframe" src="news-details.html" scrolling="no"></iframe>
+	    <div class="mask jumpApp">
+			打开超级排球，阅读完整文章
+		</div>
+		<!--精彩评论-->
+		<div class="wonderful">精彩评论</div>
+		<!--评论内容-->
+		<div class="comment">
+			<div class="comment-header">
+				<div><img src="../../../img/SuperVolleyLogo.png"/></div>
+				<div><span class="username">排球少年</span><br><span class="time">2017-07-10 13:15</span></div>
+				<div><img src="../../../img/new-zan.png"/><span>201</span></div>
+			</div>
+			<div class="comment-main">
+				<div class="comment-text">水平可以呀</div>
+				<div class="comment-pic">
+					<img src="../../../img/new-zan.png"/>
+				</div>
+				<div class="comment-reply">共205条回复 ></div>
+			</div>
+		</div>
+		<div class="comment">
+			<div class="comment-header">
+				<div><img src="../../../img/SuperVolleyLogo.png"/></div>
+				<div><span class="username">我的排球梦</span><br><span class="time">2017-07-10 13:15</span></div>
+				<div><img src="../../../img/new-zan.png"/><span>201</span></div>
+			</div>
+			<div class="comment-main">
+				<div class="comment-text">这野球打的，跟东南亚那边人贼像</div>
+				<div class="comment-reply">共205条回复 ></div>
+			</div>
+		</div>
+		<div class="comment">
+			<div class="comment-header">
+				<div><img src="../../../img/SuperVolleyLogo.png"/></div>
+				<div><span class="username">大爱排球</span><br><span class="time">2017-07-10 13:15</span></div>
+				<div><img src="../../../img/new-zan.png"/><span>201</span></div>
+			</div>
+			<div class="comment-main">
+				<div class="comment-text">这野球打的，跟东南亚那边人贼像</div>
+				<div class="comment-reply">共205条回复 ></div>
+			</div>
+		</div>
+		<!--打开超级排球-->
+		<div class="open-connection jumpApp">打开超级排球，查看更多精彩评论 ></div>
+		<!--热门文章-->
+		<div class="wonderful">热门文章</div>
+		<!--文章循环-->
+	    <div class="popular-articles">
+	    	<div class="content-right">
+	    		<div>中国女排不敌美国 获世界女排大奖赛昆山站亚军</div>
+	    		<div class="source">
+	    			<div>来自  中国排协</div>
+	    			<div class="pinglun"><img src="../../../img/new-zan.png"/><span>201</span></div>
+	    		</div>
+	    	</div>
+	    	<div class="pic-lift">
+	    		<img src="../../../img/SuperVolleyLogo.png"/>
+	    	</div>
+	    </div>
+	    <div class="popular-articles">
+	    	<div class="content-right">
+	    		<div>中国女排不敌美国 获世界女排大奖赛昆山站亚军</div>
+	    		<div class="source">
+	    			<div>来自  中国排协</div>
+	    			<div class="pinglun"><img src="../../../img/new-zan.png"/><span>201</span></div>
+	    		</div>
+	    	</div>
+	    	<div class="pic-lift">
+	    		<img src="../../../img/SuperVolleyLogo.png"/>
+	    	</div>
+	    </div>
+	    <!--打开超级排球-->
+		<div class="open-connection jumpApp">打开超级排球，查看更多精彩文章 ></div>
+		
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	 $(".jumpApp").on("click",function(){
+		if (window.PhoneSystem=="Android") {
+			$(".jump").show();
+			setTimeout(function(){
+				window.location.href = androidLoad;
+			},2000);
+			window.location.href = androidOpen;
+		} else {
+			$(".jump").show();
+			setTimeout(function(){
+				window.location.href=iosLoad;
+			},2000);
+			window.location.href=iosOpen; 
+		}
+	})
+</script>

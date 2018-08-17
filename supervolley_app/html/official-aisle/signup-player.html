@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>报名-选择球员</title>
+    <link rel="stylesheet" href="../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../css/mui/common.css">
+    <link rel="stylesheet" href="../../css/official-alsle/signuo-player.css">
+    <script src="../../js/view-port.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/pako.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/commom.js"></script>
+</head>
+<body>
+    <div id="main">
+        <div class="box">
+            <div class="box-title">选择球员</div>
+            <div class="box-people">
+                <div v-for="(item, i) in peopleArr" @tap="selectPlayer(item.PlayerID)"
+                     :class="{
+                        'box-normal': selectPeople.indexOf(item.PlayerID) == -1,
+                        'box-selected': selectPeople.indexOf(item.PlayerID) != -1
+                     }"
+                >
+                    {{ item.PlayerName }}
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-title">比赛服颜色</div>
+            <div class="box-table">
+                <div class="box-th">
+                    <div>比赛服</div>
+                    <div>颜色1</div>
+                    <div>颜色2</div>
+                    <div>颜色3</div>
+                </div>
+                <div class="box-tr">
+                    <div>球衣</div>
+                    <div><input type="text" v-model="cloth1"></div>
+                    <div><input type="text" v-model="cloth2"></div>
+                    <div><input type="text" v-model="cloth3"></div>
+                </div>
+            </div>
+            <div class="next">
+                <span @tap="accomplish()">完成</span>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        // html/official-aisle/signup-player.html?TeamID=9&CompetitionID=34&OfficialStr=42,44,45
+
+        // 接收参数
+        var teamID = UrlParm.TeamID;
+        var competitionID = UrlParm.CompetitionID;
+        var officialStr = UrlParm.OfficialStr;
+
+        // VUE 实例
+        var vm = new Vue({
+            data: {
+                selectPeople: [],
+                peopleArr: [],
+                cloth1: "",
+                cloth2: "",
+                cloth3: ""
+            },
+            methods: {
+                // 选择球员事件
+                selectPlayer: function (id) {
+                    if (this.selectPeople.indexOf(id) == -1) {
+                        this.selectPeople.push(id);
+                    } else {
+                        var newArr = [];
+                        for (var i = 0; i < this.selectPeople.length; i++) {
+                            if (this.selectPeople[i] != id) {
+                                newArr.push(this.selectPeople[i]);
+                            }
+                        }
+                        this.selectPeople = newArr;
+                    }
+                },
+                // 完成事件, 球员大于 6, 小于20才能通过验证
+                accomplish: function () {
+                	$("input").blur();
+                    if (this.selectPeople.length < 6 || this.selectPeople.length > 20) {
+                        mui.alert("球员人数必须在六到二十人之间");
+                        return;
+                    }
+                    if (!this.cloth1.trim() || !this.cloth2.trim()) {
+                        mui.alert("颜色一和颜色二不能为空");
+                        return;
+                    }
+                    Ajax(httpOfficial + "CollegeStudent/signUp", {
+                        TeamID: teamID,
+                        CompetitionID: competitionID,
+                        playerStr: this.selectPeople.join(","),
+                        officialStr: officialStr,
+                        cloth1: this.cloth1.trim(),
+                        cloth2: this.cloth2.trim(),
+                        cloth3: this.cloth3.trim()
+                    }, function (ret) {
+                        // console.log(ret);
+                        ret = JSON.parse(ret);
+                        if (ret.msgCode == "0") {
+                            mui.alert("报名成功!", "恭喜", function () {
+                                this.pushMsg();
+                            }.bind(this));
+                        } else {
+                            mui.alert("网络异常,报名失败!");
+                        }
+                    }.bind(this));
+                },
+                // 报名完成后的推送
+                pushMsg: function () {
+                    var url = "http://h.supervolleyball.com/package/player-affirm/html/manage-affirm.html?CompetitionID=";
+                    Ajax(httpPush + "user/insertSysMessage.do", {
+                        playerIDs: this.selectPeople.join(","),
+                        message: "你已经报名参加比赛,请前往确认",
+                        url: encodeURIComponent(url + competitionID)
+                    }, function (ret) {
+                        // console.log(ret);
+                        H5ToNative(["toOfficalList"]);
+                    }.bind(this));
+                }
+            },
+            mounted: function () {
+                // 获取球员列表
+                Ajax(httpOfficial + "CollegeStudent/choicePlayer", {
+                    TeamID: teamID, CompetitionID: competitionID
+                }, function (ret) {
+                    // console.log(ret);
+                    ret = JSON.parse(ret);
+                    this.peopleArr = ret.data[0].Player;
+                }.bind(this));
+            }
+        }).$mount("#main");
+    </script>
+</body>
+</html>

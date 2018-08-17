@@ -1,0 +1,240 @@
+/**
+ * 创建人：  丛秀
+ * 创建时间：2018-05-02 10:49
+ * 功能说明：赛事 - 个人资料
+ */
+/* 头部 */
+body,html {
+	background: #fff;
+}
+.top-header {
+	height: 200px;
+	text-align: center;
+}
+.bg-pic > img {
+	width: 100%;
+	height: 200px;
+}
+.header-pic {
+	position: absolute;
+	width: 88px;
+	height: 88px;
+	background: #F3F3F3;
+	top: 43px;
+	left: 136px;
+	border-radius: 50%;
+	text-align: center;
+}
+.header-img {
+	display: inline-block;
+	border-radius: 50%;
+	width: 68px;
+	height: 68px;
+	margin-top: 10px;
+}
+.header-img > img {
+	display: inline-block;
+	border-radius: 50%;
+	width: 100%;
+	height: 100%;
+}
+.name {
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	top: 142px;
+	height: 17px;
+	
+}
+.name > span {
+	display: inline-block;
+	vertical-align: top;
+}
+.name > span:nth-child(1) {
+	font-size: 15px;
+	color: #222;
+	
+}
+.sex {
+	width: 11px;
+	height: 14px;
+	margin:2px 0 0 0;
+}
+.sex > img {
+	width: 100%;
+}
+/* 头部 end */
+/* 基本信息  */
+.info-top {
+	padding: 0 15px 0 15px; 
+	width: 100%;
+	height: 35px;
+	line-height: 35px;
+	background: #F2F2F2;
+	color: #222;
+	font-size: 15px;
+	margin-bottom: 5px;
+}
+.info-double {
+	padding: 0 15px 0 15px;
+	font-size: 12px;
+	color: #333;
+	height: 35px;
+	line-height: 35px;
+	border-bottom: 1px solid #E6E6E6;
+	overflow: hidden;
+	text-overflow: ellipsis; 
+	white-space: nowrap;
+}
+.info-double > span {
+	display: inline-block;
+	width: 165px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.info-single {
+	padding: 0 15px 0 15px;
+	font-size: 12px;
+	color: #333;
+	height: 35px;
+	line-height: 35px;
+	border-bottom: 1px solid #E6E6E6;
+}
+/* 基本信息end */
+/*  基本奖项 */
+.major {
+	padding: 20px 15px 20px 15px;
+	border-bottom: 1px solid #E2E2E2;
+}
+.major > span {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 12px;
+	color: #333;
+}
+.major > span:nth-child(1){
+	width: 33px;
+	height: 40px;
+}
+.major > span:nth-child(1) > img {
+	display: inline-block;
+	width: 100%;
+}
+.major > span:nth-child(2){
+	display: -webkit-box;
+	line-height: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 2; 
+	-webkit-box-orient: vertical;
+	margin: -35px 0 0 40px;
+}
+.more {
+	font-size: 12px;
+	color: #333;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border-bottom: 1px solid #E2E2E2 ;
+}
+/* 主要奖项 end */
+/* 场均数据 */
+#radar {
+	height: 310px;
+	
+}
+.radar-data {
+	margin: 0 15px;
+	border-top: 1px solid #E5E5E5;
+	font-size: 13px;
+	padding: 12px 15px;
+}
+.radar-list {
+	display: inline-block;
+	width: 97px;
+	text-align: center;
+}
+.radar-list > span {
+	display: inline-block;
+}
+.radar-list > span:nth-child(1) {
+	color: #333;
+}
+.radar-color {
+	color: #999;
+}
+/* 场均数据end */
+/* 历史数据 */
+.data-year {
+	color: #999;
+	font-size: 13px;
+	padding: 3px 0 0 15px;
+	clear: both;
+}
+.new-historical {
+	padding: 0 15px;
+}
+.new-ding {
+	font-size: 13px;
+	color: #999;
+	width: 20%;
+	text-align: center;
+	float: left;
+}
+.new-right {
+	width: 80%;
+	display: inline-block;
+	overflow-y: hidden;
+}
+.new-hua {
+	width: 578px;
+	display: inline-block;
+}
+.new-hua > div {
+	display: inline-block;
+	font-size: 13px;
+	color: #333;
+	width: 68px;
+	text-align: center;
+}
+.new-hua > div > span {
+	display: block;
+	height: 34px;
+	line-height: 34px;
+	border-bottom: 1px solid #E5E5e5;
+	margin-left: -5px;
+}
+.new-hua > div > span:nth-child(1) {
+	color: #999 !important;
+}
+.new-ding > span {
+	display: block;
+	height: 34px;
+	line-height: 34px;
+	color: #333;
+	border-bottom: 1px solid #E5E5e5;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.new-ding > span:nth-child(1) {
+	color: #999 !important;
+}
+/*历史数据end*/
+/* 执教经历 */
+.teach {
+	padding: 10px  15px 0;
+	color: #333;
+	font-size: 13px;
+	text-indent: 5px;
+}
+.origin {
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -2px;
+	width: 4px;
+	height: 4px;
+	background: #000000;
+	border-radius: 50%;
+	margin-right: 6px;
+}

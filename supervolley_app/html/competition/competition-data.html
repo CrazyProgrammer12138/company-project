@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据</title>
+    <link rel="stylesheet" href="../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../css/mui/common.css">
+    <link rel="stylesheet" href="../../css/competition/competition-data.css">
+    <script src="../../js/view-port.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/commom.js"></script>
+    <script src="../../js/pako.js"></script>
+    <script src="../../js/ajax.js"></script>
+</head>
+<body>
+    <div id="data" v-cloak>
+        <div class="game-title">对赛成绩</div>
+        <div class="team-message">
+            <ul class="team">
+                <li>{{teamAName}}</li>
+                <li>最近{{teamA_win_num + teamB_win_num}}场交锋</li>
+                <li>{{teamBName}}</li>
+            </ul>
+            <div class="gress">
+                <div class="lose">{{teamA_win_num}}胜</div>
+                <span class="success">{{teamB_win_num}}胜</span>
+            </div>
+            <ul class="troopsUl">
+                <li>日期</li>
+                <li class="matchname">赛事</li>
+                <li>A队</li>
+                <li class="width15">比分</li>
+                <li>B队</li>
+            </ul>
+            <ul class="troops">
+                <li v-for="(item, index) in near">
+                    <ol class="troopsOl">
+                        <li>{{item.starttime.substring(5, 10)}}<br/>{{item.starttime.substring(0, 4)}}</li>
+                        <li class="matchname line-height">{{item.matchname}}</li>
+                        <li class="blueColor" v-if="item.teamaName == teamAName" @click="competitionA(item.teama)">{{item.teamaName}}</li>
+                        <li class="redColor" v-else @click="competitionA(item.teama)">{{item.teamaName}}</li>
+                        <!--比分-->
+                        <li class="frameHui width15">
+                            <div>{{item.teamascore}}-{{item.teambscore}}</div>
+                        </li>
+
+                        <li class="redColor" v-if="item.teambName ==  teamBName" @click="competitionB(item.teamb)">{{item.teambName}}</li>
+                        <li class="blueColor" v-else @click="competitionB(item.teamb)">{{item.teambName}}</li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        <div class="game-title">近期战绩</div>
+        <div class="team-two">
+            <div class="teamTWo">
+                <img class="recentImg" :src="teamALogo | ImgUrl" onerror="this.src='../../img/headDefaltImg.png'" />
+                <span class="recentText">{{teamAName}}</span>
+            </div>
+            <ul class="troopsUl troopsUlTwo">
+                <li>日期</li>
+                <li class="matchname">赛事</li>
+                <li>A队</li>
+                <li class="width15">比分</li>
+                <li>B队</li>
+            </ul>
+            <ul class="troops">
+                <li v-for="(item, index) in teamA">
+                    <ol class="troopsOl">
+                        <li>{{item.starttime.substring(5, 10)}}<br/>{{item.starttime.substring(0, 4)}}</li>
+                        <li class="matchname line-height">{{item.matchname}}</li>
+                        <li class="blueColor" v-if="item.teamaName == teamAName" @click="competitionA(item.teama)">{{item.teamaName}}</li>
+                        <li class="redColor" v-else-if="item.teamaName == teamBName"  @click="competitionB(item.teamb)">{{item.teamaName}}</li>
+                        <li v-else @click="competitionA(item.teama)">{{item.teamaName}}</li>
+                        <!--比分-->
+                        <li class="frameBule width15">
+                            <div>{{item.teamascore}}-{{item.teambscore}}</div>
+                        </li>
+                        <li class="redColor" v-if="item.teambName == teamBName"  @click="competitionB(item.teamb)">{{item.teambName}}</li>
+                        <li class="blueColor" v-else-if="item.teambName == teamAName" @click="competitionA(item.teama)">{{item.teambName}}</li>
+                        <li v-else @click="competitionB(item.teamb)">{{item.teambName}}</li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+
+        <div class="team-two MT">
+            <div class="teamTWo">
+                <img class="recentImg" :src="teamBLogo | ImgUrl" onerror="this.src='../../img/headDefaltImg.png'" />
+                <span class="recentText">{{teamBName}}</span>
+            </div>
+            <ul class="troopsUl troopsUlTwo">
+                <li>日期</li>
+                <li class="matchname">赛事</li>
+                <li>A队</li>
+                <li class="width15">比分</li>
+                <li>B队</li>
+            </ul>
+            <ul class="troops">
+                <li v-for="(item, index) in teamB">
+                    <ol class="troopsOl">
+                        <li>{{item.starttime.substring(5, 10)}}<br/>{{item.starttime.substring(0, 4)}}</li>
+                        <li class="matchname line-height">{{item.matchname}}</li>
+                        <li class="blueColor" v-if="item.teamaName == teamAName" @click="competitionA(item.teama)">{{item.teamaName}}</li>
+                        <li class="redColor" v-else-if="item.teamaName == teamBName"  @click="competitionB(item.teamb)">{{item.teamaName}}</li>
+                        <li v-else @click="competitionA(item.teama)">{{item.teamaName}}</li>
+                        <!--比分-->
+                        <li class="frameRed width15">
+                            <div>{{item.teamascore}}-{{item.teambscore}}</div>
+                        </li>
+                        <li class="redColor" v-if="item.teambName == teamBName"  @click="competitionB(item.teamb)">{{item.teambName}}</li>
+                        <li class="blueColor" v-else-if="item.teambName == teamAName" @click="competitionA(item.teama)">{{item.teambName}}</li>
+                        <li v-else @click="competitionB(item.teamb)">{{item.teambName}}</li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    //测试：competition/competition-data.html?teamaid=8&teambid=9
+    //接收参数
+    var teamaid = UrlParm.teamaid;
+    var teambid = UrlParm.teambid;
+
+    var vm = new Vue({
+        data:{
+            teamAName: "",
+            teamBName: "",
+            teamALogo: "",
+            teamBLogo: "",
+            teamA: [],
+            teamB: [],
+            teamA_win_num: 0,
+            teamB_win_num: 0,
+            near: []
+        },
+        methods: {
+            competitionA:function(teamAid){
+                var param = "&teamid=" + teamAid;
+                H5ToNative(["html/competition/team-details.html", param]);
+            },
+            competitionB:function(teamBid){
+                var param = "&teamid=" + teamBid;
+                H5ToNative(["html/competition/team-details.html", param]);
+            }
+        }
+    }).$mount('#data');
+
+    (function(){
+        //var httpCompetion = "http://192.168.3.11:8081/volleyball_competion_api_v1.0/";
+        Ajax(httpCompetion + "queryFiveTeamFightData.do?", {
+            "teamaid": teamaid,
+            "teambid": teambid
+        }, function(e){
+            console.log(JSON.parse(e));
+            mes = JSON.parse(e).data;
+            //队名
+            vm.teamAName = mes.near[0].teamaName;
+            vm.teamBName = mes.near[0].teambName;
+            //队伍Logo
+            vm.teamALogo = mes.teama[0].teamaLogo;
+            vm.teamBLogo = mes.teamb[0].teambLogo;
+            //A、B 队伍信息
+            vm.teamA = mes.teama;
+            vm.teamB =  mes.teamb;
+            //A、B 队胜利比分
+            vm.teamA_win_num = mes.teamaWin;
+            vm.teamB_win_num = mes.teambWin;
+            //主、客 队5场比赛
+            vm.near = mes.near;
+            var lines = (vm.teamA_win_num/(vm.teamA_win_num + vm.teamB_win_num))*100;
+            if(vm.teamA_win_num == 0 && vm.teamB_win_num != 0) {
+                $(".lose").css({ "width": "10%" });
+            } else if(vm.teamA_win_num != 0 && vm.teamB_win_num == 0){
+                $(".lose").css({ "width": "90%" });
+            } else {
+                $(".lose").css({ "width": lines + "%" });
+            }
+        })
+    })()
+</script>
+</html>

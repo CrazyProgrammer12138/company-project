@@ -1,0 +1,263 @@
+html, body {
+	background: #fff;
+	width: 360px;
+	margin: 0;
+	padding: 0;
+	letter-spacing: 0;
+	font-family: arial;
+}
+/*打开APP*/
+.fixed-app {
+	width: 94%;
+	position: fixed;
+	padding: 8px 12px 8px 12px;
+	background: #999999;
+    z-index: 999999;
+}
+.fixed-app > img {
+	width: 34px;
+	float: left;
+}
+.fixed-app > span {
+	color: #fff;
+	font-size: 18px;
+	height: 25px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 5px 0 0 8px;
+} 
+.cx-open {
+	float: right;
+	background: #d22330;
+	color: #fff;
+	font-size: 12px;
+	border: 0;
+	border-radius: 3px;
+	width: 45px;
+	height: 26px;
+	line-height: 26px;
+	text-align: center;
+	margin-top: 5px;
+}
+/*信息头*/
+#main {
+	padding: 12px 15px 0 15px;	
+	max-height: 570px;
+	overflow: hidden;
+	border-bottom: 1px solid #E5E5E5;
+}
+.add-video{
+    padding-top: 60px;
+}
+.head-title {
+	color: #111;
+	font-size: 18px;
+}
+.time-info {
+	border-bottom: 1px solid #e5e5e5;
+	margin: 5px 0 0 0;
+}
+.time-info  span {
+	color: #999;
+	font-size: 11px;
+	line-height: 25px;
+}
+.time-info > span:nth-child(2) {
+	float: right;
+}
+/*内容*/
+.content{
+	margin: 12px 0 0 0;
+}
+.content p > img {
+	width: 100%;
+}
+.content p {
+	color: #333;
+	font-size: 15px;
+    position: relative;
+}
+/*遮罩*/
+.mask {
+	width: 100%;
+	position: relative;
+	text-align: center;
+	color: #d22330;
+	font-size: 13px;
+	margin-top: -24px;
+	padding: 30px 0 15px 0;
+	background: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,1));
+	border-bottom: 15px solid #f5f5f5; 
+}
+/*精彩评论*/
+.wonderful {
+	height: 18px;
+	background: #e6e6e6;
+	padding: 8px 10px 8px 15px;
+	font-size: 14px;
+}
+.comment {
+	padding: 10px 15px 10px 15px;
+	border-bottom: 1px solid #E5E5E5;
+}
+.comment-header div {
+	display: inline-block;
+	vertical-align: middle;
+}
+.comment-header > div:nth-child(1) {
+	width: 35px;
+	height: 35px;
+	margin-right: 2px;
+}
+.comment-header > div:nth-child(1)>img {
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+}
+.comment-header > div:nth-child(2) {
+	width: 74%;
+}
+.username{
+	color: #D22330;
+	font-size: 14px;
+}
+.time {
+	color: #999;
+	font-size: 9px;
+}
+.comment-header > div:nth-child(3) {
+	
+}
+.comment-header > div:nth-child(3) > img {
+	width: 12px;
+	height: 12px;
+}
+.comment-header > div:nth-child(3) > span {
+	color: #999;
+	font-size: 11px;
+	margin-left: 5px;
+}
+.comment-main {
+	padding-top: 8px;
+}
+.comment-text {
+	font-size: 15px;
+	color: #333;
+	word-wrap: break-word;
+}
+.comment-pic {
+	padding-top: 5px;
+}
+.comment-pic >img {
+	max-width: 100%;
+}
+.content img,
+.img-list{
+	width: 100%;
+}
+.comment-reply {
+	padding: 4px 8px;
+	width: 100px;
+	margin-top: 8px;
+	font-size: 13px;
+	color: #D22330;
+	background: #e6e6e6;
+}
+/*打开超级排球*/
+.open-connection {
+	color: #D22330;
+	font-size: 14px;
+	text-align: center;
+	padding: 22px;
+}
+/*热门文章*/
+.popular-articles {
+	padding: 10px 15px;
+	border-bottom: 1px solid #f5f5f5; 
+}
+.pic-lift {
+	display: inline-block;
+	vertical-align: middle;
+	width: 95px;
+	height: 75px;
+	margin: 0 0 0 20px;
+}
+.pic-lift >img {
+	width: 100%;
+	height: 100%;
+}
+.content-right {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: justify;
+	width: 63%;
+}
+.content-right > div:nth-child(1) {
+	font-size: 15px;
+	color: #111;	
+}
+.source {
+	margin: 17px 0 0 0;
+}
+.source > div {
+	display: inline-block;
+	vertical-align: middle;
+} 
+.source > div:nth-child(1) {
+	color: #999;
+	font-size: 11px;
+	width: 95px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.pinglun > img {
+	width: 12px;
+	height: 12px;
+}
+.pinglun > span {
+	display: inline-block;
+	vertical-align: middle;
+	color: #999;
+	font-size: 11px;
+	margin-left: 5px;
+}
+#iframe{
+	width: 100%;
+	border: none;
+	height: 270px;
+}
+.del-height{
+	max-height: initial !important;
+}
+.img-group:after {
+    content: "图集";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #fff;
+    z-index: 99999999;
+    font-size: 14px;
+    padding: 2px 8px;
+    background: #000;
+    opacity: .7;
+}
+.jump{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 999999;
+    background: rgba(0,0,0,.2);
+    text-align: center;
+    display: none;
+}
+.jump>span{
+	position: relative;
+	top: 50%;
+	font-size: 12px;
+	color: #fff;
+	background: rgba(0,0,0,.8);
+	border-radius: 4px;
+	padding: 8px 12px;
+	line-height: 1;
+}

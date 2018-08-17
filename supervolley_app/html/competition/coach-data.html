@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>个人资料</title>
+    <link rel="stylesheet" href="../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../css/mui/common.css">
+    <link rel="stylesheet" href="../../css/competition/personal-data.css"/>
+    <script src="../../js/view-port.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/esl.js"></script>
+    <script src="../../js/echarts.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/pako.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/commom.js"></script>
+</head>
+<body>
+	<div id="mian" v-cloak>
+		<!--头部-->
+		<div class="top-header">
+			<div class="bg-pic"><img src="../../img/com-bg.png"/></div>
+			<div class="header-pic">
+				<div class="header-img">
+					<img src="../../img/headDefaltImg.png"/>
+				</div>
+			</div>
+			<div class="name">
+				<span>{{ officialInfo.officialname }}</span>
+				<span class="sex"><img  v-show="officialInfo.sex == 0" src="../../img/sex-demade.png" ><img  v-show="officialInfo.sex == 1" src="../../img/man.png" ></span>
+			</div>
+		</div>
+		<!--基本信息-->
+		<div class="information" v-if="officialInfo">
+			<div class="info-top">基本信息</div>
+			<div class="info-double"><span>身高：{{ officialInfo.hight || '-'}}</span><span>体重：{{ officialInfo.weight || '-'}}</span></div>
+			<div class="info-double"><span>出生地：{{ officialInfo.officialarea || '-'}}</span><span>出生日期：{{ officialInfo.birthday || '-' }}</span></div>
+			<div class="info-single">毕业院校：{{ officialInfo.professionalcollege || '-' }}</div>
+		</div>
+		<!--主要奖项-->
+		<div class="major-awards" v-show="officialHonor.length !=0 ">
+			<div class="info-top">主要奖项</div>
+			<div class="major-list">
+				<div class="major" v-for="item in officialHonor">
+					<span><img src="../../img/jiangbei.png"/></span><span>：{{ item.honorname }}</span>
+				</div>
+				<div class="more">
+					查看更多>
+				</div>
+			</div>
+		</div>
+		<!--执教经历-->
+		<div class="info-top" v-show="officialExperience.length !=0">执教经历</div>
+		<div class="teach" v-for="item1 in officialExperience"><div class="origin"></div>{{ item1.experiences }}</div>
+	</div>	
+</body>
+</html>
+ <script type="text/javascript">
+ 	//接收参数
+ 	var officalroleid = UrlParm.officalroleid;
+ 	
+ 	//实例化
+ 	var vm = new Vue({
+ 		el: '#mian',
+ 		data: {
+ 			list: 3,
+ 			officialInfo: '',
+ 			officialHonor: [],
+ 			officialExperience: []
+ 		},
+ 		mounted: function(){
+ 			Ajax(httpCompetion+'officialInfomationData.do',{
+ 				officalroleid: officalroleid
+ 			},function(res){
+// 				console.log(res);
+ 				var res = JSON.parse(res);
+ 				this.officialInfo = res.data.officialInfo;
+ 				this.officialHonor = res.data.officialHonor;
+ 				this.officialExperience = res.data.officialExperience;
+ 			}.bind(this))
+ 		}
+ 	});
+ </script>
+ 

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>个人资料</title>
+    <link rel="stylesheet" href="../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../css/mui/common.css">
+    <link rel="stylesheet" href="../../css/competition/personal-data.css"/>
+    <script src="../../js/view-port.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/esl.js"></script>
+   	<script src="../../js/echarts.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/pako.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/commom.js"></script>
+</head>
+<body>
+	<div id="mian"  v-cloak>
+		<!--头部-->
+		<div class="top-header">
+			<div class="bg-pic"><img src="../../img/com-bg.png"/></div>
+			<div class="header-pic">
+				<div class="header-img">
+					<img :src="selfInfo.playerheaderimg | ImgUrl"  onerror="this.src='../../img/headDefaltImg.png'"/>
+				</div>
+			</div>
+			<div class="name">
+				<span>{{ selfInfo.playername }}</span>
+				<span class="sex"><img  v-show="selfInfo.sex == 0" src="../../img/sex-demade.png" ><img  v-show="selfInfo.sex == 1" src="../../img/man.png" ></span>
+			</div>
+		</div>
+		<!--基本信息-->
+		<div class="information" v-if="selfInfo">
+			<div class="info-top" @click="tap()">基本信息</div>
+			<div class="info-double"><span>身高：{{ selfInfo.height }}</span><span>体重：{{ selfInfo.weight }}</span></div>
+			<div class="info-double"><span>出生地：{{ selfInfo.playeraddress  || '-'}}</span><span>出生日期：{{ selfInfo.birthday.substr(0,10) }}</span></div>
+			<div class="info-single">毕业院校：{{ selfInfo.professionalcollege || '-'}}</div>
+			<div class="info-double"><span>场上位置：{{ selfInfo.positionname | namefilter }}</span><span>球衣号码：{{ selfInfo.num }}</span></div>
+			<div class="info-double"><span>扣球高度：{{ selfInfo.dropHeight || '-'}}</span><span>拦网高度：{{ selfInfo.blockHeight || '-'}}</span></div>
+			<div class="info-double"><span>专业特点：{{ selfInfo.technicalFeature || '-' }}</span><span>运动状态：{{ selfInfo.playerstate | statefilter}}</span></div>
+		</div>
+		<!--主要奖项-->
+		<div class="major-awards" v-show="Honors.length != 0">
+			<div class="info-top">主要奖项</div>
+			<div class="major-list">
+				<div class="major" v-for="item in Honors">
+					<span><img src="../../img/jiangbei.png"/></span><span>：{{ item.honorname }}</span>
+				</div>
+				<div class="more">
+					查看更多>
+				</div>
+			</div>
+		</div>
+		<!--场均数据-->
+		<div class="average-data">
+			<div class="info-top">场均数据</div>
+			<!--雷达图-->
+			<div id="radar"></div>
+			<div class="radar-data">
+				<div class="radar-list">
+					<span>{{ SkillData.firstNum }} / {{ SkillData.attendNum }}</span><br>
+					<span class="radar-color">首发/出场</span>
+				</div>
+				<div class="radar-list">
+					<span>{{ SkillData.avgscore }}</span><br>
+					<span class="radar-color">场均得分</span>
+				</div>
+				<div class="radar-list">
+					<span> {{ SkillData.shiwuNum }}</span><br>
+					<span class="radar-color">失误次数</span>
+				</div>
+			</div>
+		</div>
+		<!--历史数据-->
+		<div class="historical-data" v-show="historyInfo.length != 0">
+			<div class="info-top">历史数据</div>
+			<div v-for="item in historyInfo">
+				<div class="data-year">{{ item.time || '-'}}年</div>
+				<div class="new-historical">
+					<div class="new-ding" >
+						<span>赛事</span>
+						<span v-for="item1 in item.pList">{{ item1.matchabbreviation }}</span>
+					</div>
+					<div class="new-right">
+						<div class="new-hua">
+							<div>
+								<span>首发/出场</span>
+								<span v-for="item2 in item.pList">{{ item2.firstNum }} / {{ item2.attendNum }}</span>
+							</div>
+							<div>
+								<span>得分</span>
+								<span  v-for="item3 in item.pList"> {{ item3.allScore || '-'}}</span>
+							</div>
+							<div>
+								<span>扣球</span>
+								<span  v-for="item4 in item.pList">{{ item4.scorebucklesum || '-'}}</span>
+							</div>
+							<div>
+								<span>拦网</span>
+								<span  v-for="item5 in item.pList">{{ item5.scoreblocksum || '-'}}</span>
+							</div>
+							<div>
+								<span>接发球</span>
+								<span  v-for="item6 in item.pList">{{ item6.noscorereceivesum || '-' }}</span>
+							</div>
+							
+							<div>
+								<span>发球</span>
+								<span  v-for="item7 in item.pList">{{ item7.scoreservesum  || '-' }}</span>
+							</div>
+							<div>
+								<span>防守</span>
+								<span  v-for="item8 in item.pList">{{ item8.noscoredefensesum || '-'}}</span>
+							</div>
+							<div>
+								<span>传球</span>
+								<span  v-for="item9 in item.pList">{{ item9.noscorepasssum || '-'}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</body>
+</html>
+ <script type="text/javascript">
+ 	//接收参数
+ 	var ptid = UrlParm.ptid;
+ 	
+ 	//实例
+ 	var vm = new Vue({
+ 		data: {
+			selfInfo: '',// 基本信息
+			Honors: [],// 主要奖项
+			SkillData: " ",// 场均数据
+			historyInfo: [],// 历史数据
+			firstNum: [],//首发
+			attendNum: [],//出场
+			allScore: [],//总分
+			scorebucklesum: [],//扣球
+			scoreblocksum: [],//拦网
+			noscorereceivesum: [],//接发球
+			scoreservesum: [],//发球
+			noscoredefensesum: [],//防守
+			noscorepasssum: []//传球
+ 		},
+ 		filters: {
+			timefilter: function(val){
+				return ;
+			},
+			namefilter: function(name){
+				if( name == 1){
+					return '助攻'
+				}
+				if(name == 2){
+					return '副攻'
+				}
+				if(name == 3){
+					return '二传'
+				}
+				if(name == 4){
+					return '接应'
+				}
+				if(name == 5){
+					return '自由人'
+				}
+			},
+			statefilter: function(state){
+				if( state == 0){
+					return '未定'
+				}
+				if( state == 1){
+					return '退役球员'
+				}
+				if(state == 2){
+					return '现役球员'
+				}
+				if(state == 3){
+					return '无状态 '
+				}
+			}
+		},
+ 		methods: {
+ 			tap: function(){
+ 				alert(1)
+ 			}
+ 		}
+ 	}).$mount("#mian");
+ 	
+ 	(function(){
+ 		Ajax(httpCompetion + 'playerInfomationData.do',{
+ 				ptid : ptid
+ 			},function(res){
+ 				var firstNum = [];
+ 				//console.log(res);
+ 				var res = JSON.parse(res);
+ 				vm.selfInfo = res.data.selfInfo;
+ 				vm.Honors = res.data.Honors;
+ 				vm.SkillData = res.data.SkillData;
+ 				vm.historyInfo = res.data.historyInfo;
+ 				//获取数据统计
+ 				radarOption.series[0].data[0].value = [vm.SkillData.scorebucklesum, vm.SkillData.noscorereceivesum, vm.SkillData.noscorepasssum, vm.SkillData.noscoredefensesum, vm.SkillData.scoreservesum, vm.SkillData.scoreblocksum];
+ 				//重新绘制
+ 				radar.setOption(radarOption);
+ 		});
+ 	})();
+ 	
+ 	
+ 	 var radarOption = {  // 雷达图的配置
+        grid: {left: '3%', right: '3%', top: "3%", bottom: "0%", containLabel: true},
+        legend: {
+            bottom: "5",
+            itemGap: 20,
+            textStyle: {color: '#000', fontSize: 14}
+        },
+        radar: {
+            indicator: [
+                {name: '扣球', max: 80},
+                {name: '接发球', max: 80},
+                {name: '传球', max: 80},
+                {name: '防守', max: 80},
+                {name: '发球', max: 80},
+                {name: '拦网', max: 80}
+            ],
+            radius: 100,
+            center: ['50%', '46%'],
+            name: {
+                textStyle: {color: 'rgb(0, 0, 0)'}
+            }
+        },
+        series: [
+            {
+                type: 'radar',
+                tooltip: {trigger: 'item'},
+                data: [
+                    {
+                        value: [0,0,0,0,0,0],
+                        itemStyle: {
+                            normal: {
+                                color: 'rgb(0, 151, 237)',
+                                areaStyle: {type: 'default'}
+                            }
+                        },
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter: function (params) {
+                                    return params.value;
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    };
+    var radar = null;
+    require.config({
+        paths: {
+            'echarts': '../../js/echarts',
+            'echarts/chart/pie': '../../js/echarts'
+        }
+    });
+    require(
+        ['echarts', 'echarts/chart/pie'],
+        function (ec) {
+            radar = ec.init(document.getElementById("radar"));
+        }
+    );
+ </script>
+ 

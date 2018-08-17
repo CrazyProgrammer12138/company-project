@@ -1,0 +1,182 @@
+#main {
+    width: 360px;
+    overflow: hidden;
+    font-size: 0;
+    background: #FFFFFF;
+}
+.selector {
+    background: #FFFFFF;
+    width: 375px;
+    overflow: hidden;
+}
+.selector-tab {
+    height: 26px;
+    line-height: 26px;
+    background: #f44f5c;
+    border-radius: 14px;
+    width: 250px;
+    margin: 15px auto 5px auto;
+}
+.selector-tab > div {
+    color: #FFF;
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.selector-tab > img {
+    width: 40px;
+    height: 26px;
+    padding: 6px 16px;
+}
+.selector-tab > img:nth-child(1) {
+    opacity: 0.3;
+}
+.selector-item {
+    text-align: center;
+    margin: 0 0 15px 0;
+    transition-property: height;
+    transition-duration: 0.5s;
+    height: 26px;
+    overflow: hidden;
+}
+.selector-item > div {
+    display: inline-block;
+    width: 45px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #999999;
+    border: 1px solid #999999;
+    text-align: center;
+    margin: 0 3px 0 3px;
+}
+.selector-item > .native {
+    border: 1px solid #f44f5c;
+    color: #FFFFFF;
+    background: #f44f5c;
+}
+.title {
+    line-height: 37px;
+    text-indent: 15px;
+    font-size: 14px;
+    color: #333333;
+    border-bottom: 1px solid #e5e5e5;
+}
+.title > img {
+    float: right;
+    height: 14px;
+    margin: 11px 15px 0 0;
+}
+#linechart {
+    height: 250px;
+    padding: 10px 0 15px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+#histogram {
+    height: 250px;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+#radascore {
+    height: 290px;
+    padding: 10px 0 15px 0;
+    border-bottom: 5px solid #e5e5e5;
+}
+.play-data {
+    padding: 0 12px 20px 12px;
+}
+.data-title {
+    line-height: 35px;
+    text-align: center;
+    font-size: 14px;
+    color: #333333;
+}
+.data-line {
+    overflow: hidden;
+}
+.play-namea, .play-nameb {
+    float: left;
+    width: 63px;
+    height: 67px;
+    line-height: 67px;
+    text-align: center;
+    font-size: 12px;
+    color: #333333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.play-score {
+    float: left;
+    width: 210px;
+}
+.play-item {
+    position: relative;
+    top: 5px;
+    float: left;
+    width: 211px;
+    text-align: center;
+    font-size: 13px;
+    color: #333333;
+}
+.play-scorea, .play-scoreb {
+    float: left;
+    width: 103px;
+}
+.play-scoreb {
+    margin: 0 0 0 4px;
+}
+.play-scorea > span {
+    display: block;
+    float: right;
+}
+.play-scorea > span:nth-child(1) {
+    width: 77%;
+    height: 2px;
+    background: #DDDDDD;
+    margin: 9px 0 0 3px;
+}
+.play-scorea > span:nth-child(1) > span {
+    display: block;
+    height: 2px;
+    background: #1D9FF9;
+    float: right;
+    transition-property: width;
+    transition-duration: 0.5s;
+}
+.play-scorea > span:nth-child(2) {
+    color: #000000;
+    font-size: 12px;
+    line-height: 21px;
+}
+.play-scoreb > span {
+    display: block;
+    float: left;
+}
+.play-scoreb > span:nth-child(1) {
+    width: 77%;
+    height: 2px;
+    background: #DDDDDD;
+    margin: 9px 0 0 0;
+}
+.play-scoreb > span:nth-child(1) > span {
+    display: block;
+    height: 2px;
+    background: #F44F5C;
+    transition-property: width;
+    transition-duration: 0.5s;
+}
+.play-scoreb > span:nth-child(2) {
+    color: #000000;
+    font-size: 12px;
+    line-height: 21px;
+    margin: 0 0 0 3px;
+}
+.data-report {
+    line-height: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #e70016;
+    text-decoration: underline;
+}
+

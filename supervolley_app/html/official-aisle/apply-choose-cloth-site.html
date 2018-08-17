@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>报名详情-选择服装位置</title>
+    <link rel="stylesheet" href="../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../css/mui/common.css">
+    <link rel="stylesheet" href="../../css/mui/mui.picker.css">
+    <link rel="stylesheet" href="../../css/mui/mui.poppicker.css">
+    <link rel="stylesheet" href="../../css/official-alsle/apply-choose-cloth-site.css">
+    <script src="../../js/view-port.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/mui.picker.js"></script>
+    <script src="../../js/mui.poppicker.js"></script>
+    <script src="../../js/pako.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/commom.js"></script>
+</head>
+<body>
+    <div id="main" class="mui-content">
+        <div class="cloth">球衣颜色</div>
+        <div class="cloth-color">
+            <table class="cloth-table">
+                <thead>
+                    <tr v-for="color in ">
+                        <th>比赛服</th>
+                        <th>颜色1</th>
+                        <th>颜色2</th>
+                        <th>颜色3</th>
+                    </tr>
+                </thead>
+                <tbody class="cloth-tbody">
+                    <tr>
+                        <th>服装颜色</th>
+                        <th v-for="(item, i) in clothColor">{{item.ClothName}}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="cloth">选择位置</div>
+        <div class="people">
+            <table class="people-table">
+                <thead><tr><th>号码</th><th>姓名</th><th>场上位置</th><th>设置身份</th></tr></thead>
+                <tbody class="people-tbody">
+                    <tr v-for="(itemA, a) in code">
+                        <th v-for="(itemB, b) in itemA" @click="init(a, b)">
+                            {{ itemB.text }}
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="finish" @click="finish">完 成</div>
+    </div>
+    <script type="text/javascript">
+        // 接收参数
+        var Official3 = UrlParm.Official3;
+        var Official4 = UrlParm.Official4;
+        var teamID = UrlParm.TeamID;
+        var competitionID = UrlParm.CompetitionID;
+
+        // 测试参数
+        // Official3 = 0;
+        // Official4 = 0;
+
+        // 选择总数组
+        var selectArr = [];
+
+        // 构成号码
+        selectArr[0] = [];
+        for (var i = 1; i <= 21; i++) {
+            var obj ={};
+            if (i == 21){
+                obj = {"text": "-", "codeId": i};
+                selectArr[0].push({"text": "-", "id": "0"});
+            } else {
+                obj = {"text": i, "codeId": i};
+                selectArr[0].push({"text": i, "id": i});
+            }
+        }
+
+        // 构造位置
+        selectArr[2] = [{
+            "text": "主攻", "id": 1
+        }, {
+            "text": "副攻", "id": 2
+        }, {
+            "text": "二传手", "id": 3
+        }, {
+            "text": "接应", "id": 4
+        }, {
+            "text": "自由人", "id": 5
+        }, {
+            "text": "-", "id": 0
+        }];
+
+        // 构造身份
+        selectArr[3] = [{
+            "text": "C", "id": 1
+        }, {
+            "text": "L1", "id": 2
+        }, {
+            "text": "L2", "id": 3
+        }, {
+            "text": "-", "id": 0
+        }];
+
+        // 构造选中数组
+        var checkArr = [];
+        for (var i = 0; i < 14; i++) {
+            var arrays = [
+                {"text": "-", "id": 0},
+                {"text": "-", "id": 0},
+                {"text": "-", "id": 0},
+                {"text": "-", "id": 0}
+            ];
+            checkArr.push(arrays);
+        }
+
+        // 实例化 VUE
+        var vm = new Vue({
+            data:{
+                arr: selectArr,
+                code: checkArr,
+                clothColor: []
+            },
+            methods:{
+                init: function(line, column){
+                    add(line, column);
+                },
+                finish: function () {
+                	$("input").blur();
+                    isNullData(this.code);
+                    if(isRepeat(0, "id", this.code)) {
+                        mui.alert("号码不能重复");
+                        return;
+                    }
+                    if(isRepeat(1, "id", this.code)) {
+                        mui.alert("姓名不能重复");
+                        return;
+                    }
+                    var num = isPeople(this.code);
+                    if(num < 6) {
+                        mui.alert("人员不足6人,请补全")
+                        return;
+                    }
+//                    if(isCL(num, this.code)) {
+//                        mui.alert("身份配置不正确, 请从新分配");
+//                        return;
+//                    }
+                    success(this.code);
+                }
+            }
+        }).$mount("#main");
+
+        //接口 - 服装颜色
+        (function(){
+            Ajax(httpOfficial + "CollegeStudent/confirmCloth", {
+                TeamID: teamID,
+                CompetitionID: competitionID
+            }, function(e) {
+                vm.clothColor = JSON.parse(e).data[0].Player;
+                if ( vm.clothColor.length == 2 ){
+                    vm.clothColor.push({ClothName: '-'});
+                }
+            });
+        })();
+
+        // 获取姓名
+        selectArr[1] = [];
+
+        // 接口 - 获取球员
+        (function(){
+            Ajax(httpOfficial + "CollegeStudent/confirmPlayer", {
+                TeamID: teamID,
+                CompetitionID: competitionID
+            }, function(e) {
+                 console.log(e);
+                var playNum = JSON.parse(e).data[0].Player;
+                for(var i = 0; i < playNum.length; i++){
+                    var player = {"text": playNum[i].PlayerName, "id": playNum[i].PlayerID};
+                    selectArr[1].push(player);
+                }
+                selectArr[1].push({"text": "-", "id": 0});
+            });
+        })();
+
+        //接口 - 验证成功提交
+        function success(code){
+            var messageAll = [];
+            for (var i = 0; i < code.length; i++) {
+                if (code[i][0].id == 0) continue;
+                if (code[i][1].id == 0) continue;
+                if (code[i][2].id == 0) continue;
+                messageAll.push({"PlayerID": code[i][1].id, "CourtPositionID": code[i][2].id,
+                                "PlayerRole": code[i][3].id, "PlayerCode": code[i][0].id});
+            }
+            Ajax(httpOfficial + "CollegeStudent/confirmSubmit", {
+                TeamID: teamID,
+                CompetitionID: competitionID,
+                playerStr: JSON.stringify(messageAll),
+                Official3: Official3,
+                Official4: Official4
+            }, function(e){
+                var hint = JSON.parse(e);
+                if (hint.msgCode == 0){
+                    mui.alert(hint.msg, "恭喜", function () {
+                        H5ToNative(["toOfficalList"]);
+                    });
+                } else {
+                    mui.alert("提交失败！");
+                }
+            });
+        }
+
+        // 弹窗选择
+        var userPicker = new mui.PopPicker();
+        function add(line, column) {
+            userPicker.setData(vm.arr[column]);
+            userPicker.show(function(items) {
+                Vue.set(vm.code[line], column, items[0]);
+            });
+        }
+
+        // 判断号码和姓名是否重复的方法
+        function isRepeat(index, filed, code) {
+            var arr = [];
+            for (var i = 0; i < code.length; i++) {
+                if (code[i][index][filed] != 0) {
+                    arr.push(code[i][index][filed]);
+                }
+            }
+            var repeat = false;
+            for (var i = 0; i < arr.length; i++) {
+                for (var j = i + 1; j < arr.length; j++){
+                    if (arr[i] == arr[j]) {
+                        repeat = true;
+                        break;
+                    }
+                }
+                if (repeat) break;
+            }
+            return repeat;
+        }
+
+        // 判断表格填写是否完整
+        function isNullData(code) {
+            var arr = [];
+            for (var i = 0; i < code.length; i++) {
+                if (code[i][0].id == 0) continue;
+                if (code[i][1].id == 0) continue;
+                if (code[i][2].id == 0) continue;
+                arr.push(code[i]);
+            }
+            var nullNum = code.length - arr.length;
+            for (var i = 0; i < nullNum; i++) {
+                var arrays = [
+                    {"text": "-", "id": 0},
+                    {"text": "-", "id": 0},
+                    {"text": "-", "id": 0},
+                    {"text": "-", "id": 0}
+                ];
+                arr.push(arrays);
+            }
+            vm.code = arr;
+        }
+
+        // 判断人员是否足够
+        function isPeople(code) {
+            var num = 0;
+            for (var i = 0; i < code.length; i++) {
+                if (code[i][0].id == 0) break;
+                num++;
+            }
+            return num;
+        }
+
+        // 判断身份是否超出人数
+        function isCL(num, code) {
+            var cNum = 0;
+            var lNum = 0;
+            for (var i = 0; i < code.length; i++) {
+                if (code[i][3].id == 1) cNum++;
+                if (code[i][3].id == 2 || code[i][3].id == 3) lNum++;
+            }
+            if (cNum != 1) return true;
+            if (lNum != 0 && num == 6) return true;
+            if (lNum > 1 && num <= 12) return true;
+            if (lNum != 2 && num > 12) return true;
+            return true;
+        }
+    </script>
+</body>
+</html>

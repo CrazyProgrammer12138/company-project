@@ -1,0 +1,69 @@
+/**
+ * 创建人：  丛秀
+ * 创建时间：2018-6-5 16:26
+ * 功能说明：网球 - 表格
+ */
+* {
+	padding: 0;
+	margin: 0;
+}
+.cx-wrapper {
+	padding: 15px 15px 25px 15px;
+}
+.cx-content {
+	margin: 7px 0 0 0;
+}
+.cx-content > p {
+	font-size: 15px;
+	font-weight: bold;
+}
+.cx-content > div {
+	margin: 7px 0 0 0;
+	font-size: 14px;
+	text-indent: 30px;
+	text-align: justify;
+	line-height: 24px;
+}
+.cx-content01 {
+	margin: 7px 0 0 0;
+}
+.cx-content01 > p:nth-child(1) {
+	font-size: 15px;
+	font-weight: bold;
+}
+.cx-content01 > div {
+	margin: 7px 0 0 0;
+	font-size: 14px;
+	text-align: justify;
+	line-height: 24px;
+}
+.cx-fotter {
+	margin: 20px 0 0 0;
+}
+.cx-fotter > div:nth-child(1) {
+	font-size: 14px;
+	text-align: right;
+	line-height: 24px;
+}
+.cx-fotter > div:nth-child(2) {
+	font-size: 14px;
+	text-align: right;
+	line-height: 24px;
+}
+.cx-logo {
+	float: right;
+	margin: 8px 0 0 0;
+}
+
+.cx-logo > img:nth-child(1) {
+	width: 67px;
+	height: 30px;
+	margin-right: 15px;
+}
+.cx-logo > img:nth-child(2) {
+	width: 33px;
+	height: 30px;
+}
+.cx-clear {
+	clear: both;
+}

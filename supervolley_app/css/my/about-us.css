@@ -1,0 +1,39 @@
+html, body {
+    background: #FFFFFF;
+}
+.mui-icon {
+    color: #FFFFFF;
+}
+.mui-content {
+   background: #FFFFFF;
+}
+.mui-content img {
+    width: 63px;
+    height: 63px;
+    display: block;
+    margin: 43px auto;
+}
+.mui-content p {
+    margin: 0 30px;
+    font-family: arial;
+    font-size: 12px;
+    text-align: justify;
+}
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+footer > div {
+    text-align: center;
+    margin: 0 auto;
+    font-size: 11px;
+    color: #8f8f94;
+    font-family: arial;
+}
+footer > div:last-child {
+    margin-bottom: 18px;
+}
+p {
+    color: #555;
+}

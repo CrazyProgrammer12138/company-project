@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>排行榜</title>
+    <link rel="stylesheet" href="../../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../../css/mui/common.css">
+    <link rel="stylesheet" href="../css/ranking-list.css">
+    <script src="../../../js/view.port.js"></script>
+    <script src="../../../js/vue.js"></script>
+    <script src="../../../js/mui.min.js"></script>
+    <script src="../../../js/jquery.min.js"></script>
+    <script src="../../../js/commom.js"></script>
+    <script src="../../../js/pako.js"></script>
+    <script src="../../../js/ajax.js"></script>
+</head>
+<body>
+<div id="main">
+	<!--top 打开提示-->
+	<div class="top" @click="jump()">
+		<img class="logo" src="../../../img/SuperVolleyLogo.png" /> 
+		<div class="name">SuperVolley</div> 
+		<div class="head-button">打开</div>
+	</div>
+    <!-- 第二阶段对战列表的显示 -->
+    <div class="fight">
+        <div class="fight-line" v-for="(item, i) in dataList">
+            <div class="inline-mid fight-time">{{ dateFormat(item.starttime) }}</div>
+            <div class="inline-mid fight-name-a">
+                <span class="inline-mid">{{ item.teamAname }}</span>
+                <img class="inline-mid" :src="item.teamAlogo | ImgUrl"
+                     onerror="this.src='../../../img/headDefaltImg.png'"
+                >
+            </div>
+            <div class="inline-mid fight-score">
+                {{ scoreForamt(item.teamascore, item.teambscore) }}
+            </div>
+            <div class="inline-mid fight-name-b">
+                <img class="inline-mid" :src="item.teamBlogo | ImgUrl"
+                     onerror="this.src='../../../img/headDefaltImg.png'"
+                >
+                <span class="inline-mid">{{ item.teamBname }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    // html/ranking-list-two.html?raceid=3&phaseid=7&isScore=0
+    // 接收全局参数
+    var raceid = UrlParm.raceid;
+    var phaseid = UrlParm.phaseid;
+    var isScore = UrlParm.isScore;
+
+    // 实例化 VUE
+    var vm = new Vue({
+        data: {
+            dataList: [],           // 某一阶段的数据
+            colunmField: ["attentNum", "winNum", "loseNum", "allScore", "cvalue", "zvalue"]
+        },
+        methods: {
+        	 // 获取某一阶段的具体数据
+            queryPhasedTeamRankData: function () {
+                Ajax(httpCompetion + "queryPhasedTeamRankData.do", {
+                    raceid: raceid,
+                    phaseid: phaseid,
+                    isScore: isScore
+                }, function (ret) {
+//                  console.log(ret);
+                    ret = JSON.parse(ret);
+                    this.dataList = ret.data;
+                }.bind(this));
+            },
+            // 格式化比分
+            scoreForamt: function(aScore, bScore) {
+                if (!aScore && !bScore) return "vs";
+                return aScore + " : " + bScore;
+            },
+            // 格式化事件
+            dateFormat: function(value) {
+                if(!value) return 'xx-xx xx:xx';
+                return value.substr(5, 11);
+            },
+            jump: function () {
+				mui.toast("请稍等......");
+		        if (window.PhoneSystem.name == "Android") {
+		            setTimeout(function(){
+		                window.location.href = androidLoad;
+		            }, 2000);
+		            window.location.href = androidOpen;
+		        } else {
+		            setTimeout(function(){
+		                window.location.href = iosLoad;
+		            }, 2000);
+		            window.location.href = iosOpen;
+		        }
+			},
+        },
+        mounted: function(){
+        	this.queryPhasedTeamRankData();
+        }
+    }).$mount("#main");
+</script>
+</body>
+</html>

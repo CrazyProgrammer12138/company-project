@@ -1,0 +1,108 @@
+html,
+body{
+	background: #fff;
+	overflow-x: hidden;
+    overflow-y: scroll;
+}
+body .data-table{
+	margin: 0;
+}
+.t-l table{
+	table-layout:fixed; 
+	width: 100%;
+}
+#main{
+	margin-bottom: 18px;
+}
+.t-l{
+	width: 140px;
+	float: left;
+	display: inline-block;
+}
+.t-r{
+	width: 220px;
+	display: inline-block;
+	overflow-x: scroll;
+	border-left: 0;
+}
+.scroll{
+	width: 285px;
+}
+.t-r th{
+	width: 130px;
+}
+tr {
+	height:30px;
+	line-height: 30px;
+}
+th{
+    font-size: 12px;
+    font-weight: 500;
+    border-top: 10px solid #f2f2f2;
+	height: 35px;    
+	line-height: 35px;
+}
+.t-l td{
+	border: 1px solid #ddd;
+    border-left: 0;
+    border-right: 0;
+}
+.t-r tr{
+	border: 1px solid #ddd;
+	border-left: 0;
+    border-right: 0;
+}
+.t-r tr:first-child{
+	border:0;
+}
+table{
+	font-size: 12px;
+	text-align: center;
+}
+.t-r table tr:nth-child(odd),
+.t-l table tr:nth-child(odd){
+	background: #f2f2f2;
+	
+}
+.t-l table tr{
+	border-right: 1px solid #ddd;
+}
+.t-l table tr:first-child{
+	border-right: 1px solid #fff;
+}
+.t-r table tr:first-child,
+.t-l table tr:first-child{
+	background: #fff;
+	border-bottom: 1px solid #ddd;
+}
+#main>div{
+	border-top: 10 px solid #f2f2f2;
+}
+#refresh{
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	bottom: 40px;
+	right: 15px;
+}
+.refresh{
+	animation: flush 1s infinite;
+}
+#refresh>img{
+	width: 100%;
+	height: 100%;
+}
+.tr-overflow{
+	word-break:keep-all;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+@keyframes flush {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

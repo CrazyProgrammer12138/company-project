@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>报名-选择官员</title>
+    <link rel="stylesheet" href="../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../css/mui/common.css">
+    <link rel="stylesheet" href="../../css/official-alsle/signup-official.css">
+    <script src="../../js/view-port.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/pako.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/commom.js"></script>
+</head>
+<body>
+    <div id="main">
+        <div class="box" v-if="peopleObj" v-for="(itemA, a) in title">
+            <div class="box-title">
+                选择{{ itemA }}
+            </div>
+            <div class="box-people">
+                <div v-for="(itemB, b) in peopleObj['dtOffices' + a]"
+                     :class="{
+                         'box-normal': normal(a, itemB.IDCard),
+                         'box-selected': selected(a, itemB.IDCard),
+                         'box-disabled': !normal(a, itemB.IDCard)
+                     }"
+                     @tap="selectOffical(a, itemB.IDCard)"
+                >
+                    {{ itemB.OfficialName }}
+                </div>
+            </div>
+        </div>
+        <div class="next">
+            <span @tap="nextPage()">下一步</span>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        // 接收参数
+        var teamID = UrlParm.TeamID;
+        var competitionID = UrlParm.CompetitionID;
+
+        // 测试参数
+        // teamID = 1;
+        // competitionID = 1;
+
+        // VUE 实例
+        var vm = new Vue({
+            data: {
+                title: ["领队", "主教练", "助理教练", "理疗师", "队医"],
+                peopleObj: null,
+                dtOffices0: [],
+                dtOffices1: [],
+                dtOffices2: [],
+                dtOffices3: [],
+                dtOffices4: [],
+                officialIDArr: [0, 0, [0, 0], 0, 0]
+            },
+            methods: {
+                // 判断当前官员是否可选, 不可选的判断直接取反
+                normal: function (index, iDCard) {
+                    if ([0, 3, 4].indexOf(index) != -1) {
+                        if (this.dtOffices0.indexOf(iDCard) != -1) return false;
+                        if (this.dtOffices3.indexOf(iDCard) != -1) return false;
+                        if (this.dtOffices4.indexOf(iDCard) != -1) return false;
+                    }
+                    if ([1, 2, 3, 4].indexOf(index) != -1) {
+                        if (this.dtOffices1.indexOf(iDCard) != -1) return false;
+                        if (this.dtOffices2.indexOf(iDCard) != -1) return false;
+                        if (this.dtOffices3.indexOf(iDCard) != -1) return false;
+                        if (this.dtOffices4.indexOf(iDCard) != -1) return false;
+                    }
+                    return true;
+                },
+                // 判断当前官员是否被选中
+                selected: function (index, iDCard) {
+                    var field = "dtOffices" + index;
+                    if (this[field].indexOf(iDCard) != -1) return true;
+                    return false;
+                },
+                // 官员按钮点击事件, 选择各个身份的官员
+                selectOffical: function (index, iDCard) {
+                    var field = "dtOffices" + index;
+                    if (index != 2) {
+                        if (this[field].indexOf(iDCard) != -1) {
+                            this[field] = [];
+                            return;
+                        }
+                        if (this[field].length == 0 && !this.normal(index, iDCard)) {
+                            return;
+                        }
+                        var arr = [iDCard];
+                        this[field] = arr;
+                    } else {
+                        if (this[field].indexOf(iDCard) != -1) {
+                            var arr = [];
+                            for (var i = 0; i < this[field].length; i++) {
+                                if (this[field][i] != iDCard) arr.push(this[field][i]);
+                            }
+                            this[field] = arr;
+                            return;
+                        }
+                        if (this[field].indexOf(iDCard) == -1 && !this.normal(index, iDCard)) {
+                            return;
+                        }
+                        var arr = this[field].concat([]), newArr = [];
+                        arr.push(iDCard);
+                        if(arr.length > 2) {
+                            newArr[0] = arr[1];
+                            newArr[1] = arr[2];
+                            this[field] = newArr;
+                        } else {
+                            this[field] = arr;
+                        }
+                    }
+                },
+                // 验证选择的官员是否正确, 并提交到服务器
+                nextPage: function () {
+                    var officialStr = "";
+                    var noThrough = false;
+                    for(var i = 0; i < 5; i++) {
+                        var field = "dtOffices" + i;
+                        if (this[field].length < 1 && i < 3) {
+                            mui.alert(this.title[i] + "不能为空!");
+                            noThrough = true;
+                            break;
+                        }
+                        for (var j = 0; j < this.peopleObj[field].length; j++) {
+                            if (this[field].indexOf(this.peopleObj[field][j].IDCard) != -1) {
+                                officialStr += this.peopleObj[field][j].OfficialID + ",";
+                            }
+                        }
+                    }
+                    if (noThrough) return;
+                    officialStr = officialStr.substr(0, officialStr.length - 1);
+                    console.log(officialStr);
+                    var param = "&OfficialStr=" + officialStr + "&CompetitionID=" + competitionID;
+                    H5ToNative(["html/official-aisle/signup-player.html", param, "报名-选择球员"]);
+                }
+            },
+            mounted: function () {
+                // 请求接口, 获取官员列表
+                Ajax(httpOfficial + "CollegeStudent/choiceOfficial", {
+                    TeamID: teamID
+                }, function (ret) {
+                    // console.log(ret);
+                    ret = JSON.parse(ret);
+                    this.peopleObj = ret.data[0];
+                }.bind(this));
+            }
+        }).$mount("#main");
+
+    </script>
+</body>
+</html>

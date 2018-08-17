@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>球员信息</title>
+		<link rel="stylesheet" href="../../css/mui/mui.min.css">
+		<link rel="stylesheet" href="../../css/mui/common.css">
+		<link rel="stylesheet" href="../../css/official-alsle/my.css"/>
+		<script src="../../js/view-port.js"></script>
+		<script src="../../js/vue.js"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/jquery.min.js"></script>
+		<script src="../../js/pako.js"></script>
+		<script src="../../js/ajax.js"></script>
+		<script src="../../js/commom.js"></script>
+	</head>
+	<body>
+		<center class="no-data">
+			<img src="../../img/zanwushuju.png"/>
+			<center class="ceter_text">暂时没有数据哦~</center>
+		</center>
+		<div id="main" class="mui-content">
+			<ul class="mui-table-view">
+			    <li class="mui-table-view-cell" v-for="(item,index) in getOfficialList" @tap="goPlayerDetail(item.OfficialID,imgIndex,index,item.OfficialName)" :class="{active: isDel==index}">
+		        	<img class="player-img" :src="item.OfficialHeadImg" onerror="this.src='../../img/headDefaltImg.png'"  /> 
+		        	<span class="player-name">{{ item.OfficialName }}</span>
+		        	<img class="right-img" src="../../img/adderrRight.png" v-show="imgIndex==0" />
+		        	<img class="delete-img" src="../../img/delete.png"  v-show="imgIndex==1" />
+			    </li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			var index = UrlParm.index;
+			var roleId = UrlParm.roleId;
+			var teamID = UrlParm.TeamID;
+			
+			var vm = new Vue({
+				el: "#main",
+				data: {
+					imgIndex: index,
+					getOfficialList: [],
+					isDel: null
+				},
+				methods: {
+					goPlayerDetail: function(officialId, imgIndex, i, name){
+						if(index==0){
+//							console.log(name+"-"+officialId+"-"+roleId)
+							H5ToNative(["goOfficerDetail",name,officialId,roleId]);
+						}else if(index==1){
+							deleteOfficer(officialId,name,i);	
+						}
+					}
+				}
+			});
+			(function(){
+				Ajax(httpOfficial+"CollegeStudent/getOfficialList",{
+					TeamID: teamID,
+					OfficialRole:roleId
+				},function(e){
+					e = JSON.parse(e);
+					if(e.data.length==0){
+						$("#main").hide();
+						$(".no-data").show();
+						return;
+					}
+					vm.getOfficialList = e.data;
+				});
+			}());
+			function deleteOfficer(officialId,name,i){
+				var btnArray = ['取消', '确认'];
+				mui.confirm('你确定删除'+name+'吗？', '', btnArray, function(e) {
+					if (e.index == 1) {
+						Ajax(httpOfficial+"CollegeStudent/deleteOfficial",{
+							OfficialID: officialId
+						},function(e){
+							e = JSON.parse(e);
+							if(e.msgCode != 0){
+								mui.toast(e.msg);
+								return ;
+							}
+							mui.toast(e.msg);
+							vm.isDel = i;
+						});
+					}
+				});
+			};
+		</script>
+	</body>
+</html>

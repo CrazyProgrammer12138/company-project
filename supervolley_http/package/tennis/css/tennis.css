@@ -1,0 +1,180 @@
+/**
+ * 创建人：  丛秀
+ * 创建时间：2018-05-30 15:04
+ * 功能说明：网球 - 表格
+ */
+* {
+	padding: 0;
+	margin: 0;
+	font-size: 12px;
+}
+.bottom-two{
+	margin-top: 100px;
+}
+.csx-left {
+	width: 400px;
+	padding: 20px 20px;
+}
+.csx-wrapper{
+	display: inline-block;
+    vertical-align: top;
+}
+/*时间*/
+.csx-time {
+    position: absolute;
+    width: 800px;
+    margin-top: 20px;
+    text-align: left;
+    margin-left: 10px;
+}
+.csx-time > div {
+	display: inline-block;
+	width: 17%;
+	margin-top: 4px;
+}
+.csx-started > div {
+	display: inline-block;
+	width: 42%;
+	height: 20px;
+	border-bottom: 1px solid #000000;
+	text-align: center;
+}
+.csx-Finished {
+	margin-left:1px ;
+}
+.csx-Finished > div {
+	display: inline-block;
+	width: 50%;
+	height: 20px;
+	border-bottom: 1px solid #000000;
+	text-align: center;
+}
+/*时间end*/
+/*表格左侧*/
+.csx-table-left {
+	display: inline-block;
+	margin-top: 74px;
+	text-align: center;
+	width: 291px;
+	/*border: 1px solid pink;*/
+	vertical-align: top;
+	
+}
+.csx-td {
+    width: 12px;
+    text-align: center;
+}
+.csx-border-right {
+	border: 1px solid #000000;
+}
+th {
+	font-weight: 500;
+}
+td{
+	position: relative;
+}
+.csx-points {
+	width: 84%;
+	text-align: center;
+}
+.csx-server {
+	width: 16%;
+}
+.csx-table-right {
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+	margin:4px 0 0 -7px;
+	
+}
+.csx-table-left td{
+	height: 16px;
+	
+}
+.csx-table-right > table {
+	width: 48px;
+	float: left;
+    border: 2px solid #000000;
+}
+.csx-border-right {
+	width: 5%;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	text-indent: 10px;
+	border-right: 2px solid #000000;
+	
+}
+.csx-among > div {
+	line-height: 35px;
+}
+.twoTitle{
+	height: 32px
+}
+.csx-table-right>table:last-child{
+    margin-left: -3px;
+}
+/*左侧表格end*/
+/*右侧表格*/
+.csx-right-games1 {
+	height: 52px;
+}
+.csx-right-games2 {
+	height: 34px;
+}
+.bottomTwo > td {
+    border-bottom: 3px solid #000;
+}
+
+/*底部人员*/
+.bottom-two .player-boottom {
+	width: 300px;
+	margin:-170px 0 40px 20px;
+	position: absolute;
+}
+.bottom-two .csx-player-left {
+ 	float: left;
+ 	width: 50%;
+    margin-top: -10px;
+}
+.bottom-two .csx-player-right {
+ 	float: left;
+    margin: -29px 0 0 -7px;
+}
+.bottom-two .csx-started1 {
+	margin-bottom: 5px;
+}
+.bottom-two .csx-started1 > div {
+	display: inline-block;
+	width: 60%;
+	height: 20px;
+	border-bottom: 1px solid #000000;
+	margin-bottom: -5px;
+}
+.bottom-two .csx-score {
+	width: 26px;
+}
+.bottom-two .csx-div-score {
+	width: 70px;
+	text-align: left;
+	height: 16px;
+}
+.bottom-two .csx-score-td {
+	width: 20px;
+	height: 21px; 
+    text-align: center;
+}
+.bottom-two .csx-player-right td{
+	width: 20px;
+	height: 20px;
+	display: table-cell;
+}
+/*圆点*/
+.csx-circle {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	position: absolute;
+    bottom: 4px;
+    left: 4px;
+}

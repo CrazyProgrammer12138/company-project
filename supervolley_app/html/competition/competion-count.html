@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>赛程比分</title>
+    <link rel="stylesheet" href="../../css/mui/mui.min.css" />
+    <link rel="stylesheet" href="../../css/mui/common.css" />
+    <link rel="stylesheet" href="../../css/competition/competion-count.css" />
+    <script src="../../js/view-port.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/esl.js"></script>
+    <script src="../../js/echarts.js"></script>
+    <script src="../../js/pako.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/commom.js"></script>
+</head>
+<body>
+<div id="main">
+    <div class="title" @click="goScoreRecord">
+        <span>比分记录</span>
+        <img src="../../img/black-right.png" />
+    </div>
+    <div id="linechart"></div>
+    <div class="selector">
+        <center class="selector-tab">
+            <img class="mui-pull-left" src="../../img/leftArrows.png"
+                 :style="{'opacity': selMar[0] == 0 ? 0.3 : 1}"
+                 @click="selectMar(0, -1)"
+            />
+            <div>{{ marStr[selMar[0]] }}</div>
+            <img class="mui-pull-right" src="../../img/rightArrows.png"
+                 :style="{'opacity': selMar[0] == 2 ? 0.3 : 1}"
+                 @click="selectMar(0, 1)"
+            />
+        </center>
+        <div class="selector-item" :style="{'height': sectionHeight(0)}">
+            <div v-for="i in 5" :class="{'native': i == selBig[0]}" @click="selectBig(0, i)">
+                第{{ i }}局
+            </div>
+        </div>
+    </div>
+    <div id="histogram"></div>
+    <div id="radascore"></div>
+    <div class="selector">
+        <center class="selector-tab">
+            <img class="mui-pull-left" src="../../img/leftArrows.png"
+                 :style="{'opacity': selMar[1] == 0 ? 0.3 : 1}"
+                 @click="selectMar(1, -1)"
+            />
+            <div>{{ marStr[selMar[1]] }}</div>
+            <img class="mui-pull-right" src="../../img/rightArrows.png"
+                 :style="{'opacity': selMar[1] == 2 ? 0.3 : 1}"
+                 @click="selectMar(1, 1)"
+            />
+        </center>
+        <div class="selector-item" :style="{'height': sectionHeight(1)}">
+            <div v-for="i in 5" :class="{'native': i == selBig[1]}" @click="selectBig(1, i)">
+                第{{ i }}局
+            </div>
+        </div>
+    </div>
+    <div class="play-data">
+        <div class="data-title">球员技术统计</div>
+        <div class="data-line" v-for="(item, i) in playData">
+            <div class="play-namea" @tap="jumpDetail(item.aId)">{{ item.aName }}</div>
+            <div class="play-score">
+                <div class="play-item">{{ itemName[i] }}</div>
+                <div class="play-scorea">
+                    <span><span :style="{width: item.aScore / maxScore * 100  + '%'}"></span></span>
+                    <span>{{ item.aScore }}</span>
+                </div>
+                <div class="play-scoreb">
+                    <span><span :style="{width: item.bScore / maxScore * 100  + '%'}"></span></span>
+                    <span>{{ item.bScore }}</span>
+                </div>
+            </div>
+            <div class="play-nameb" @tap="jumpDetail(item.bId)">{{ item.bName }}</div>
+        </div>
+        <div class="data-title">比赛结果报告</div>
+        <div class="data-report" @click="goThreeUrl" v-if="isComplete == '0'">统计报告</div>
+    </div>
+</div>
+<script type="text/javascript">
+    // html/competition/competion-count.html?roundId=99&teamAId=5&teamBId=6&isComplete=0
+    var roundId = UrlParm.roundId;
+    var teamAId = UrlParm.teamAId;
+    var teamBId = UrlParm.teamBId;
+    var isComplete = UrlParm.isComplete;
+
+    // 折线图配置参数
+    var optionLinechart = {
+        color: ["#1D9FF9", "#F44F5C"],
+        grid: { left: '6%', right: '8%', top: "13%", bottom: "0%", containLabel: true },
+        legend: {
+            data: ['球队A', '球队B']
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['第一局', '第二局', '第三局', '第四局', '第五局']
+        },
+        yAxis: {
+            type: 'value',
+            max: 30,
+            axisLabel: {
+                formatter: '{value}'
+            }
+        },
+        series: [
+            {
+                name: '球队A',
+                type: 'line',
+                data: [0, 0, 0, 0, 0],
+            }, {
+                name: '球队B',
+                type: 'line',
+                data: [0, 0, 0, 0, 0],
+            }
+        ]
+    };
+
+    // 柱状图配置参数
+    var optionHistogram = {
+        color: ["#1D9FF9", "#F44F5C"],
+        grid: { left: '4.2%', right: '3%', top: "3%", bottom: "0%", containLabel: true },
+        xAxis: [{
+            type: 'category',
+            data: ['扣球', '拦网', '发球', '对失'],
+            axisTick: { alignWithLabel: true }
+        }],
+        yAxis: [{ type: 'value', min: 0, max: 120 }],
+        series: [{
+            type: 'bar', barWidth: '35%', barLeft: '0%', barGap: '0%',
+            itemStyle: {
+                normal: {
+                    label: {
+                        show: true,
+                        position: 'top',
+                        formatter: '{c}%',
+                        textStyle: { fontSize: 12 }
+                    }
+                }
+            },
+            data: [60, 80, 50, 60],
+        }, {
+            type: 'bar', barWidth: '35%', barGap: '0%',
+            itemStyle: {
+                normal: {
+                    label: {
+                        show: true,
+                        position: 'top',
+                        formatter: '{c}%',
+                        textStyle: { fontSize: 12 }
+                    }
+                }
+            },
+            data: [20, 50, 60, 20],
+        }]
+    };
+
+    // 雷达图配置参数
+    var optionRadascore = {
+        color: ["#59B7EC", "#F6788F"],
+        grid: { left: '3%', right: '3%', top: "3%", bottom: "0%", containLabel: true },
+        radar: {
+            indicator: [
+                { name: '扣球', max: 120 },
+                { name: '拦网', max: 120 },
+                { name: '发球', max: 120 },
+                { name: '防守', max: 120 },
+                { name: '传球', max: 120 },
+                { name: '接发球', max: 120 }
+            ],
+            radius: 100,
+            center: ['50%', '50%'],
+            name: {
+                textStyle: { color: 'rgb(0, 0, 0)' }
+            }
+        },
+        series: [
+            {
+                type: 'radar',
+                tooltip: { trigger: 'item' },
+                data: [
+                    {
+                        value : [60, 50, 80, 40, 30, 20],
+                        itemStyle: { normal: {
+                                areaStyle: { type: 'default' }
+                            }},
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter: function (params) {
+                                    return params.value;
+                                }
+                            }
+                        }
+                    }, {
+                        value : [10, 20, 60, 80, 100, 80],
+                        itemStyle: { normal: {
+                                areaStyle: { type: 'default' }
+                            }},
+                        label: {
+                            normal: {
+                                show: true,
+                                formatter: function (params) {
+                                    return params.value;
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    };
+
+    // 实例化 VUE 组件
+    var vm = new Vue({
+        data: {
+            marStr: ["本局", "本场", "历史"],       // 选择器三种分类
+            selMar: [0, 0],                        // 两个选择器分别选中了哪一类
+            selBig: [1, 1],                        // 两个选择器分别选中了第几局
+            linechart: null,                       // 折线图绘图句柄
+            histogram: null,                       // 柱状图绘图句柄
+            radascore: null,                       // 雷达图绘图句柄
+            itemName: ["扣球", "拦网", "发球", "防守", "传球", "接发球"],
+            playData: [],                          // 球员对阵信息
+            maxScore: 1,                           // 球员所得最高分，作为比列条的分母
+            isComplete: isComplete                 // 当前比赛是否结束
+        },
+        methods: {
+            // 引入统计图配置，获取绘图句柄
+            drawImg: function() {
+                require.config({
+                    paths: {
+                        'echarts': '../../js/echarts',
+                        'echarts/chart/pie': '../../js/echarts'
+                    }
+                });
+                require(
+                    ['echarts', 'echarts/chart/pie'],
+                    function(ec) {
+                        this.linechart = ec.init(document.getElementById("linechart"));
+                        this.histogram = ec.init(document.getElementById("histogram"));
+                        this.radascore = ec.init(document.getElementById("radascore"));
+                        this.getLinechart();
+                        this.getHistogramRadascore();
+                        this.getPlayData();
+                    }.bind(this)
+                );
+            },
+            // 切换本局本场, num 字段用于区别是第一个还是第二个选择器
+            selectMar: function (num, i) {
+                var nums = this.selMar[num] + i;
+                if (nums < 0) return;
+                if (nums > 2) return;
+                Vue.set(this.selMar, num, nums);
+                if(nums > 0) {
+                    $(".item").eq(num).slideUp();
+                } else {
+                    $(".item").eq(num).slideDown();
+                }
+                if(num == 0) this.getHistogramRadascore();
+                if(num == 1) this.getPlayData();
+            },
+            // 判断是否出现局数的选择器
+            sectionHeight: function(num) {
+                if (this.selMar[num] > 0) return '0px';
+                return '26px';
+            },
+            // 切换局数, num 字段用于区别是第一个还是第二个选择器
+            selectBig: function (num, i) {
+                if (this.selBig[num] == i) return;
+                Vue.set(this.selBig, num, i);
+                if(num == 0) this.getHistogramRadascore();
+                if(num == 1) this.getPlayData();
+            },
+            // 获取折线图的数据
+            getLinechart: function() {
+                Ajax(httpCompetion + "selectStatisticsDataCompetitionScore.do", {
+                    roundid: roundId
+                }, function (ret) {
+                    console.log(ret)
+                    ret = JSON.parse(ret);
+                    for (var i = 0; i < ret.data.sectionData.length; i++) {
+                        optionLinechart.series[0].data[i] = ret.data.sectionData[i].teamascore;
+                        optionLinechart.series[1].data[i] = ret.data.sectionData[i].teambscore;
+                    }
+                    optionLinechart.legend.data[0] = ret.data.teamaName;
+                    optionLinechart.legend.data[1] = ret.data.teambName;
+                    optionLinechart.series[0].name = ret.data.teamaName;
+                    optionLinechart.series[1].name = ret.data.teambName;
+                    this.linechart.setOption(optionLinechart);
+                }.bind(this));
+            },
+            // 获取柱状图和雷达图的数据
+            getHistogramRadascore: function () {
+                var json = {
+                    type: 1,
+                    teamaid: teamAId,
+                    teambid: teamBId,
+                    roundid: roundId,
+                    section: this.selBig[0],
+                    iscomplete: isComplete
+                };
+                if (this.selMar[0] == 1) delete json.section;
+                if (this.selMar[1] == 2) delete json.roundid;
+                Ajax(httpCompetion + "selectStatisticsDataScoreIsByError.do", json, function (ret) {
+                    // console.log(ret)
+                    ret = JSON.parse(ret);
+                    var hParam = ["bucklePercentage", "blockPercentage", "servePercentage"];
+                    var rParam = [
+                        "bucklePercentage",
+                        "blockPercentage",
+                        "servePercentage",
+                        "defensePercentage",
+                        "passPercentage",
+                        "ceivePercentage"
+                    ];
+                    var hParamArr = [0, 0, 0, 0], hParamBrr = [0, 0, 0, 0];
+                    var rParamArr = [0, 0, 0, 0, 0, 0], rParamBrr = [0, 0, 0, 0, 0, 0];
+                    if (!!ret.data[0]) {
+                        for (var i = 0; i < hParam.length; i++) {
+                            hParamArr[i] = parseInt(ret.data[0][hParam[i]]) || 0;
+                        }
+                        for (var i = 0; i < rParam.length; i++) {
+                            rParamArr[i] = parseInt(ret.data[0][rParam[i]]) || 0;
+                        }
+                    }
+                    if (!!ret.data[1]) {
+                        for (var i = 0; i < hParam.length; i++) {
+                            hParamBrr[i] = parseInt(ret.data[1][hParam[i]]) || 0;
+                        }
+                        for (var i = 0; i < rParam.length; i++) {
+                            rParamBrr[i] = parseInt(ret.data[1][rParam[i]]) || 0;
+                        }
+                    }
+                    optionHistogram.series[0].data = hParamArr;
+                    optionHistogram.series[1].data = hParamBrr;
+                    optionRadascore.series[0].data[0].value = rParamArr;
+                    optionRadascore.series[0].data[1].value = rParamBrr;
+                    this.histogram.setOption(optionHistogram);
+                    this.radascore.setOption(optionRadascore);
+                }.bind(this));
+            },
+            // 获取球员对阵信息
+            getPlayData: function() {
+                Ajax(httpCompetion + "selectStatisticsDataTechnology.do", {
+                    roundid: roundId,
+                    type: this.selMar[1] == 2 ? 0 : 1,
+                    section: this.selBig[1],
+                    teamaid: teamAId,
+                    teambid: teamBId,
+                    iscomplete: isComplete
+                }, function (ret) {
+                    // console.log(ret);
+                    ret = JSON.parse(ret);
+                    if (!ret.data) ret.data = {};
+                    var fieldArr = ["buckle", "block", "serve", "defense", "pass", "receive"];
+                    var playData = [];
+                    var maxScore = 1;
+                    for(var i = 0; i < fieldArr.length; i++) {
+                        var info = {
+                            aId: ret.data[fieldArr[i] + 'AptId'] || 0,
+                            aScore: ret.data[fieldArr[i] + 'A'] || 0,
+                            aName: ret.data[fieldArr[i] + 'Aplayernamea'] || "-",
+                            bId: ret.data[fieldArr[i] + 'BptId'] || 0,
+                            bScore: ret.data[fieldArr[i] + 'B'] || 0,
+                            bName: ret.data[fieldArr[i] + 'Bplayernamea'] || "-",
+                        }
+                        playData.push(info);
+                        if (info.aScore > maxScore) maxScore = info.aScore;
+                        if (info.bScore > maxScore) maxScore = info.bScore;
+                    }
+                    this.maxScore = maxScore;
+                    this.playData = playData;
+                }.bind(this));
+            },
+            // 跳转到比分记录
+            goScoreRecord: function () {
+                var param = "&roundid=" + roundId;
+                H5ToNative(["html/competition/score-record.html", param]);
+            },
+            // 跳转到个人信息
+            jumpDetail: function (id) {
+                if (id == 0) return;
+                var param = "&ptid=" + id;
+                H5ToNative(["html/competition/personal-data.html", param]);
+            },
+            // 跳转到统计报告
+            goThreeUrl: function () {
+                Ajax(httpCompetion + "staticTemplate.do", {
+                    roundid: roundId
+                }, function (ret) {
+                    console.log(ret);
+                    H5ToNative([ret, ""]);
+                });
+            }
+        },
+        mounted: function () {
+            this.drawImg();
+        }
+    }).$mount("#main");
+</script>
+</body>
+</html>

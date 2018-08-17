@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>相关信息</title>
+    <link rel="stylesheet" href="../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../css/mui/common.css">
+    <link rel="stylesheet" href="../../css/official-alsle/interfix-info.css">
+    <script src="../../js/view-port.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/pako.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/commom.js"></script>
+</head>
+<body>
+    <div id="main" v-if="info">
+        <div class="box">
+            <div class="box-title">个人信息</div>
+            <div class="box-line"><b>{{ info.PlayerName }}</b> ({{ info.Birthday.split(" ")[0] }})</div>
+            <div class="box-line">{{ info.TeamName }}</div>
+            <div class="box-line">{{ info.PlayerCode }}号 · {{ info.ParamDescn }}</div>
+            <div class="box-line">身高 : {{ parseInt(info.Height) }} cm</div>
+            <div class="box-line">体重 : {{ parseInt(info.Weight) }} kg</div>
+        </div>
+        <div class="box">
+            <div class="box-title">摸高信息</div>
+            <div class="box-line">扣球高度 : {{ info.BlockNum }} cm</div>
+            <div class="box-line">拦网高度 : {{ info.SpikNum }} cm</div>
+        </div>
+        <div class="box">
+            <div class="box-title">参赛信息 (总计:{{ parseInt(info.DomesticCompeNum) + parseInt(info.InternaCompeNum) }} 次)</div>
+            <div class="box-line">国际大赛 : {{ info.DomesticCompeNum }} 次</div>
+            <div class="box-line">国内大赛 : {{ info.InternaCompeNum }} 次</div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        // 接收参数
+        var playerID = UrlParm.PlayerID;
+
+        // 测试参数
+        // playerID = 78;
+
+        // 实例化 VUE
+        var vm = new Vue({
+            data: {
+                info: null
+            },
+            methods: {},
+            mounted: function () {
+                // 获取球员相关信息
+                Ajax(httpOfficial + "CollegeStudent/getPlayerInfo", {
+                    PlayerID: playerID
+                }, function (ret) {
+                    // console.log(ret);
+                    ret = JSON.parse(ret);
+                    this.info = ret.data[0];
+                }.bind(this));
+            }
+        }).$mount("#main");
+    </script>
+</body>
+</html>

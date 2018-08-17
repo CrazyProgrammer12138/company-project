@@ -1,0 +1,92 @@
+#main{
+    background: #F2F2F2;
+}
+.add-margin{
+    margin: 0px 15px;
+    background: transparent;
+}
+.del-padding{
+    padding: 0;
+    margin: 10px 0px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 0px 14px #CCCCCC;
+    position: relative;
+}
+.list-img{
+    width: 100%;
+    height:150px;
+}
+.mui-table-view-cell:after{
+   height: 0px;
+}
+.list-logo-date{
+    width: 12px !important;
+    height:12px !important;
+    position: absolute;
+    top: 3px;
+}
+.list-logo-address{
+    width: 11px !important;
+    height:14px !important;
+    position: absolute;
+    top: 2px;
+    margin-left: 1px;
+}
+.date{
+    padding: 0px 6px;
+    font-size: 12px;
+    color: #666;
+    position: relative;
+}
+.address{
+    padding-left:6px ;
+    padding-right: 6px;
+    padding-bottom: 5px;
+    font-size: 12px;
+    color: #666;
+    position: relative;
+}
+.list-img-top{
+	width: 100%;
+    height:150px;
+    position: absolute;
+    top: 0;
+    background: rgba(0,0,0,.3);
+    color: #fff;
+}
+.list-img-top>center:first-child{
+    font-size: 20px;
+    margin-top: 47px;
+    padding: 0 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.list-img-top>center:last-child{
+    margin-top: 24px;
+}
+.list-img-top button{
+	width: 70px;
+    height: 20px;
+    font-size: 10px;
+    padding: 2px;
+    border: 0;
+    color: #fff;
+}
+.red-btn{
+    background: #d22330;
+}
+.pale-red-btn{
+    background: #ff9098;
+}
+.orange-btn{
+	background: #ff7800;
+}
+.grey-btn{
+	background: #ccc;
+}
+.address>span,
+.date>span{
+	margin-left: 14px;
+}

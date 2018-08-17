@@ -1,0 +1,291 @@
+html, body {
+    background: #271E1E;
+}
+#main {
+    width: 360px;
+    color: #FFFFFF;
+    padding-top: 50px;
+}
+.top{
+	height: 50px;
+	line-height: 50px;
+	vertical-align: top;
+	background: #000;
+    opacity: 0.8;
+	position: fixed;
+	top: 0;
+	z-index: 9999;
+	width: 100%;
+}
+.logo{
+	width: 31px;
+	height: 31px;
+	margin: 10px 16px;
+}
+.top>div{
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 2px;
+}
+.name{
+	font-size: 14px;
+    color: #fff;
+    margin-left: -7px;
+}
+.button{
+	color: #E33C46;
+    border: 2px solid #E33C46;
+    padding: 5px;
+    line-height: 1;
+    border-radius: 14px;
+    font-size: 12px;
+    margin: 0 15px;
+    position: relative;
+    top: 12px;
+    padding: 5px 9px;
+}
+.inline-mid {
+    display: inline-block;
+    vertical-align: middle;
+}
+.select {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 30px;
+    background: #3D3535;
+    font-size: 15px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.group {
+    width: 100%;
+    font-size: 0;
+}
+.group-name {
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    background: #271E1E;
+    text-indent: 5px;
+}
+.group-freeze {
+    width: 156px;
+}
+.group-freeze-order {
+    width: 36px;
+}
+.group-order-title {
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+    background: #3D3535;
+    text-indent: 5px;
+}
+.group-order-infos {
+    font-size: 12px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-bottom: 1px solid #E5E5E5;
+}
+.group-freeze-teams {
+    width: 120px;
+}
+.group-teams-title {
+    height: 30px;
+    line-height: 30px;
+    background: #3D3535;
+    font-size: 13px;
+    padding: 0 0 0 58px;
+    border-right: 1px solid #E5E5E5;
+}
+.group-teams-infos {
+    font-size: 12px;
+    height: 40px;
+    border-right: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+}
+.group-teams-infos > img {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background: #fff;
+}
+.group-teams-infos > span {
+    height: 40px;
+    line-height: 40px;
+    margin: 0 0 0 10px;
+}
+.group-scroll {
+    -webkit-overflow-scrolling: touch;
+    width: 204px;
+    overflow-x: scroll;
+}
+.group-ul {
+    white-space: nowrap;
+}
+.group-li {
+    width: 51px;
+}
+.group-li-title {
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+    background: #3D3535;
+    text-align: center;
+}
+.group-li-infos {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 12px;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.fight {
+    margin: 10px 0 0 0;}
+.fight-line {
+    background: #322929;
+    font-size: 0;
+    border-bottom: 1px solid #E5E5E5;
+}
+.fight > div:last-child {
+    border: none;
+}
+.fight-time {
+    padding: 0 0 0 15px;
+    font-size: 12px;
+    color: #CCCCCC;
+    width: 118px;
+    height: 40px;
+    line-height: 40px;
+}
+.fight-name-a, .fight-name-b {
+    width: 102px;
+}
+.fight-name-a {
+    text-align: right;
+}
+
+.fight-name-a > span, .fight-name-b > span {
+    font-size: 13px;
+    height: 40px;
+    line-height: 40px;
+    width: 74px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.fight-name-a > img, .fight-name-b > img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.fight-name-a > img,  .fight-name-b > span{
+    margin: 0 0 0 8px;
+}
+.fight-score {
+    font-size: 13px;
+    width: 38px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+.all {
+
+}
+.all-head {
+    line-height: 30px;
+    height: 30px;
+    background: #3D3535;
+    font-size: 0;
+    font-size: 13px;
+}
+.all-head-order {
+    width: 50px;
+    text-align: center;
+}
+.all-head-tname {
+    padding: 0 0 0 55px;
+}
+.all-line {
+    height: 40px;
+    font-size: 0;
+    border-bottom: 1px solid #E5E5E5;
+}
+.all-order {
+    width: 50px;
+    text-align: center;
+    font-size: 13px;
+}
+.all-tname {
+    padding: 0 0 0 25px;
+}
+.all-tname > img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    /*margin: 0 0 0 25px;*/
+}
+.all-tname > span {
+    font-size: 13px;
+    line-height: 40px;
+    margin: 0 0 0 12px;
+}
+
+.dialog {
+    position: fixed;
+    overflow: hidden;
+    z-index: 2;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    font-size: 0;
+}
+.dialog-assist, .dialog-content {
+    display: inline-block;
+    vertical-align: bottom;
+}
+.dialog-assist {
+    height: 100%;
+}
+.dialog-content {
+    width: 100%;
+    transition-property: margin-bottom;
+    transition-duration: 0.3s;
+}
+.dialog-stage, .dialog-cancel {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #E5E5E5;
+    background: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
+    color: #333333;
+}
+.dialog-cancel {
+    height: 45px;
+    border-bottom: none;
+    border-top: 5px solid #E5E5E5;
+}
+
+.three-ago {
+    background: #D22330;
+}
+.head-button {
+    width: 45px;
+    height: 25px;
+    line-height: 26px;
+    color: #FFFFFF;
+    font-size: 12px;
+    text-align: center;
+    background: #D22330;
+    border-radius: 4px;
+    margin: 12px 14px 0 0;
+    position: absolute;
+    top: 11px;
+    right: 0;
+}

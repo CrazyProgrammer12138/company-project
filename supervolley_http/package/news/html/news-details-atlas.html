@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>SuperVolley</title>
+    <link rel="stylesheet" href="../css/news-details-atlas.css"/>
+    <script src="../../../js/view.port.js"></script>
+    <script src="../../../js/vue.js"></script>
+	<script src="../../../js/commom.js"></script>
+    <script src="../../../js/jquery.min.js"></script>
+</head>
+<body>
+    <div class="fixed-app jumpApp">
+        <img src="../../../img/SuperVolleyLogo.png"/>
+        <span>SuperVolley</span>
+        <div class="cx-open">打开</div>
+    </div>
+    <div class="jump">
+		<span>正在跳转…</span>
+	</div>
+    <div class="change-num">1/4</div>
+    <div class="box">
+        <div class="box-ul">
+            <div class="box-li">
+                <span></span>
+                <img src="http://pic71.nipic.com/file/20150610/13549908_104823135000_2.jpg">
+            </div>
+            <div class="box-li">
+                <span></span>
+                <img src="http://img.zcool.cn/community/0142135541fe180000019ae9b8cf86.jpg@1280w_1l_2o_100sh.png">
+            </div>
+            <div class="box-li">
+                <span></span>
+                <img src="http://img07.tooopen.com/images/20170316/tooopen_sy_201956178977.jpg">
+            </div>
+            <div class="box-li">
+                <span></span>
+                <img src="http://res.supervolleyball.com/1/advisoryrelease/jpg/0107c578-01c6-4205-b397-31afe7a88d87.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="text-contet">
+        文字文字文字文字文字文字文字文字
+    </div>
+    <script type="text/javascript">
+        $(".text-contet").css("height", innerHeight - 390 + 'px');
+        var changeNum = $(".change-num");
+        var boxs = $(".box");
+        var box = $(".box-ul");
+        var num = box.children(".box-li").length, index = 1;
+        var sX, mX, msX, lN = 0, nLN = 0;
+        boxs.on("touchstart", function (ev) {
+            ev = ev || event
+            ev.preventDefault();
+            sX = ev.originalEvent.changedTouches[0].clientX;
+        }).on("touchmove", function (ev) {
+            ev = ev || event;
+            ev.preventDefault();
+            mX = ev.originalEvent.changedTouches[0].clientX;
+            msX = mX - sX;
+            nLN = lN + msX;
+            if (nLN > 0) nLN = 0;
+            if (nLN < (1 - num) * 360) nLN = (1 - num) * 360;
+            box.css("left", nLN + 'px');
+        }).on("touchend", function (ev) {
+            ev = ev || event;
+            ev.preventDefault();
+            if (msX > 100) {
+                nLN = lN + 360;
+                index --;
+            }
+            else if (msX < -100) {
+                nLN = lN - 360;
+                index ++;
+            }
+            else nLN = lN;
+            if (nLN > 0) {
+                nLN = 0
+                index = 1;
+            }
+            if (nLN < (1 - num) * 360) {
+                nLN = (1 - num) * 360;
+                index = num;
+            }
+            box.animate({ left: nLN + "px" }, 200);
+            lN = nLN; mX = 0; msX = 0;
+            changeNum.text(index + "/" + num);
+        });
+        $(".jumpApp").on("click",function(){
+            if (window.PhoneSystem.name == "Android") {
+                $(".jump").show();
+                setTimeout(function(){
+                    window.location.href = androidLoad;
+                },2000);
+                window.location.href = androidOpen;
+            } else {
+                $(".jump").show();
+                setTimeout(function(){
+                    window.location.href = iosLoad;
+                },2000);
+                window.location.href = iosOpen;
+            }
+        });
+    </script>
+</body>
+</html>

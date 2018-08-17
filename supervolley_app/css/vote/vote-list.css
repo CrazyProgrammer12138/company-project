@@ -1,0 +1,102 @@
+/**
+ * 创建人：  薛魁
+ * 创建时间：2018-04-09 13:50
+ * 功能说明：报名详情 - 选择服装位置
+ */
+#main{
+	width: 100%;
+	height: 640px;
+	background: url("../../img/vote.png") no-repeat;
+	background-size: 100% 100%;
+}
+.vote-header{
+	width: 100%;
+	overflow: hidden;
+}
+.vote-header img{
+	width: 32px;
+	height: 30px;
+	position: fixed;
+	top: 15px;
+	left: 15px;
+}
+.vote-title{
+	margin-top: 15px;
+	text-align: center;
+}
+.vote-title .vote-big-title{
+	font-size: 26px;
+	color: #fff124;
+	padding: 3px;
+	font-weight: bold;
+	display: inline-block;
+	background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(255, 241, 36, 1)), to(rgba(251, 246, 152, 1)));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.vote-title .vote-small-title{
+	font-size: 16px;
+	color: #ffffff;
+	margin-top: 5px;
+}
+/* 投票内容 */
+.mui-scroll-wrapper{
+	top: 80px;
+}
+.vote-list{
+	padding: 0 15px;
+	margin: 0;
+}
+.vote-list li{
+	list-style: none;
+	border-radius: 6px;
+	background-color: #e5e2df;
+	opacity: .8;
+	margin-bottom: 14px;
+	padding: 15px;
+	position: relative;
+}
+.vote-list-title{
+	font-size: 15px;
+	color: #000000;
+}
+.vote-number-img{
+	width: 14px;
+	height: 12px;
+	line-height: 12px;
+	background: url("../../img/rank.png") no-repeat;
+	background-size: 100% 100%;
+	text-align: center;
+	float: left;
+	color: #ffffff;
+	font-size: 5px;
+	margin: 7px 7px 0 0;
+}
+.vote-player-name{
+	font-size: 12px;
+	color: #444444;
+	margin-right: 5px;
+}
+.vote-num{
+	font-size: 12px;
+	color: #666666;
+}
+.vote-immediately{
+	height: 37px;
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
+}
+.vote-immediately img{
+	width: 84px;
+	height: 24px;
+}
+.vote-person-num{
+	font-size: 9px;
+	color: #666666;
+	text-align: center;
+	margin-top: -3px;
+}
+.no-data > .ceter_text{
+	color: #fff;
+}

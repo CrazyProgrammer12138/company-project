@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>报名-确认官员</title>
+    <link rel="stylesheet" href="../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../css/mui/common.css">
+    <link rel="stylesheet" href="../../css/official-alsle/signup-official.css">
+    <script src="../../js/view-port.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/pako.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/commom.js"></script>
+</head>
+<body>
+<div id="main">
+    <div class="box" v-if="peopleObj" v-for="(itemA, a) in title">
+        <div class="box-title">
+            {{ itemA }}
+        </div>
+        <div class="box-people">
+            <div v-for="(itemB, b) in peopleObj['dtOffices' + a]"
+                 :class="{
+                     'box-normal': cancelArr.indexOf(itemB.CompetitionOfficialID) != -1,
+                     'box-selected': cancelArr.indexOf(itemB.CompetitionOfficialID) == -1
+                 }"
+                 @tap="selectOffical(a, itemB.CompetitionOfficialID)"
+            >
+                {{ itemB.OfficialName }}
+            </div>
+        </div>
+    </div>
+    <div class="next">
+        <span @tap="nextPage()">下一步</span>
+    </div>
+</div>
+<script type="text/javascript">
+
+    // 接收参数
+    var teamID = UrlParm.TeamID;
+    var competitionID = UrlParm.CompetitionID;
+
+    // 测试参数
+    // teamID = 1;
+    // competitionID = 1;
+
+    // VUE 实例
+    var vm = new Vue({
+        data: {
+            title: ["领队", "主教练", "助理教练", "理疗师", "队医"],
+            peopleObj: null,
+            cancelArr: [0, 0],
+        },
+        methods: {
+            // 官员按钮点击事件, 选择各个身份的官员
+            selectOffical: function (index, competitionOfficialID) {
+                if (index < 3) return;
+                if (this.cancelArr[index - 3] != 0) {
+                    competitionOfficialID = 0;
+                }
+                Vue.set(this.cancelArr, index - 3, competitionOfficialID);
+            },
+            // 验证选择的官员是否正确, 并传递给下一个页面
+            nextPage: function () {
+                var param = "&CompetitionID=" + competitionID;
+                param += "&Official3=" + this.cancelArr[0];
+                param += "&Official4=" + this.cancelArr[1];
+                H5ToNative(["html/official-aisle/apply-choose-cloth-site.html", param, "报名详情-选择服装位置"]);
+            }
+        },
+        mounted: function () {
+            // 请求接口, 获取官员列表
+            Ajax(httpOfficial + "CollegeStudent/confirmOfficial", {
+                TeamID: teamID, CompetitionID: competitionID
+            }, function (ret) {
+                // console.log(ret);
+                ret = JSON.parse(ret);
+                this.peopleObj = ret.data[0];
+            }.bind(this));
+        }
+    }).$mount("#main");
+
+</script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>球队详情</title>
+    <link rel="stylesheet" href="../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../css/mui/common.css">
+    <link rel="stylesheet" href="../../css/competition/team-details.css">
+    <script src="../../js/view-port.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/commom.js"></script>
+    <script src="../../js/pako.js"></script>
+    <script src="../../js/ajax.js"></script>
+</head>
+<body>
+    <div id="main" v-cloak>
+        <div class="mui-content">
+            <div class="headed" >
+                <div class="portray">
+                    <img :src="teamMsg.teamlogo | ImgUrl" onerror="this.src='../../img/headDefaltImg.png'" alt=""  />
+                </div>
+                <div class="porName">
+                    <div class="nameChina">{{teamMsg.teamname}}</div>
+                </div>
+            </div>
+        </div>
+        <div id="slider" class="mui-slider">
+            <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                <a class="mui-control-item mui-active" href="#item1mobile">
+                    介绍
+                </a>
+                <a class="mui-control-item" href="#item2mobile">
+                    赛程
+                </a>
+                <a class="mui-control-item" href="#item3mobile">
+                    成员
+                </a>
+            </div>
+            <div id="sliderProgressBar" class="mui-col-xs-4 mui-slider-progress-bar" style="background:transparent;">
+                <div class="" style="width: 100%; height: 2px;">
+                    <div class="" style="display:block; background: #d22330; height: 2px; width:45px;margin:0 auto;"></div>
+                </div>
+            </div>
+            <div class="mui-slider-group" id="heighs">
+                <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+                    <div id="scroll1" class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <div class="mui-loading">
+                                <div class="basic">
+                                    <div class="message">基本信息</div>
+                                    <ul class="mes_ul">
+                                        <li>
+                                            <span>成立时间：{{teamMsg.teamdate || "-"}}</span>
+                                        </li>
+                                        <li class="individual">
+                                            <span>电话 :</span>
+                                            <span>{{teamMsg.contactnum || "-"}}</span>
+                                        </li>
+                                        <li class="individual">
+                                            <span>邮箱 :</span>
+                                            <span>{{teamMsg.emails || "-"}}</span>
+                                        </li>
+                                        <li class="individual">
+                                            <span>地址 :</span>
+                                            <span>{{teamMsg.teamaddress || "-"}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="basic">
+                                    <div class="message">更多介绍</div>
+                                    <ul class="mes_ul more">
+                                        <li v-for="(item, index) in honor">
+                                            <span>·</span>
+                                            <span>{{item.honorname}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="item2mobile" class="mui-slider-item mui-control-content">
+                    <div id="scroll2" class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <div class="introduce"  v-for="(item, index) in wta">
+                                <div class="times" v-if="((today - Date.parse(item.time))/86400000) <= 1 ">{{item.time}} 今天</div>
+                                <div class="times" v-else-if="(today - Date.parse(item.time)) < 86400">{{item.time}} 昨天</div>
+                                <div class="times" v-else>{{item.time}}</div>
+                                <ul class="game">
+                                    <li v-for="(items, index) in item.teamfight">
+                                        <div class="in_left">
+                                            <span>{{items.matchabbreviation}}</span>
+                                            <span class="turn">第{{items.turn}}轮</span>
+                                            <span>{{items.starttimeDay}}</span>
+                                        </div>
+
+                                        <div class="in_right">
+                                            <div class="game_text_A">{{items.teamaName}}</div>
+                                            <img class="game_img game_img_A" :src="items.teamaLogo | ImgUrl" onerror="this.src='../../img/headDefaltImg.png'" alt="" />
+                                            <span class="game_cont" v-if="!items.teamascore">0-0</span>
+                                            <span class="game_cont" v-else>{{items.teamascore}}-{{items.teambscore}}</span>
+                                            <img class="game_img game_img_B" :src="items.teambLogo | ImgUrl" onerror="this.src='../../img/headDefaltImg.png'" alt="" />
+                                            <div class="game_text_B">{{items.teambName}}</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="noData1" style="width: 100%; text-align: center; margin-top: 15%;display: none;">
+                                <img src="../../img/zanwushuju.png" style="width: 50%; margin: 15px 0 20px 0" />
+                                <center  style="font-size: 12px; color: #999;">暂无数据</center>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="item3mobile" class="mui-slider-item mui-control-content">
+                    <div id="scroll3" class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <div class="mui-loading">
+                                <div class="job">
+                                    <div class="line">教练</div>
+                                    <ul class="post">
+                                        <li class="people" v-for="(item, index) in coach" @click="Official(item.officalroleid)">
+                                            <img class="peopleImg" :src="item.officialheadimg | ImgUrl" onerror="this.src='../../img/headDefaltImg.png'" />
+                                            <div class="name">{{item.officialname}}</div>
+                                            <div class="jobs" v-if="item.officalroletype ==0 ">领队</div>
+                                            <div class="jobs" v-else-if="item.officalroletype ==1 ">主教练</div>
+                                            <div class="jobs" v-else-if="item.officalroletype ==2 ">助理教练</div>
+                                            <div class="jobs" v-else-if="item.officalroletype ==3 ">治疗师</div>
+                                            <div class="jobs" v-else>医生</div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="job" v-for="(item, index) in player" v-if="item.data.length != 0">
+                                    <div class="line">{{item.title}}</div>
+                                    <ul class="post">
+                                        <li class="people" v-for="(items, index) in item.data" @click="playerJump(items.ptid)">
+                                            <img class="peopleImg" :src="items.playerheaderimg | ImgUrl" onerror="this.src='../../img/headDefaltImg.png'" alt="" />
+                                            <div class="name">{{items.playername}}</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="job" v-for="(item, index) in player" v-else></div>
+                            </div>
+                            <div id="noData2" style="width: 100%;text-align: center;margin-top: 15%;display: none;">
+                                <img src="../../img/zanwushuju.png" style="width: 50%; margin: 15px 0px 20px 0" />
+                                <center  style="font-size: 12px; color: #999;">暂无数据</center>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    //测试地址 : html/competition/team-details.html?teamid=1
+    //var httpCompetition = "http://192.168.3.11:8081/volleyball_competion_api_v1.0/";
+    //测试参数
+    var teamid = UrlParm.teamid;
+
+    var vm = new Vue({
+        data:{
+            honor: [],
+            teamMsg: {},
+            wta: [],
+            coach: [],
+            player: [],
+            today: 0
+        },
+		mounted: function(){
+			//计算高度
+			$("#heighs").css({
+				"height": window.innerHeight - 240 + "px",
+			});
+			mui('.mui-scroll-wrapper').scroll({
+				indicators: true //是否显示滚动条
+			});
+		},
+        methods:{
+            Official:function (officalroleid){
+                var param = "&officalroleid=" + officalroleid;
+                H5ToNative(["html/competition/coach-data.html", param]);
+            },
+            playerJump:function (ptid){
+                var param = "&ptid=" + ptid;
+                H5ToNative(["html/competition/personal-data.html", param]);
+            }
+        }
+    }).$mount("#main");
+	
+	
+
+    //介绍
+    (function(){
+
+        var json = {
+            "teamid": teamid
+        };
+        Ajax(httpCompetion + "queryTeamAndHonorByTeamId.do", json, function(e){
+            //console.log(JSON.parse(e));
+            var data =  JSON.parse(e).data;
+            if (data == null){
+                vm.honor = [];
+                vm.teamMsg = {};
+            }else{
+                vm.honor = data.honor;
+                vm.teamMsg = data.team;
+            }
+        })
+    })();
+
+    //赛程
+    (function(){
+        var json = {
+            "teamid": teamid
+        };
+        Ajax(httpCompetion + "querySaiChengByTeamId.do", json, function(e){
+            //console.log(JSON.parse(e));
+            if (JSON.parse(e).data.length == 0){
+                $("#noData1").attr("style", "display:block;text-align: center;");
+            }else{
+                $("#noData1").attr("style", "display:none;text-align: center;");
+                vm.wta =  JSON.parse(e).data;
+            }
+            vm.today = Date.parse(new Date());
+        })
+    })();
+
+    //成员
+    (function(){
+        var json = {
+            "teamid": teamid
+        };
+        Ajax(httpCompetion + "queryTeamPlayerAndOfficeByTeamid.do", json, function(e){
+            console.log(JSON.parse(e));
+            var data = JSON.parse(e).data;
+            var arr = [];
+            vm.coach = data.coach;
+            for(var i = 0; i < data.coach.length; i++){
+                for (var j = 0; j < data.coach[i].data.length; j++){
+                    arr.push(data.coach[i].data[j]);
+                }
+            }
+            vm.coach = arr;
+            vm.player =  data.players;
+        })
+    })()
+</script>

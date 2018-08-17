@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <link rel="stylesheet" href="../../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../../css/mui/common.css">
+    <link rel="stylesheet" href="../css/vote-list.css">
+    <script type="text/javascript" src="../../../js/view.port.js"></script>
+    <script type="text/javascript" src="../../../js/vue.js"></script>
+    <script type="text/javascript" src="../../../js/mui.min.js"></script>
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../js/ajax.js"></script>
+    <script type="text/javascript" src="../../../js/mui.pullToRefresh.js"></script>
+    <script type="text/javascript" src="../../../js/mui.pullToRefresh.material.js"></script>
+    <script type="text/javascript" src="../../../js/commom.js"></script>
+</head>
+<body>
+    <div id="main">
+        <center class="no-data">
+            <img src="../../../img/zanwushuju.png"/>
+            <center class="ceter_text">暂时没有投票哦~</center>
+        </center>
+        <div class="vote-header">
+            <img src="../../../img/logo@2x.png" alt="">
+            <div class="vote-title">
+                <div class="vote-big-title">{{voteDate.finals_name}}</div>
+                <div class="vote-small-title">{{voteDate.league_name}}</div>
+            </div>
+        </div>
+        <div class="mui-slider-group">
+            <div class="mui-slider-item mui-active">
+                <div class="mui-scroll-wrapper">
+                    <div class="mui-scroll">
+                        <ul class="vote-list">
+                            <li v-for="(item, index) in voteDate.titleList">
+                                <div class="vote-list-title">{{index+1}}、{{item.titlename}}？</div>
+                                <div class="vote-one" v-for="(items, indexed) in item.list"
+                                     v-if="item.ispersonal == 1 && indexed <=2"
+                                >
+                                    <div class="vote-number-img">{{indexed+1}}</div>
+                                    <span class="vote-player-name">{{items.person_name}}</span>
+                                    <span class="vote-num" v-if="items.voting_num == null">[0票]</span>
+                                    <span class="vote-num" v-else>[{{items.voting_num}}票]</span>
+                                </div>
+                                <div class="vote-one" v-for="(items, indexed) in item.list"
+                                     v-if="item.ispersonal == 2 && indexed <=2"
+                                >
+                                    <div class="vote-number-img">{{indexed+1}}</div>
+                                    <span class="vote-player-name">{{items.team_name}}</span>
+                                    <span class="vote-num" v-if="items.voting_num == null">[0票]</span>
+                                    <span class="vote-num" v-else>[{{items.voting_num}}票]</span>
+                                </div>
+                                <div class="vote-immediately" @click="votePu(item.ispersonal, item.titleid)">
+                                    <img src="../../../img/immediately-vote.png" alt="">
+                                    <div class="vote-person-num" v-if="item.voted_num == null">已有0人参与</div>
+                                    <div class="vote-person-num" v-else>已有{{item.voted_num}}人参与</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //html/vote/vote-list.html?leagueid=1
+        var leagueid = UrlParm.leagueid;
+
+        /* 列表接口 */
+        var json = {
+            "leagueid": leagueid,
+            "Page": 1,
+            "Size": 10
+        };
+
+        var vm = new Vue({
+            data: {
+                n: 0,
+                voteDate: ""
+            },
+            methods: {
+                voteMessage : function(self){
+                    Ajax(httpVote + "voteFirstList.do", json, function(e){
+                        console.log(e);
+                        e = JSON.parse(e);
+                        if (e.data.titleList.length == 0 && json.Page == 1){
+                            $(".no-data").show();
+                            $(".mui-pull-bottom-tips").hide();
+                            return ;
+                        }
+                        if(e.data.titleList.length < json.Size) {
+                            self.endPullUpToRefresh(true);
+                        } else {
+                            self.endPullUpToRefresh(false);
+                        }
+                        vm.voteDate = e.data;
+                        json.Page++;
+                    })
+                },
+                votePu : function(num, titleid){
+                    if (num == 1){
+                        // window.location.href = "newvote-details.html?titleid=" + titleid;
+                        H5ToNative([servers + "vote/html/newvote-details.html", "?titleid="+ titleid]);
+                    }else if (num == 2){
+                        // window.location.href = "newvote-team.html?titleid=" + titleid;
+                        H5ToNative([servers + "vote/html/newvote-team.html", "?titleid="+ titleid]);
+                    }
+
+                }
+            }
+        }).$mount("#main");
+
+        (function () {
+            $(".mui-scroll-wrapper").css("height", window.innerHeight - 80 + "px");
+            mui('.mui-scroll-wrapper').scroll({
+                bounce: false,
+                indicators: true,
+                deceleration: mui.os.ios?0.003:0.0009
+            });
+            mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+                mui(pullRefreshEl).pullToRefresh({
+                    up: {
+                        callback: function() {
+                            var self = this;
+                            setTimeout(function() {
+                                vm.voteMessage(self);
+                            }, 200);
+                        }
+                    }
+                }).pullUpLoading();
+            });
+        })();
+    </script>
+</body>
+</html>

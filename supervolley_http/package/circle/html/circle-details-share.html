@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>supervolley</title>
+    <link rel="stylesheet" href="../css/circle-details-share.css">
+	<script src="../../../js/view.port.js"></script>
+	<script src="../../../js/vue.js"></script>
+	<script src="../../../js/commom.js"></script>
+    <script src="../../../js/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        <div class="open-app jumpApp">
+            <div class="open-left">
+                <img src="../../../img/SuperVolleyLogo.png" alt="">
+                <span>SuperVolley</span>
+            </div>
+            <button>打开</button>
+        </div>
+		<div class="jump">
+			<span>正在跳转…</span>
+		</div>
+        <div id="main" class="publish-post">
+            <div class="publish-header">
+                <img src="../../../img/new-zan.png" alt="">
+                <div class="post">
+                    <div class="post-username">
+                       运动达人
+                    </div>
+                    <p>2017-03-13 10:05</p>
+                </div>
+            </div>
+            <div class="publish-post-title">姚明西装革履参加政协会议</div>
+            <div class="publish-post-content">北京时间5月29日消息，古德蒂挂帅的土耳其女排国家队昨天在伊斯坦布尔与来访的俄罗斯女排进行了第二场友谊赛</div>
+            <img class="publish-post-img" src="../../../img/new-zan.png" alt="">
+        </div>
+
+        <div class="brilliant">精彩评论</div>
+
+        <div class="discuss">
+            <div class="discuss-header">
+                <div class="discuss-header-left">
+                    <img src="../../../img/new-zan" onerror="this.src='http://h.supervolleyball.com/img/headDefaltImg.png'" >
+                    <div class="discuss-user-message">
+                        <div>树枝发芽lio77</div>
+                        <p>昨天20:40</p>
+                    </div>
+                </div>
+                <div class="discuss-header-right">
+                    <img src="../../../img/new-zan.png" alt="">
+                    <span>109</span>
+                </div>
+            </div>
+            <div class="discuss-txt">女排好帅!女排最帅!</div>
+            <div class="discuss-txt-img">图片x3</div>
+        </div>
+
+        <button class="view-more jumpApp">打开SuperVolley，查看更多精彩评论>></button>
+    </div>
+    <script type="text/javascript">
+
+    </script>
+</body>
+</html>
+<script type="text/javascript">
+	 $(".jumpApp").on("click",function(){
+		if (window.PhoneSystem.name=="Android") {
+			$(".jump").show();
+			setTimeout(function(){
+				window.location.href = androidLoad;
+			},2000);
+			window.location.href = androidOpen;
+		} else {
+			$(".jump").show();
+			setTimeout(function(){
+				window.location.href=iosLoad;
+			},2000);
+			window.location.href=iosOpen; 
+		}
+	})
+</script>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>投票</title>
+		<link rel="stylesheet" href="../../../css/mui/mui.min.css">
+	    <link rel="stylesheet" href="../../../css/mui/common.css">
+	    <link rel="stylesheet" href="../css/vote-details.css">
+	    <script type="text/javascript" src="../../../js/view.port.js"></script>
+	    <script type="text/javascript" src="../../../js/vue.js"></script>
+	    <script type="text/javascript" src="../../../js/mui.min.js"></script>
+	    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+	    <script type="text/javascript" src="../../../js/pako.js"></script>
+    	<script type="text/javascript" src="../../../js/ajax.js"></script>
+	    <script type="text/javascript" src="../../../js/commom.js"></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<img src="../../../img/vote.png"/>
+			<!--投票主题-->
+			<div class="voting-topic">
+				<div class="text-gradient">{{ titlename }} </div>
+				<div class="time" v-if="vote_time">投票截止日期: {{ vote_time | dateFilter }}</div>
+				<!--投票列表-->
+				<div class="voting-list">
+					<div class="list" v-for="(item, index) in list">
+						<!--投票-->
+						<div class="vote-right">
+							<span>【{{ item.voting_num }}】票</span><span @click="vote(item.teamid, item.voting_num, index)">投TA</span>
+						</div>
+						<div class="name"><span>{{ item.short_name }}</span><span></span></div>
+						<div class="team">{{ item.team_name }}</div>
+					</div> 
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	/*接收参数*/ 
+	var titleid = UrlParm.titleid;
+	
+	var vm = new Vue({
+		el: '.wrapper',
+		data: {
+			titlename: '',
+			vote_time: false,
+			ispersonal: '',
+			list: []
+		},
+		filters: {
+			dateFilter: function(dateTime){
+                return dateTime.split(":")[0] + ":" + dateTime.split(":")[1];
+			}
+		},
+		methods: {
+			vote: function(val,voting_num,i){
+				Ajax(httpVote + "updateVotingById.do", {
+					id: val,
+					ispersonal:  this.ispersonal,
+				},function(ret){
+					//console.log(ret);
+					ret = JSON.parse(ret);
+					if(ret.msg == "请求成功"){
+						mui.alert('投票成功！', "  ", function () {
+							vm.list[i].voting_num ++;
+							vm.list = vm.list.concat([]);
+							
+						});
+					}else{
+						mui.toast('投票失败！');
+					}
+				})
+			}
+		},
+		mounted: function(){
+            $(".voting-list").css("height", innerHeight - 71 + "px");
+			Ajax(httpVote + "voteTitleList.do", {
+		 	 	titleid: titleid
+		 	},function(res){
+		 		res = JSON.parse(res);
+		 		this.titlename = res.data.titlename;
+		 		this.vote_time = res.data.vote_time;
+		 		this.ispersonal = res.data.ispersonal;
+		 		this.list = res.data.list;
+		 	}.bind(this));
+		}
+	})
+</script>
+
+

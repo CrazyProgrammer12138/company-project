@@ -1,0 +1,37 @@
+html, body {
+	background: #fff;
+}
+.team {
+	background: #fff;
+	padding: 9px  15px;
+	height: 50px;
+	border-bottom:1px solid #E5E5E5 ;
+}
+.team > div {
+	display: inline-block;
+	vertical-align: middle;
+	color: #333;
+	height: 30px;
+	font-size: 14px;
+	width: 240px;
+	line-height: 30px;
+	margin: 0 0 0 3px;
+}
+.team > div:nth-child(1) {
+	width: 30px;
+	height: 30px;
+}
+.team > div:nth-child(1) > img{
+	width: 100%;
+	border-radius: 50%;
+}
+.team > button {
+	display: inline-block;
+	vertical-align: middle;
+	border: 1px solid #D22330;
+	color: #D22330;
+	padding: 1px 9px;
+	border-radius: 0;
+	line-height: 18px;
+	font-size: 12px;
+}

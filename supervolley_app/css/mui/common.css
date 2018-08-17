@@ -1,0 +1,141 @@
+/* 统筹全局样式 */
+html, body {
+    background: #F2F2F2;
+    width: 360px;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0;
+    font-family: arial;
+}
+/* 解决苹果手机点击出现黑色背景 解决手机端长按出现复制粘贴 */
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+    -ms-tap-highlight-color: rgba(0, 0, 0, 0);
+    -o-tap-highlight-color: rgba(0, 0, 0, 0);
+    tap-highlight-color: rgba(0, 0, 0, 0);
+}
+/* 消除手机端 overflow: scroll 之后出现的滚动条 */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+/*下拉加载*/
+.mui-bar ~ .mui-content .mui-fullscreen {
+    top: 44px;
+    height: auto;
+}
+.mui-pull-top-tips {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    margin-left: -25px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    z-index: 1;
+}
+.mui-bar ~ .mui-pull-top-tips {
+    top: 24px;
+}
+.mui-pull-top-wrapper {
+    width: 42px;
+    height: 42px;
+    display: block;
+    text-align: center;
+    background-color: #efeff4;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    background-clip: padding-box;
+    box-shadow: 0 4px 10px #bbb;
+    overflow: hidden;
+}
+.mui-pull-top-tips.mui-transitioning {
+    -webkit-transition-duration: 200ms;
+    transition-duration: 200ms;
+}
+.mui-pull-top-tips .mui-pull-loading {
+    margin: 0;
+}
+.mui-pull-top-wrapper .mui-icon, .mui-pull-top-wrapper .mui-spinner {
+    margin-top: 7px;
+}
+.mui-pull-bottom-tips {
+    text-align: center;
+    background-color: #efeff4;
+    font-size: 15px;
+    line-height: 40px;
+    color: #777;
+}
+.mui-pull-top-canvas {
+    overflow: hidden;
+    background-color: #fafafa;
+    border-radius: 40px;
+    box-shadow: 0 4px 10px #bbb;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+}
+.mui-pull-top-canvas canvas {
+    width: 40px;
+}
+.mui-slider-indicator.mui-segmented-control {
+    background-color: #efeff4;
+}
+
+/*更改上拉加载样式*/
+.mui-pull-bottom-tips {
+    text-align: center;
+    background-color: #efeff4;
+    font-size: 12px;
+    line-height: 40px;
+    color: #666
+}
+.mui-pull-bottom-tips {
+    background-color: transparent;
+}
+
+/*暂无数据*/
+.no-data {
+    display: none;
+}
+.no-data > img {
+    width: 160px;
+    height: auto;
+    text-align: center;
+    margin-top: 110px;
+    margin-bottom: 8px;
+}
+.no-data > .ceter_text {
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/*删除列表点击颜色*/
+.mui-table-view-cell.mui-active {
+    background: #fff !important;
+}
+.mui-btn.mui-active:enabled, .mui-btn:enabled:active, button.mui-active:enabled, button:enabled:active,
+input[type=button].mui-active:enabled, input[type=button]:enabled:active, input[type=reset].mui-active:enabled,
+input[type=reset]:enabled:active, input[type=submit].mui-active:enabled, input[type=submit]:enabled:active {
+    background-color: #fff;
+}
+
+/*弹出框按钮颜色*/
+.mui-btn-blue, .mui-btn-primary, input[type=submit] {
+    color: #fff;
+    border: 1px solid #d22330;
+    background-color: #d22330;
+}
+/* 解决vue闪现代码 */
+[v-cloak] {
+    display: none;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../css/mui/common.css">
+    <script src="../../js/view-port.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/pako.js"></script>
+	<script src="../../js/ajax.js"></script>
+    <script src="../../js/commom.js"></script>
+</head>
+<body>
+    <div id="main">
+
+    </div>
+    <script type="text/javascript">
+        Ajax("http://apis.supervolleyball.com/user/user/bindOffice.do", {
+            phone: '17839227319',
+            officeAccount: 290,
+            roleType: 1
+        }, function (ret) {
+            console.log(ret)
+        })
+    </script>
+</body>
+</html>

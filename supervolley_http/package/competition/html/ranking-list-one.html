@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>排行榜</title>
+    <link rel="stylesheet" href="../../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../../css/mui/common.css">
+    <link rel="stylesheet" href="../css/ranking-list.css">
+    <script src="../../../js/view.port.js"></script>
+    <script src="../../../js/vue.js"></script>
+    <script src="../../../js/mui.min.js"></script>
+    <script src="../../../js/jquery.min.js"></script>
+    <script src="../../../js/commom.js"></script>
+    <script src="../../../js/pako.js"></script>
+    <script src="../../../js/ajax.js"></script>
+</head>
+<body>
+<div id="main">
+	<!--top 打开提示-->
+	<div class="top" @click="jump()">
+		<img class="logo" src="../../../img/SuperVolleyLogo.png" /> 
+		<div class="name">SuperVolley</div> 
+		<div class="head-button">打开</div>
+	</div>
+    <!-- 第一阶段分组显示的队列 -->
+    <div v-if="isScore == 1" class="group" v-for="(itemA, a) in dataList">
+        <div class="group-name">{{ itemA.groupname }}</div>
+        <div class="inline-mid group-freeze">
+            <div class="inline-mid group-freeze-order">
+                <div class="group-order-title">排名</div>
+                <div class="group-order-infos" v-for="(itemB, b) in itemA.dList"
+                     :class="{'three-ago': b < 3}"
+                >
+                    {{b + 1}}
+                </div>
+            </div>
+            <div class="inline-mid group-freeze-teams">
+                <div class="group-teams-title">球队</div>
+                <div class="group-teams-infos" v-for="(itemC, c) in itemA.dList"
+                     :class="{'three-ago': c < 3}"
+                >
+                    <img class="inline-mid" :src="itemC.teamLogo | ImgUrl"
+                         onerror="this.src='../../../img/headDefaltImg.png'"
+                    >
+                    <span class="inline-mid">{{ itemC.teamShortName }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="inline-mid group-scroll">
+            <div class="group-ul">
+                <div class="inline-mid group-li" v-for="(itemB, b) in colunmName">
+                    <div class="group-li-title">{{ itemB }}</div>
+                    <div class="group-li-infos" v-for="(itemC, c) in itemA.dList"
+                         :class="{'three-ago': c < 3}"
+                    >
+                        {{ itemC[colunmField[b]] || 0 }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    // html/ranking-list-one.html?raceid=3&phaseid=5&isScore=1
+    // 接收全局参数
+    var raceid = UrlParm.raceid;
+    var phaseid = UrlParm.phaseid;
+    var isScore = UrlParm.isScore;
+
+    // 实例化 VUE
+    var vm = new Vue({
+        data: {
+            dataList: [],           // 某一阶段的数据
+            colunmName: ["总场", "总胜", "总负", "积分", "C值", "Z值"],
+            colunmField: ["attentNum", "winNum", "loseNum", "allScore", "cvalue", "zvalue"]
+        },
+        methods: {
+        	 // 获取某一阶段的具体数据
+            queryPhasedTeamRankData: function () {
+                Ajax(httpCompetion + "queryPhasedTeamRankData.do", {
+                    raceid: raceid,
+                    phaseid: phaseid,
+                    isScore: isScore
+                }, function (ret) {
+                    // console.log(ret);
+                    ret = JSON.parse(ret);
+                    this.dataList = ret.data;
+                }.bind(this));
+            },
+            jump: function () {
+				mui.toast("请稍等......");
+		        if (window.PhoneSystem.name == "Android") {
+		            setTimeout(function(){
+		                window.location.href = androidLoad;
+		            }, 2000);
+		            window.location.href = androidOpen;
+		        } else {
+		            setTimeout(function(){
+		                window.location.href = iosLoad;
+		            }, 2000);
+		            window.location.href = iosOpen;
+		        }
+			},
+        },
+        mounted: function(){
+        	this.queryPhasedTeamRankData();
+        }
+    }).$mount("#main");
+</script>
+</body>
+</html>

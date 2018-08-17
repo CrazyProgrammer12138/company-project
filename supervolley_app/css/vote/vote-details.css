@@ -1,0 +1,157 @@
+/**
+ * 创建人：  丛秀
+ * 创建时间：2018-04-09 10:00
+ * 功能说明：投票详情
+ */
+html {
+	background: #fff;
+}
+.wrapper > img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+}
+/* 投票主题  */
+.voting-topic {
+	position: relative;
+	z-index: 1;
+}
+.voting-topic > div:nth-child(1) {
+	text-align: center;
+}
+/*.text-gradient {  
+	width: 100%;
+    display: inline-block;
+    font-family: '微软雅黑';
+   	font-size: 26px;
+	padding: 10px 10px 5px 10px; 
+}  		  
+.text-gradient[data-text]::after {  
+    content: attr(data-text);  
+    color: #FBEE00;  
+   	text-align: center;
+    z-index: 2;
+    -webkit-mask-image: -webkit-gradient(linear, 0 0, 0 bottom, from(#fff124), to(rgba(251,246,1, .6)));
+}*/
+.text-gradient {
+	padding: 18px 10px 10px 10px; 
+	text-align: center;
+	font-size: 26px;
+	color: #fff124;
+	font-weight: bold;
+	background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(255, 241, 36, 1)), to(rgba(251, 246, 152, 1)));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.time {
+	text-align: center;
+	color: #fff;
+	font-size: 12px;
+	padding-bottom: 9px;
+}
+/* 投票列表 */
+.voting-list{
+	width: 92%;
+	margin-left: 4%;
+	height: 552px;
+	overflow: hidden;
+	overflow-y: auto;
+	z-index: 3;
+    padding-bottom: 35px;
+}
+.img-list {
+	z-index: 100 !important;
+	float: right;
+	width: 31px;
+	margin: 78px -10px 0 0;
+}
+.img-list > img {
+	width: 100%;
+}
+.list {
+	padding: 7px 20px 5px 20px;
+	border-radius: 5px;
+	background: rgba(255, 255, 255, .8);
+	margin-bottom: 15px;
+	/*z-index: 150;*/
+}
+.add-list {
+	background: rgba(187, 187, 187, .9) !important;
+}
+.name > span:nth-child(1) {
+	font-size: 16px;
+}
+.name > span:nth-child(2) {
+	font-size: 12px;
+	color: #666;
+}
+.team{
+	padding-bottom: 2px;
+	font-size: 10px;
+	color: #666;
+}
+.team-score {
+	font-size: 12px;
+	color: #666;
+}
+.war-record > span {
+	display: inline-block;
+	padding-bottom: 2px;
+}
+.spike {
+	font-size: 13px;
+	color: #333;
+	width: 76px;
+	height: 17px;
+	border-right: 1px solid #666;
+}
+.spike01 {
+	display: inline-block;
+	margin-left: 20px;
+	font-size: 13px;
+	color: #333;
+	width: 76px;
+}
+
+/* 投票底部 */
+.vote-footer {
+	width: 100%;
+	height: 54px;
+	position: fixed;
+	bottom: 0;
+	background: rgba(51, 51, 51, .7);
+	z-index: 20 !important;
+}
+.vote-footer > span {
+	padding: 10px 0;
+	color: #fff;
+	font-size: 12px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 10px 0 0 15px;
+}
+.vote-footer > button {
+	display: inline-block;
+	vertical-align: middle;
+	z-index: 100 !important;
+	text-align: center;
+	width: 98px;
+	height: 35px;
+	padding: 5px 20px;
+	background: #fff;
+	font-size: 18px;
+	color: #000000;
+	margin: 5px 0 0 50px;
+	border-radius: 5px;
+}
+/* 教练 */
+.war-record01 {
+	font-size: 13px;
+	color: #333;
+	margin-bottom: 2px;
+}
+/*.war-record02 {
+	font-size: 13px;
+	color: #333;
+}*/

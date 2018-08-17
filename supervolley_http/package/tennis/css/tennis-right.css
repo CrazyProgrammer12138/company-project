@@ -1,0 +1,134 @@
+/*最外面宽 50%*/
+body{
+    font-size: 12px;
+}
+.tennis-right{
+    width:400px;
+    display: inline-block;
+    vertical-align: middle;
+}
+/*第一部分*/
+.events{
+    overflow: hidden;
+}
+/*底部线条*/
+.events-one-line,.events-two-line,.events-three-line,.events-four-line{
+    height: 20px;
+    border-bottom: 2px solid #333333;
+    line-height: 45px;
+    text-align: center;
+    font-size: 12px;
+}
+.events .right-o-mr{
+    margin-left: 170px;
+}
+.events .right-t-mr{
+    margin-left: 100px;
+}
+.dates{
+    width: 29%;
+    float: left;
+}
+.mar-cum{
+    margin: 0 24px 0 23px;
+}
+.chair{
+    display: inline-block;
+    width: 34%;
+    margin-top: 20px;
+}
+.cer-right{
+    margin-left: 6%;
+}
+/*.events .text-r-line{
+    margin-left: 40px;
+}*/
+/*第二部分带有表格 start*/
+.content-two{
+    margin-top: 56px;
+    position: relative;
+}
+.player{
+    height: 50px;
+}
+.p-text{
+    float: left;
+    margin-top: 22px;
+}
+.player-line{
+    width: 81%;
+    height: 35px;
+    border-bottom: 2px solid #333333;
+    margin-left: 67px;
+    line-height: 45px;
+    padding-left: 20px;
+    font-size: 12px;
+}
+/*表格样式*/
+.right-c{
+    width: 20%;
+    overflow: hidden;
+    border-top: 2px solid #333333;
+    border-right: 2px solid #333333;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: -15px;
+    right: -11px;
+}
+/*表格上字体*/
+.won-elects{
+    position: absolute;
+    top: -59px;
+    right: -8px;
+}
+.won-elects div{
+    float: left;
+    text-align: center;
+}
+/*表格列表*/
+.right-c li{
+    width: 47%;
+    height: 50px;
+    line-height: 50px;
+    list-style: none;
+    float: left;
+    text-align: center;
+    border-left: 2px solid #333333;
+}
+/*第三部分 start*/
+/*第三部分第三行*/
+.started{
+    overflow: hidden;
+    padding-top: 4px;
+}
+.started-one{
+    float: left;
+}
+.started-one-span,.started-two-span, .started-three-span{
+    width: 98px;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: -4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.started-two, .started-three{
+    float: left;
+}
+.bot-line{
+    width: 86%;
+    height: 1px;
+    border-bottom: 2px solid #333333;
+    margin-left: 14%;
+    margin-top: -16px;
+}
+.started-two,.started-one,.started-three{
+	width: 132px;
+}
+.started-two>div,.started-one>div,.started-three>div{
+	width: 52%;
+    vertical-align: middle;
+    display: inline-block;
+}
+/*第三部分第三行 end*/

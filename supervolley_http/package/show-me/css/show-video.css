@@ -1,0 +1,135 @@
+.inline-top {
+    display: inline-block;
+    vertical-align: top;
+}
+.inline-mid {
+    display: inline-block;
+    vertical-align: middle;
+}
+.inline-bom {
+    display: inline-block;
+    vertical-align: bottom;
+}
+#mian {
+
+}
+.head {
+    background: #000000;
+    font-size: 0;
+}
+.head-logo {
+    width: 34px;
+    height: 34px;
+    margin: 7px 10px 7px 14px;
+}
+.head-text {
+    color: white;
+    font-size: 16px;
+}
+.head-button {
+    width: 45px;
+    height: 25px;
+    line-height: 26px;
+    color: #FFFFFF;
+    font-size: 12px;
+    text-align: center;
+    background: #D22330;
+    border-radius: 4px;
+    float: right;
+    margin: 12px 14px 0 0;
+}
+.video > img {
+    width: 360px;
+    display: block;
+}
+.video-js .vjs-big-play-button {
+    width: 1.8em;
+    height: 1.8em;
+    border-radius: 50%;
+    top: 48%;
+    left: 55%;
+    line-height: 1.65em;
+}
+.follow {
+    background: #000000;
+}
+.follow-text {
+    width: 332px;
+    margin: 0 auto;
+    color: #FFFFFF;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15px;
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid #FFFFFF;
+}
+.follow-author {
+    width: 100%;
+}
+.follow-head {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 8px 0 8px 14px;
+}
+.follow-id {
+    margin: 0 0 0 8px;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+.follow-button {
+    width: 72px;
+    height: 25px;
+    line-height: 25px;
+    color: #FFFFFF;
+    font-size: 12px;
+    text-align: center;
+    background: #D22330;
+    border-radius: 4px;
+    float: right;
+    margin: 15px 14px 0 0;
+}
+.title {
+    background: #000000;
+    text-align: center;
+}
+.title-line {
+    width: 35px;
+    height: 1px;
+    background: #FFFFFF;
+}
+.title-text {
+    font-size: 12px;
+    color: #FFFFFF;
+    line-height: 54px;
+}
+.hot {
+    width: 360px;
+    overflow-x: scroll;
+    white-space: nowrap;
+    font-size: 0;
+}
+.hot > div:nth-child(1) {
+    border-left: 2px solid #FFFFFF;
+    width: 152px;
+}
+.hot-box {
+    width: 150px;
+    height: 163px;
+    border-right: 2px solid #FFFFFF;
+    background: rgb(0,0,0);
+}
+.hot-box > img {
+    display: block;
+}
+.hot-box > img:nth-child(1) {
+    margin: 0 auto;
+    max-width: 148px;
+    max-height: 163px;
+}
+.hot-box > img:nth-child(2) {
+    width: 46px;
+    height: 46px;
+    margin: -103px 0 0 52px;
+}

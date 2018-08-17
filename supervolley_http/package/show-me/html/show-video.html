@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SuperVolley</title>
+    <link rel="stylesheet" href="../../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../../css/mui/common.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/video.js/7.0.0-rc.1/video-js.min.css">
+    <link rel="stylesheet" href="../css/show-video.css">
+    <script src="../../../js/view.port.js"></script>
+    <script src="../../../js/vue.js"></script>
+    <script src="../../../js/mui.min.js"></script>
+    <script src="../../../js/jquery.min.js"></script>
+    <script src="../../../js/pako.js"></script>
+    <script src="../../../js/ajax.js"></script>
+    <script src="../../../js/commom.js"></script>
+    <script src="https://cdn.bootcss.com/video.js/7.0.0-rc.1/video.min.js"></script>
+</head>
+<body>
+<div id="main">
+    <div class="head go-app">
+        <img class="inline-mid head-logo" src="../../../img/SuperVolleyLogo.png">
+        <div class="inline-mid head-text">SuperVolley</div>
+        <div class="head-button">打开</div>
+    </div>
+    <div class="video" id="video"></div>
+    <div id="box" v-if="pageData">
+        <div class="follow" v-if="pageData.liveStatus == 1">
+            <div class="follow-text">{{ pageData.collectionTile || "这个人很懒,没写标题" }}</div>
+            <div class="follow-author">
+                <img class="inline-mid follow-head"
+                     :src="pageData.headPic | ImgUrl"
+                     onerror="this.src='../../../img/headDefaltImg.png'"
+                >
+                <div class="inline-mid follow-id">{{ pageData.name }}</div>
+                <div class="inline-mid follow-button">关注</div>
+            </div>
+        </div>
+        <div class="video go-app" v-if="pageData.liveStatus != 1">
+            <img src="../../../img/video-end.jpg" width="100%">
+        </div>
+        <!-- <div class="title">
+            <span class="inline-mid title-line"></span>
+            <span class="inline-mid title-text">热门视频</span>
+            <span class="inline-mid title-line"></span>
+        </div>
+        <div class="hot go-app">
+            <div class="inline-mid hot-box" v-for="(item, i) in pageData.recommendList" v-if="item">
+                <img :src="item.picUrl | ImgUrl">
+                <img src="../../../img/player.png">
+            </div>
+        </div> -->
+    </div>
+</div>
+<script type="text/javascript">
+    // package/show-me/html/show-video.html?cId=296&roomId=45039139392&classify=1
+    var cId = UrlParm.cId;
+    var roomId = UrlParm.roomId;
+    var classify = UrlParm.classify;
+
+    // 实例化 VUE
+    var vm = new Vue({
+        data: {
+            pageData: null          // 从接口获取的页面数据
+        },
+        methods: {
+
+        },
+        mounted: function () {
+            // 获取接口数据
+            Ajax(httpShowBar + "production/productionShare.do", {
+                cId: cId,
+                roomId: roomId,
+                classify: classify
+            }, function (ret) {
+                // console.log(ret);
+                ret = JSON.parse(ret);
+                this.pageData = ret.data;
+                initPlayer(ret.data);
+            }.bind(this));
+        }
+    }).$mount("#box");
+
+    // 接管视频
+    function initPlayer(ret) {
+        var player = $("#video");
+        if (ret.liveStatus != 1) {
+            player.hide();
+            return;
+        }
+        var videoUrl = null, type = null;
+        if (classify == 1) {
+            videoUrl = "http://res.supervolleyball.com/" + ret.collectUrl
+            type = "video/mp4";
+        } else if(classify == 2) {
+            videoUrl = ret.HLSPlayUrl;
+            type = "application/x-mpegURL";
+        } else {
+            videoUrl = ret.collectUrl;
+            type = "application/x-mpegURL";
+        }
+        var str = '<video id="vieo-player" loop class="video-js vjs-big-play-centered"';
+        str += ' webkit-playsinline playsinline controls';
+        str += ' width="360" height="494"  data-setup="{}"';
+        str += ' poster="'+ 'http://res.supervolleyball.com/' + ret.picUrl +'">';
+        str += '<source src="'+ videoUrl +'" type="'+ type +'"></video>';
+        player.append(str);
+        var myPlayer = videojs('vieo-player', {}, function () {});
+        playPause(myPlayer);
+    }
+
+    // 视频的播放暂停
+    function playPause(myPlayer) {
+        var isPlayer = false;
+        $("#vieo-player").on("tap", function () {
+            if (isPlayer) {
+                myPlayer.pause();
+            } else {
+                myPlayer.play();
+            }
+            isPlayer = !isPlayer;
+        })
+    }
+
+    // 跳转到或下载 App
+    $("#main").on("tap", ".go-app", function (ev) {
+        mui.toast("请稍等......");
+        if (window.PhoneSystem.name == "Android") {
+            setTimeout(function(){
+                window.location.href = androidLoad;
+            }, 2000);
+            window.location.href = androidOpen;
+        } else {
+            setTimeout(function(){
+                window.location.href = iosLoad;
+            }, 2000);
+            window.location.href = iosOpen;
+        }
+    });
+
+</script>
+</body>
+</html>

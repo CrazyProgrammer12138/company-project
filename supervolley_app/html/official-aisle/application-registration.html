@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>详情</title>
+    <link rel="stylesheet" href="../../css/mui/mui.min.css">
+    <link rel="stylesheet" href="../../css/mui/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/official-alsle/application-details.css"/>
+    <script src="../../js/view-port.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/mui.min.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/pako.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="../../js/commom.js"></script>
+</head>
+<body>
+    <div id="main" v-if="SeasonDetails">
+    	<!--头部图片-主题-时间-地址-->
+    	<div class="header-pic">
+    		<img :src="SeasonDetails.SeasonImage | ImgUrlOfficial" onerror="this.src='../../img/bigDefaule.png'"/>
+    	</div>
+    	<div class="activity">
+    		<div>{{ SeasonDetails.SeasonName }}</div>
+    		<div class="time"><span><img src="../../img/date.png"/></span><span>{{ SeasonDetails.BeginDateTime | dateFilter }}</span></div>
+    		<div class="address"><span><img src="../../img/address.png"/></span><span>{{ SeasonDetails.MatchPlace }}</span></div>
+    	</div>
+    	<!--简介-->
+    	<div class="introduction">
+    		<div><img src="../../img/ribbons.png"/><span>简介</span></div>
+    	</div>
+    	<div class="introduction-content">
+    		<!--显示-->
+    		<div class="display" :style="{'height':lookove =='查看全部'?'21px' : 'auto'}">{{ SeasonDetails.CompetitionIntro | decode}}</div>
+    		<div class="viewall"  @click="view">
+    			{{ lookove }}
+    		</div>
+    	</div>
+    	<!--赛事选择-->
+    	<div v-show ="CompetitionList.length != 0">
+	    	<div class="introduction" >
+	    		<div><img src="../../img/saishi.png"/><span>比赛选择</span></div>
+	    	</div>
+	    	<div class="list"  v-for="(val, index) in  CompetitionList">
+	    		<div class="team" v-show = "val.IsSignUp == 0">
+		    		<div class="team-div1">{{ val.CompetitionName }}</div>
+		    		<button  @click="jump(val.CompetitionID)">报名</button>
+	    		</div>
+	    		<div class="team" v-show = "val.IsSignUp > 0">
+	    			<div class="team-div3">{{ val.CompetitionName }}</div>
+		    		<button  @click="affirm(val.CompetitionID)">确认名单</button>
+	    		</div>
+	    		<div class="team" v-show = "val.IsSignUp == -1">
+		    		<div class="team-div3">{{ val.CompetitionName }}</div>
+		    		<button>已确认</button>
+	    		</div>
+	    		<div class="team" v-show = "val.IsSignUp == -2">
+		    		<div class="team-div4">{{ val.CompetitionName }}</div>
+		    		<button>未开始</button>
+	    		</div>
+	    		<div class="team" v-show = "val.IsSignUp == -3">
+		    		<div class="team-div4">{{ val.CompetitionName }}</div>
+		    		<button class="jiezhi">已截止</button>
+	    		</div>
+	    	</div>
+    	</div>
+    	
+    </div>
+    <script type="text/javascript">
+    	/* 接收参数 */
+    	var CompetitionSeasonID = UrlParm.CompetitionSeasonID;
+    	var TeamID = UrlParm.TeamID;
+    	
+    	/* vue实例 */
+    	var vm = new Vue({
+    		el: "#main",
+    		data: {
+    			SeasonDetails: null,
+    			CompetitionList: [],
+    			lookove:'查看全部'
+    			
+    		},
+    		methods: {
+    			jump: function(competitionID) {
+    			    var url = "html/official-aisle/signup-official.html";
+    			    var param = "&CompetitionID=" + competitionID;
+    			    var title = "报名-选择官员";
+    				H5ToNative([url, param, title]);
+    			},
+    			affirm: function(competitionID) {
+                    var url = "html/official-aisle/signup-official-look.html";
+                    var param = "&CompetitionID=" + competitionID;
+                    var title = "报名-确认官员";
+                    H5ToNative([url, param, title]);
+    			},
+    			view: function() {
+    				if(vm.lookove == '查看全部'){
+    					vm.lookove = '点击收起';
+    				}else{
+    					vm.lookove = '查看全部';
+    				}
+    			}
+    		},
+    		filters: {
+    			decode: function(val) {
+    				var text = decodeURIComponent(val);
+    				return text;
+    			}
+    		}
+    	});
+    	
+    	/* 获取详情接口 */
+		(function() {
+			Ajax(httpOfficial + "CollegeStudent/getCompetitionList", {
+				CompetitionSeasonID: CompetitionSeasonID,
+				TeamID: TeamID,
+			}, function(res) {
+			    //console.log(res)
+				var res = JSON.parse(res);
+				vm.SeasonDetails = res.data[0].SeasonDetails[0];
+				vm.CompetitionList = res.data[0].CompetitionList;
+			})
+		})();
+
+		
+    </script>
+</body>
+</html>

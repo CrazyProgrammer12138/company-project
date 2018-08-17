@@ -1,0 +1,58 @@
+html,body{
+	background: #fff;
+}
+.mui-content>.mui-table-view:first-child {
+    margin-top: 0px;
+}
+.mui-table-view-cell:after {
+    left: 0px;
+    background-color: #e2e2e2;
+}
+.mui-navigate-right:after, .mui-push-left:after, .mui-push-right:after {
+    color: #999;
+}
+.mui-table-view-cell>a {
+    font-size: 14px;
+    color: #333 !important;
+}
+.mui-table-view-cell>a:not(.mui-btn).mui-active{
+	background: #fff;
+}
+.mui-table-view:after {
+    background-color: #e2e2e2;
+}
+.player-img{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.player-name{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    color: #333;
+}
+.right-img{
+	width: 6px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    right: 0;
+}
+.delete-img{
+    width: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    right: 0;
+}
+.active{
+  	display: none;
+}
