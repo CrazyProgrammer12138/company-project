@@ -1,0 +1,25 @@
+/*CSS Reset*/
+@charset "utf-8";
+body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,a,th,td,form,header,footer,input,button,textarea,hr,pre,section,div,span,#app{margin:0;padding:0;box-sizing: border-box;line-height: 120%;}
+html,body,#app{width:100%;height:100%;font-size:100%;-webkit-text-size-adjust:none;}
+body{font-family:"SimHei","Microsoft Yahei","宋体",Arial;}
+h1,h2,h3,h4,h5,h6,button,input,select {font-weight:normal;}
+ul,a,figcaption,figure,footer,header,nav,section,summary{display:block}
+img{width:100%;height:100%;display: inline-block;border: none;vertical-align: middle;object-fit:cover;}
+abbr[title]{border-bottom:1px dotted;cursor:help}
+table {border-collapse:collapse;border-spacing:0}
+input,select{vertical-align:middle}
+input{outline:none 0;border:0 none}
+li{list-style:none}
+input[type="submit"]{cursor:pointer}
+a{cursor:pointer;text-decoration:none;outline:none;blur:expression(this.onFocus=this.blur())}
+a:hover{text-decoration:none}
+a:focus {outline:none}
+.clearfix:before{content: " ";display:table;}
+.clearfix:after{content:" ";display:table;width:100%;clear:both;}
+.fl{float: left;}
+.fr{float: right;}
+.center{text-align: center;margin: 0 auto;}
+body{background:#fff;}
+body,h1,h2,h3,h4,h5,h6,div,p,dl,dt,dd,ol,ul,li,form,table,th,td,a,img,span,strong,var,em,input,textarea,select,option,#app{font-size: 100%;}
+.lineheight150{line-height: 150%}

@@ -1,0 +1,36 @@
+.textCon {
+  padding: 0 40px 0;
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 60px;
+}
+.textCon .textConSecon {
+  margin-bottom: 100px;
+}
+.textCon .textConSecon:last-child {
+  margin-bottom: 0;
+}
+.textConSmallTitle {
+  font-size: 30px;
+  color: #B38A4A;
+  text-align: center;
+  margin-bottom: 60px !important;
+  font-weight: bold;
+  position: relative;
+}
+.textConSmallTitle .line {
+  position: absolute;
+  bottom: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 256px;
+  height: 24px;
+  background: url("../images/smallTitleBack.png") center center no-repeat;
+  background-size: 100% 100%;
+}
+.textCon .tableIntroduction {
+  margin-bottom: 28px;
+  font-size: 28px;
+  color: #333;
+}
+/*# sourceMappingURL=pbuliceCss.css.map */
